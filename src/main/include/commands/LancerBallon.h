@@ -5,13 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/// \file LancerBallon.h
+/// \brief Commande pour faire tourner les moteurs de la pince pour éjecter le ballon.
+
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+#include <frc/commands/Command.h>
 
-class OI
+class cmdLancerBallon : public frc::Command
 {
  public:
-	OI();
+	cmdLancerBallon();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 };

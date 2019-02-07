@@ -7,11 +7,18 @@
 
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+/// \file Bras.h
+/// \brief Sous-système représentant le bras qui peut monter/descentre la pince.
 
-class OI
+#include <frc/commands/Subsystem.h>
+
+class sysBras : public frc::Subsystem
 {
+ private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+
  public:
-	OI();
+	sysBras();
+	void InitDefaultCommand() override;
 };

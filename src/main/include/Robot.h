@@ -7,6 +7,9 @@
 
 #pragma once
 
+/// \file Robot.h
+/// \brief Le %Robot basé sur \b frc::TimedRobot.
+
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>

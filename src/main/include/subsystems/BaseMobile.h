@@ -7,11 +7,18 @@
 
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+/// \file BaseMobile.h
+/// \brief Sous-système représentant la base mobile avec les quatre moteurs et encodeurs.
 
-class OI
+#include <frc/commands/Subsystem.h>
+
+class sysBaseMobile : public frc::Subsystem
 {
+ private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+
  public:
-	OI();
+	sysBaseMobile();
+	void InitDefaultCommand() override;
 };

@@ -7,11 +7,18 @@
 
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+/// \file Crochet.h
+/// \brief Sous-système représentant le crochet pour transporter un panneaux de trappe.
 
-class OI
+#include <frc/commands/Subsystem.h>
+
+class sysCrochet : public frc::Subsystem
 {
+ private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+
  public:
-	OI();
+	sysCrochet();
+	void InitDefaultCommand() override;
 };

@@ -5,13 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "subsystems/Rampe.h"
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
-
-class OI
+sysRampe::sysRampe()
+	 : Subsystem(__func__)
 {
- public:
-	OI();
-};
+}
+
+void sysRampe::InitDefaultCommand()
+{
+	// Set the default command for a subsystem here.
+	// SetDefaultCommand(new MySpecialCommand());
+}
+
+// Put methods for controlling this subsystem
+// here. Call these from Commands.

@@ -7,11 +7,18 @@
 
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+/// \file Pince.h
+/// \brief Sous-système représentant la pince avec ses deux moteurs pour capturer et éjecter le ballon.
 
-class OI
+#include <frc/commands/Subsystem.h>
+
+class sysPince : public frc::Subsystem
 {
+ private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+
  public:
-	OI();
+	sysPince();
+	void InitDefaultCommand() override;
 };

@@ -5,13 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "subsystems/BaseMobile.h"
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
-
-class OI
+sysBaseMobile::sysBaseMobile()
+	 : Subsystem(__func__)
 {
- public:
-	OI();
-};
+}
+
+void sysBaseMobile::InitDefaultCommand()
+{
+	// Set the default command for a subsystem here.
+	// SetDefaultCommand(new MySpecialCommand());
+}
+
+// Put methods for controlling this subsystem
+// here. Call these from Commands.

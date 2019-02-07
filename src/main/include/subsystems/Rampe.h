@@ -7,11 +7,18 @@
 
 #pragma once
 
-/// \file OI.h
-/// \brief Interface de l'opérateur.
+/// \file Rampe.h
+/// \brief Sous-système représentant la rampe et son moteur pour la déployer.
 
-class OI
+#include <frc/commands/Subsystem.h>
+
+class sysRampe : public frc::Subsystem
 {
+ private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+
  public:
-	OI();
+	sysRampe();
+	void InitDefaultCommand() override;
 };
