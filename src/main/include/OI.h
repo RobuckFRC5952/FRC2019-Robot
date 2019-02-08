@@ -7,7 +7,8 @@
 
 #pragma once
 
-class OI {
+class OI
+{
  public:
-  OI();
+	OI();
 };
