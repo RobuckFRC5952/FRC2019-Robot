@@ -1,0 +1,142 @@
+/**
+
+\mainpage FRC 2019 %Robot
+
+\anchor mainpage
+
+\tableofcontents
+
+\section sec_intro Introduction
+
+Voici le dépôt pour le robot de la compétition FRC 2019 - _Deep Space_.
+
+\sa https://github.com/RobuckFRC5952/FRC2019-Robot.git
+
+
+\subsection sec_intro_state État actuel
+
+Début du codage.
+
+
+\section sec_sys Sous-systèmes
+
+Le robot est composé de cinq sous-systèmes, chacun avec leur matériel approprié.
+
+\todo Documenter les différents moteurs et encodeurs utilisés pour chaque 
+sous-système.  Trouver les références sur la toile avec leurs spécifications.
+
+
+\subsection sec_sys_bm Base Mobile
+
+Quatre moteurs
+Deux encodeurs
+
+
+\subsection sec_sys_bras Bras
+
+Un moteur
+Encodeur ?
+
+
+\subsection sec_sys_pince Pince
+
+Deux moteurs
+
+
+\subsection sec_sys_crochet Crochet
+
+Un moteur
+
+
+\subsection sec_sys_rampe Rampe
+
+Un moteur
+Interrupteur de fin de course ?
+
+
+\section sec_cmd Commandes
+
+\todo Déterminer les commandes nécessaires pour tous les sous-systèmes.
+
+
+\subsection sec_cmd_joy_ctrl_speed JoystickCtrlSpeed
+
+La commande \c JoystickCtrlSpeed sera 
+probablement la commande par défaut du sous-système `Base Mobile`.  Elle
+offre deux fonctionnalités:
+- limiter la vitesse maximale en recalibrant l'amplitude du joystick;
+- limiter l'accélération minimale et maximale en offrant avec le quatrième axe 
+  du joystick la possibilité de modifier l'accélération.
+
+À l'initialisation du mode Teleop, la commande reçoit trois paramètres: la 
+\c VitesseMax et \c AccelerationMin et \c AccelerationMax.  
+
+Par exemple, si on spécifie `VitesseMax = 0.75`, le joystick, à sa pleine 
+amplitude commandera que 0.75 de vitesse au moteur.
+
+Puis, si on spécifie `AccelerationMin = 0.25` et `AccelerationMax = 2.0`, 
+c'est-à-dire atteindre pleine vitesse en 0.5 seconde, le \e Throttle du 
+joystick permettra à l'opérateur de modifier l'accélération du moteur en 0.25 
+et 2.0.
+
+
+\subsection sec_cmd_trans_robot Translater Robot
+
+La commande \c TransRobot permettra de spécifier une distance désirée de 
+déplacement.  Elle calcule un profil de vitesse en trois étapes d'accélération, 
+de maintien de vitesse et de décélération.  Le profil de vitesse varie en 
+fonction de l'accélération spécifiée et aussi de la vitesse maximale du profil.
+
+Cette commande est pour le mode autonome.
+
+
+\subsection sec_cmd_rot_robot Tourner Robot
+
+La commande \c RotatRobot permettra de ...
+
+Cette commande est pour le mode autonome.
+
+
+\section sec_trig Triggers
+
+Les triggers permettent d'associer facilement une commande à une valeur mesurée, 
+une entrée digitale, un bouton, etc.  En faisant cette association par 
+l'entremise des méthodes de la classe \b frc::Trigger, par exemple, \b 
+WhenActive, le planificateur (\e scheduler) va périodiquement appeler la 
+méthode \b Get() de tous les triggers associés.
+
+
+\subsection sec_trig_lim_sw Interrupteur de fin de course
+
+\todo Connaître nos interrupteurs de course.
+
+Un trigger \c LimitSwitch s'assure que le moteur qui 
+est en train de déplacer du matériel et qui frappe l'interrupteur de fin de 
+course va être commandé à arrêter.
+
+Ceci est particulièrement important quand le moteur tourne pendant qu'aucune 
+commande n'est en train d'être exécuté par le planificateur de commandes.
+
+\todo Supporter les régulateurs PID.
+
+
+\section sec_doc Documentation
+
+Ce projet est sur GitHub [RobuckFRC5952](https://github.com/RobuckFRC5952) /
+[FRC2019-Robot](https://github.com/RobuckFRC5952/FRC2019-Robot.git).  Il y a un 
+README au bas de la page.
+
+La documentation du projet est faite avec des commentaires [Doxygen](http://www.doxygen.nl/)
+insérés partout dans le code.  
+
+Pour générer la documentation et produire un document (HTML), 
+- installer doxygen, 
+- lancer l'application `Doxywizard`, 
+- ouvrir le fichier de configuration `Doxyfile`, et
+- sous l'onglet 'Run' cliquer le bouton 'Run doxygen'.
+
+Cette documentation HTML sera générée dans le répertoire `doxygen/html`.
+Doxygen génère aussi les fichiers nécessaires LaTeX pour être capable de bâtir 
+un document PDF dans le répertoire `doxygen/latex`.
+
+*/
