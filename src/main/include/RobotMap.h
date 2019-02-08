@@ -7,19 +7,55 @@
 
 #pragma once
 
-/**
+/** \file RobotMap.h
+ * \brief Ensemble des ports utilisés du RoboRIO.
+ *
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
+ * \sa [NI roboRIO User Manual](http://www.ni.com/pdf/manuals/374474a.pdf)
  */
 
-// For example to map the left and right motors, you could define the
-// following variables to use with your drivetrain subsystem.
-// constexpr int kLeftMotor = 1;
-// constexpr int kRightMotor = 2;
+/// \name Ports d'entrée / sortie numérique (DIO)
+/// @{
+constexpr int kBaseMobileEncoderD_DioChannelA = 0;
+constexpr int kBaseMobileEncoderG_DioChannelB = 1;
+/// @}
 
-// If you are using multiple modules, make sure to define both the port
-// number and the module. For example you with a rangefinder:
-// constexpr int kRangeFinderPort = 1;
-// constexpr int kRangeFinderModule = 1;
+/// \name Ports de modulation de largeur d'impulsion (PWM)
+/// @{
+constexpr int kBaseMobileMoteursD_PwmChannel = 0;
+constexpr int kBaseMobileMoteursG_PwmChannel = 1;
+constexpr int kPinceMoteurD_PwmChannel = 2;
+constexpr int kPinceMoteurG_PwmChannel = 3;
+constexpr int kBrasMoteur_PwmChannel = 4;
+constexpr int kCrochetMoteur_PwmChannel = 5;
+constexpr int kRampeMoteur_PwmChannel = 6;
+/// @}
+
+/// Port du joystick utilisé
+constexpr int kJoystickPort = 0;
+
+// #define USE_LOGITECH_ATK3
+#define USE_LOGITECH_X3DPRO
+
+/// \name Boutons des joystick Logitech ATK3
+/// @{
+constexpr int kJoystickATK3Trigger = 1; // \todo Vérifier
+/// @}
+
+/// \name Boutons du joystick Logitech Extreme 3D Pro
+/// @{
+constexpr int kJoystick3DProTrigger = 1;
+/// @}
+
+#ifdef USE_LOGITECH_ATK3
+/// Boutton Trigger pour ...
+constexpr int kJoystickTrigger = kJoystickATK3Trigger;
+#endif
+#ifdef USE_LOGITECH_X3DPRO
+/// Boutton Trigger pour ...
+constexpr int kJoystickTrigger = kJoystick3DProTrigger;
+#endif
