@@ -9,7 +9,7 @@
 
 /// \file Rampe.h
 /// \brief Sous-système représentant la rampe et son moteur pour la déployer.
-#include "PWMVictorSPX.h"
+#include "frc/PWMVictorSPX.h"
 #include "frc/commands/Subsystem.h"
 #include "RobotMap.h"
 
