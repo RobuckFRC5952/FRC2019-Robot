@@ -24,7 +24,6 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("Moteur gauche", m_DriveBaseMoteurGauche);
 	AddChild("Encodeur droit",  m_DriveBaseMoteurDroitEncoder);
 	AddChild("Encodeur gauche", m_DriveBaseMoteurGaucheEncoder);
-	AddChild("Drive", m_robotDrive);
 
 
 
