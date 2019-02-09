@@ -44,21 +44,41 @@ constexpr int kJoystickPort = 0;
 // #define USE_LOGITECH_ATK3
 #define USE_LOGITECH_X3DPRO
 
-/// \name Boutons des joystick Logitech ATK3
-/// @{
-constexpr int kJoystickATK3Trigger = 1; // \todo Vérifier
-/// @}
-
 /// \name Boutons du joystick Logitech Extreme 3D Pro
 /// @{
 constexpr int kJoystick3DProTrigger = 1;
+constexpr int kJoystick3DProAttrapper_ballon = 2; // TBC
+constexpr int kJoystick3DProPousser_ballon = 3; // TBC
+constexpr int kJoystick3DProAttrapper_la_hatch = 4; // TBC
+constexpr int kJoystick3DProPousser_la_hatch = 5; // TBC
+constexpr int kJoystick3DProThrottle = 0;
+/// @}
+
+/// \name Boutons des joystick Logitech ATK3
+/// @{
+constexpr int kJoystickATK3Trigger = 1;
+constexpr int kJoystickATK3Attrapper_ballon = 2;
+constexpr int kJoystickATK3Pousser_ballon = 3;
+constexpr int kJoystickATK3Attrapper_la_hatch = 4;
+constexpr int kJoystickATK3Pousser_la_hatch = 5;
+constexpr int kJoystickATK3Throttle = 0;
 /// @}
 
 #ifdef USE_LOGITECH_ATK3
 /// Boutton Trigger pour ...
 constexpr int kJoystickTrigger = kJoystickATK3Trigger;
+constexpr int kJoystickattrapper_ballon = kJoystickATK3Attrapper_ballon;
+constexpr int kJoystickpousser_ballon = kJoystickATK3Pousser_ballon;
+constexpr int kJoystickattrapper_la_hatch = kJoystickATK3Attrapper_la_hatch;
+constexpr int kJoystickpousser_la_hatch = kJoystickATK3Pousser_la_hatch;
+constexpr int kJoystickthrottle = kJoystickATKTthrottle;
 #endif
 #ifdef USE_LOGITECH_X3DPRO
 /// Boutton Trigger pour ...
 constexpr int kJoystickTrigger = kJoystick3DProTrigger;
+constexpr int kJoystickattrapper_ballon = kJoystick3DProAttrapper_ballon;
+constexpr int kJoystickpousser_ballon = kJoystick3DProPousser_ballon;
+constexpr int kJoystickattrapper_la_hatch = kJoystick3DProAttrapper_la_hatch;
+constexpr int kJoystickpousser_la_hatch = kJoystick3DProPousser_la_hatch;
+constexpr int kJoystickthrottle = kJoystick3DProThrottle;
 #endif
