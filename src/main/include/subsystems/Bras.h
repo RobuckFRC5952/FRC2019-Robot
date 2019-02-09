@@ -9,14 +9,13 @@
 
 /// \file Bras.h
 /// \brief Sous-système représentant le bras qui peut monter/descentre la pince.
-
+#include "PWMVictorSPX.h"
 #include <frc/commands/Subsystem.h>
-
+#include "RobotMap.h"
 class sysBras : public frc::Subsystem
 {
  private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
+	frc::PWMVictorSPX m_BrasMoteur {kBrasMoteur_PwmChannel};
 
  public:
 	sysBras();
