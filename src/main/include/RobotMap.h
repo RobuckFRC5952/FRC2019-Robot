@@ -28,11 +28,12 @@ constexpr int kBaseMobileEncoderG_DioChannelB = 1;
 /// @{
 constexpr int kBaseMobileMoteursD_PwmChannel = 0;
 constexpr int kBaseMobileMoteursG_PwmChannel = 1;
-constexpr int kPinceMoteurD_PwmChannel = 2;
+// même pwm pour les 2 moteur de la pince
+constexpr int kPinceMoteurD_PwmChannel = 3;
 constexpr int kPinceMoteurG_PwmChannel = 3;
 constexpr int kBrasMoteur_PwmChannel = 4;
 constexpr int kCrochetMoteur_PwmChannel = 5;
-constexpr int kRampeMoteur_PwmChannel = 6;
+constexpr int kRampeMoteur_PwmChannel = 2;
 /// @}
 
 /// Port du joystick utilisé
