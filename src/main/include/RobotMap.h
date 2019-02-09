@@ -47,7 +47,11 @@ constexpr int kJoystickPort = 0;
 /// \name Boutons des joystick Logitech ATK3
 /// @{
 constexpr int kJoystickATK3Trigger = 1; // \todo Vérifier
-/// @}
+constexpr int kJoystickATK3attrapper_ballon = 3;
+constexpr int kJoystickATK3pousser_ballon = 4;
+constexpr int kJoystickATK3attrapper_la_hatch = 2;
+constexpr int kJoystickATK3pousser_la_hatch = 5;
+
 
 /// \name Boutons du joystick Logitech Extreme 3D Pro
 /// @{
