@@ -30,7 +30,7 @@ constexpr int DriveBaseMoteurGaucheEncoderChannelB = 3;
 /// @{
 constexpr int kBaseMobileMoteursD_PwmChannel = 0;
 constexpr int kBaseMobileMoteursG_PwmChannel = 1;
-// même pwm pour les 2 moteur de la pince
+// même pwm pour les 2 moteurs de la pince
 constexpr int kPinceMoteurD_PwmChannel = 3;
 constexpr int kPinceMoteurG_PwmChannel = 3;
 constexpr int kBrasMoteur_PwmChannel = 4;
@@ -52,8 +52,11 @@ constexpr int kJoystick3DProPousser_ballon = 3; // TBC
 constexpr int kJoystick3DProAttrapper_la_hatch = 4; // TBC
 constexpr int kJoystick3DProPousser_la_hatch = 5; // TBC
 constexpr int kJoystick3DProThrottle = 0;
+constexpr int kJoystickATK3attrapper_ballon = 3;
+constexpr int kJoystickATK3pousser_ballon = 4;
+constexpr int kJoystickATK3attrapper_la_hatch = 2;
+constexpr int kJoystickATK3pousser_la_hatch = 5;
 /// @}
-
 /// \name Boutons des joystick Logitech ATK3
 /// @{
 constexpr int kJoystickATK3Trigger = 1;
