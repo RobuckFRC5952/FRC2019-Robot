@@ -9,14 +9,13 @@
 
 /// \file Crochet.h
 /// \brief Sous-système représentant le crochet pour transporter un panneaux de trappe.
-
+#include <Talon.h>
 #include <frc/commands/Subsystem.h>
-
+#include "RobotMap.h"
 class sysCrochet : public frc::Subsystem
 {
  private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
+	frc::Talon m_CrochetMoteur {kCrochetMoteur_PwmChannel};
 
  public:
 	sysCrochet();

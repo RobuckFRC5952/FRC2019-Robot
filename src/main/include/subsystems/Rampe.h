@@ -9,13 +9,15 @@
 
 /// \file Rampe.h
 /// \brief Sous-système représentant la rampe et son moteur pour la déployer.
-
-#include <frc/commands/Subsystem.h>
+#include "PWMVictorSPX.h"
+#include "frc/commands/Subsystem.h"
+#include "RobotMap.h"
 
 class sysRampe : public frc::Subsystem
 {
  private:
-	// It's desirable that everything possible under private except
+    // Controleur SPX qui s'occupe de la rampe
+	frc::PWMVictorSPX m_RampeMoteur {kRampeMoteur_PwmChannel};
 	// for methods that implement subsystem capabilities
 
  public:

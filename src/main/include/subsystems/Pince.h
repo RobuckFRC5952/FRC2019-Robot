@@ -9,14 +9,14 @@
 
 /// \file Pince.h
 /// \brief Sous-système représentant la pince avec ses deux moteurs pour capturer et éjecter le ballon.
-
+#include <PWMTalonSRX.h>
 #include <frc/commands/Subsystem.h>
-
+#include "RobotMap.h"
 class sysPince : public frc::Subsystem
 {
  private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
+ // Moteur TalomSRX pour la pince (elle controle deux moteur)
+	frc::PWMTalonSRX m_PinceMoteur {kPinceMoteurG_PwmChannel};
 
  public:
 	sysPince();
