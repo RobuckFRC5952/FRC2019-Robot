@@ -20,8 +20,10 @@
 
 /// \name Ports d'entrée / sortie numérique (DIO)
 /// @{
-constexpr int kBaseMobileEncoderD_DioChannelA = 0;
-constexpr int kBaseMobileEncoderG_DioChannelB = 1;
+constexpr int DriveBaseMoteurDroitEncoderChannelA = 0;
+constexpr int DriveBaseMoteurDroitEncoderChannelB = 1;
+constexpr int DriveBaseMoteurGaucheEncoderChannelA = 2;
+constexpr int DriveBaseMoteurGaucheEncoderChannelB = 3;
 /// @}
 
 /// \name Ports de modulation de largeur d'impulsion (PWM)

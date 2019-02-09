@@ -6,6 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <frc/VictorSP.h>
+#include <frc/Encoder.h>
+#include <RobotMap.h>
 
 /// \file BaseMobile.h
 /// \brief Sous-système représentant la base mobile avec les quatre moteurs et encodeurs.
@@ -17,7 +20,11 @@ class sysBaseMobile : public frc::Subsystem
  private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
+	frc::Encoder m_DriveBaseMoteurDroitEncoder {DriveBaseMoteurDroitEncoderChannelA,  DriveBaseMoteurDroitEncoderChannelB,  true,  frc::Encoder::k4X};
+	frc::Encoder m_DriveBaseMoteurGaucheEncoder{DriveBaseMoteurGaucheEncoderChannelA, DriveBaseMoteurGaucheEncoderChannelB, false, frc::Encoder::k4X};
 
+	frc::VictorSP m_DriveBaseMoteurDroit {kBaseMobileMoteursD_PwmChannel};
+	frc::VictorSP m_DriveBaseMoteurGauche {kBaseMobileMoteursG_PwmChannel};
  public:
 	sysBaseMobile();
 	void InitDefaultCommand() override;
