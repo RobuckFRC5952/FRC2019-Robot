@@ -11,10 +11,13 @@
 
 class DeployerRampe : public frc::Command {
  public:
-  DeployerRampe();
+  DeployerRampe(double);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+  private:
+  // Vitesse du moteur(techniquement)
+  double m_speed;
 };

@@ -5,11 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Rampe.h"
+#include "../include/subsystems/Rampe.h"
+#include "Robot.h"
 
 sysRampe::sysRampe()
-	 : Subsystem(__func__)
+: Subsystem(__func__)
 {
+}
+
+void sysRampe::SetSpeed(double speed)
+{
+	m_RampeMoteur.Set(speed);
 }
 
 void sysRampe::InitDefaultCommand()

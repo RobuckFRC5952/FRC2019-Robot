@@ -14,14 +14,16 @@
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
-#include "OI.h"
+#include "../include/OI.h"
 #include "subsystems/BaseMobile.h"
+#include "../include/subsystems/Rampe.h"
 
 class Robot : public frc::TimedRobot
 {
  public:
 	static OI m_oi;
 	static sysBaseMobile m_sysBaseMobile;
+	static sysRampe m_Rampe;
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

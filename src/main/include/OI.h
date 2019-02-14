@@ -11,6 +11,8 @@
 /// \brief Interface de l'opérateur.
 
 #include <frc/Joystick.h>
+#include <frc/Buttons/JoystickButton.h>
+
 
 class OI
 {
@@ -19,4 +21,12 @@ class OI
 
 	/// Le joystick.
 	frc::Joystick m_joystick;
+
+	/// Ajout des boutons.
+	frc::JoystickButton m_button_attrapebal;
+	frc::JoystickButton m_button_Lancerbal;
+	frc::JoystickButton m_button_Attraper_hatch;
+	frc::JoystickButton m_button_Lacher_hatch;
+	frc::JoystickButton m_button_DeployerRampe;
+	frc::JoystickButton m_button_MonterRampe;
 };

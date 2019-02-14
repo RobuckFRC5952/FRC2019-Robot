@@ -25,4 +25,6 @@ class sysRampe : public frc::Subsystem
  public:
 	sysRampe();
 	void InitDefaultCommand() override;
+	void SetSpeed(double speed);
+
 };

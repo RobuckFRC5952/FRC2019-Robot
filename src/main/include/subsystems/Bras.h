@@ -17,10 +17,10 @@
 
 class sysBras : public frc::Subsystem
 {
- private:
-	frc::PWMVictorSPX m_BrasMoteur {kBrasMoteur_PwmChannel};
-
  public:
 	sysBras();
-	void InitDefaultCommand() override;
+	void InitDefaultCommand() override; 
+
+private:
+	frc::PWMVictorSPX m_BrasMoteur {kBrasMoteur_PwmChannel};
 };

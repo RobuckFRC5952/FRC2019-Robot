@@ -13,6 +13,7 @@
 
 OI Robot::m_oi;
 sysBaseMobile Robot::m_sysBaseMobile;
+sysRampe Robot::m_Rampe;
 
 
 void Robot::RobotInit()
