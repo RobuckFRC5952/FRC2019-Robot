@@ -20,3 +20,14 @@ class OI
 	/// Le joystick.
 	frc::Joystick m_joystick;
 };
+private:
+	/// Le joystick.
+	frc::Joystick m_joystick;
+
+	/// Le bouton \e Monter_bras et Baisser_bras.
+	frc::JoystickButton m_button11;
+	frc::JoystickButton m_button10;
+
+
+	/// Commande Ã  appliquer quand le bouton \e Trigger est enfoncÃ©.
+	cmdJoystickCtrlSpeed m_cmdJoystickCtrlSpeed;
