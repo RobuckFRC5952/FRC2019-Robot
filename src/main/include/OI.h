@@ -7,8 +7,14 @@
 
 #pragma once
 
+#include "commands/DescendBras.h"
+#include "commands/MonteBras.h"
+#include <frc/Joystick.h>
+#include <frc/Buttons/JoystickButton.h>
+
 /// \file OI.h
 /// \brief Interface de l'opérateur.
+using namespace frc;
 
 #include <frc/Joystick.h>
 
@@ -17,17 +23,16 @@ class OI
  public:
 	OI();
 
-	/// Le joystick.
-	frc::Joystick m_joystick;
-};
 private:
 	/// Le joystick.
-	frc::Joystick m_joystick;
+	Joystick *m_joystick;
 
 	/// Le bouton \e Monter_bras et Baisser_bras.
-	frc::JoystickButton m_button11;
-	frc::JoystickButton m_button10;
+	JoystickButton *m_boutonMonteBras;
+	JoystickButton *m_boutonBaisserBras;
 
 
-	/// Commande Ã  appliquer quand le bouton \e Trigger est enfoncÃ©.
-	cmdJoystickCtrlSpeed m_cmdJoystickCtrlSpeed;
+	/// Commande Ã  appliquer quand le bouton \e Bouton est enfoncÃ©.
+	MonteBras m_MonteBras;
+	DescendBras m_DescendBras;
+};

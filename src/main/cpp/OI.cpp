@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
+#include "RobotMap.h"
 
 //#include <frc/WPILib.h>
 
@@ -15,4 +16,9 @@ OI::OI()
 : m_joystick(kJoystickPort)
 {
 	// Process operator interface input here.
+	m_joystick = new Joystick(kJoystickPort);
+	m_boutonBaisserBras = new JoystickButton(m_joystick, kJoystickBaisser_bras);
+	m_boutonMonteBras = new JoystickButton(m_joystick, kJoystickMonter_bras);
+	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
+	m_boutonMonteBras->WhileHeld(&m_MonteBras);
 }
