@@ -10,5 +10,9 @@
     "bin/": true,
     ".classpath": true,
     ".project": true
+  },
+  "files.associations": {
+    "cmath": "cpp",
+    "complex": "cpp"
   }
 }

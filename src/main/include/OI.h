@@ -10,8 +10,13 @@
 /// \file OI.h
 /// \brief Interface de l'opérateur.
 
+#include <frc/Joystick.h>
+
 class OI
 {
  public:
 	OI();
+
+	/// Le joystick.
+	frc::Joystick m_joystick;
 };

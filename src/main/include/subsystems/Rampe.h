@@ -9,8 +9,10 @@
 
 /// \file Rampe.h
 /// \brief Sous-système représentant la rampe et son moteur pour la déployer.
-#include "frc/PWMVictorSPX.h"
-#include "frc/commands/Subsystem.h"
+
+#include <frc/commands/Subsystem.h>
+#include <frc/PWMVictorSPX.h>
+
 #include "RobotMap.h"
 
 class sysRampe : public frc::Subsystem

@@ -9,7 +9,10 @@
 
 //#include <frc/WPILib.h>
 
+#include "RobotMap.h"
+
 OI::OI()
+: m_joystick(kJoystickPort)
 {
 	// Process operator interface input here.
 }

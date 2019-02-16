@@ -9,9 +9,12 @@
 
 /// \file Crochet.h
 /// \brief Sous-système représentant le crochet pour transporter un panneaux de trappe.
-#include <frc/Talon.h>
+
 #include <frc/commands/Subsystem.h>
+#include <frc/Talon.h>
+
 #include "RobotMap.h"
+
 class sysCrochet : public frc::Subsystem
 {
  private:

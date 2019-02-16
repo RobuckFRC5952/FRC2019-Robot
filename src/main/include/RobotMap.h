@@ -20,20 +20,18 @@
 
 /// \name Ports d'entrée / sortie numérique (DIO)
 /// @{
-constexpr int DriveBaseMoteurDroitEncoderChannelA = 0;
-constexpr int DriveBaseMoteurDroitEncoderChannelB = 1;
-constexpr int DriveBaseMoteurGaucheEncoderChannelA = 2;
-constexpr int DriveBaseMoteurGaucheEncoderChannelB = 3;
+constexpr int kBaseMobileEncoderD_DioChannelA = 0;
+constexpr int kBaseMobileEncoderD_DioChannelB = 1;
+constexpr int kBaseMobileEncoderG_DioChannelA = 2;
+constexpr int kBaseMobileEncoderG_DioChannelB = 3;
 /// @}
 
 /// \name Ports de modulation de largeur d'impulsion (PWM)
 /// @{
 constexpr int kBaseMobileMoteursD_PwmChannel = 0;
 constexpr int kBaseMobileMoteursG_PwmChannel = 1;
-// même pwm pour les 2 moteurs de la pince
-constexpr int kPinceMoteurD_PwmChannel = 3;
-constexpr int kPinceMoteurG_PwmChannel = 3;
 constexpr int kBrasMoteur_PwmChannel = 4;
+constexpr int kPinceMoteurs_PwmChannel = 3;
 constexpr int kCrochetMoteur_PwmChannel = 5;
 constexpr int kRampeMoteur_PwmChannel = 2;
 /// @}
