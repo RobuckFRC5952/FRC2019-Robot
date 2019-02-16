@@ -7,12 +7,15 @@
 
 #include "commands/MonteBras.h"
 
+#include "Robot.h"
+
 MonteBras::MonteBras() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   m_timeout = 1; // timeout de 1 seconde a tester
   m_speed = 0.5; //vitesse a tester
   SetTimeout(m_timeout);
+  Requires(&Robot::m_sysBras);
 }
 
 // Called just before this Command runs the first time
@@ -20,7 +23,7 @@ void MonteBras::Initialize()
 {
   WPI_DEBUG3(m_logger,"MonteBras::Initialize");
 
-  setSpeed(m_speed);
+  setSpeed();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -50,9 +53,7 @@ void MonteBras::Interrupted() {}
 
 
 
-void MonteBras::setSpeed(double speed)
+void MonteBras::setSpeed()
 {
-	// Enregistrer la nouvelle vitesse dÃ©sirÃ©e (point de consigne).
-	m_speed = speed;
-
+  Robot::m_sysBras.setSpeed(m_speed);
 }

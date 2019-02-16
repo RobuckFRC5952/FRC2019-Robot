@@ -21,7 +21,7 @@ class MonteBras : public frc::Command {
   void End() override;
   void Interrupted() override;
 
-  void setSpeed(double m_speed);
+  void setSpeed();
 
 
   private:

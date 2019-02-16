@@ -28,4 +28,5 @@ class sysBras : public frc::Subsystem
  public:
 	sysBras();
 	void InitDefaultCommand() override;
+	void setSpeed(double speed);
 };

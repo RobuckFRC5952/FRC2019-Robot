@@ -21,3 +21,8 @@ void sysBras::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+void sysBras::setSpeed(double speed)
+{
+	WPI_DEBUG3(m_logger,"sysBras::setSpeed vitesse: " << speed);
+
+}
