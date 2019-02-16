@@ -24,4 +24,8 @@ void sysPince::InitDefaultCommand()
 void sysPince::setSpeed(double speed)
 {
 	WPI_DEBUG3(m_logger,"sysPince::setSpeed vitesse: " << speed);
+	if (speed > 0 && speed <= 1) 
+	{
+ 		m_PinceMoteur.Set(speed);
+	}
 }
