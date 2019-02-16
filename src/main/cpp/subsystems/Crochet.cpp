@@ -20,3 +20,8 @@ void sysCrochet::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void sysCrochet::setSpeed(double speed) 
+{
+	m_CrochetMoteur.Set(speed);
+}

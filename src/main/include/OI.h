@@ -18,7 +18,9 @@
 using namespace frc;
 
 #include <frc/Joystick.h>
-
+#include <frc/Buttons/JoystickButton.h>
+#include "commands/AvancerCrochet.h"
+using namespace frc;
 class OI
 {
  public:
@@ -31,9 +33,12 @@ private:
 	JoystickButton *m_boutonMonteBras;
 	JoystickButton *m_boutonBaisserBras;
 	JoystickButton *m_boutonLancerBallon;
+	JoystickButton *m_bouton_Attrapper_la_hatch;
 
 	/// Commande Ã  appliquer quand les bouton sont enfoncÃ©.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
 	cmdLancerBallon m_LancerBallon;
+	AvancerCrochet m_AvancerCrochet;
 };
+

@@ -22,4 +22,6 @@ OI::OI()
 	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
 	m_boutonMonteBras->WhileHeld(&m_MonteBras);
 	m_boutonLancerBallon->WhileHeld(&m_LancerBallon);
+	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
+	m_bouton_Attrapper_la_hatch->WhileHeld(&m_AvancerCrochet);
 }
