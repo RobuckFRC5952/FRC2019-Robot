@@ -17,6 +17,7 @@
 #include "OI.h"
 #include "subsystems/BaseMobile.h"
 #include "subsystems/Bras.h"
+#include "subsystems/Pince.h"
 
 class Robot : public frc::TimedRobot
 {
@@ -24,6 +25,7 @@ class Robot : public frc::TimedRobot
 	static OI m_oi;
 	static sysBaseMobile m_sysBaseMobile;
 	static sysBras m_sysBras; //subsystem bras mobile
+	static sysPince m_sysPince; //subsystem pince
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

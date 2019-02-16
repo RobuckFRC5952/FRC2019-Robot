@@ -24,4 +24,5 @@ class sysPince : public frc::Subsystem
  public:
 	sysPince();
 	void InitDefaultCommand() override;
+	void setSpeed(double speed);
 };

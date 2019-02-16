@@ -11,6 +11,7 @@
 #include "commands/MonteBras.h"
 #include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
+#include "commands/LancerBallon.h"
 
 /// \file OI.h
 /// \brief Interface de l'opérateur.
@@ -26,13 +27,13 @@ class OI
 	Joystick m_joystick;
 private:
 
-
-	/// Le bouton \e Monter_bras et Baisser_bras.
+	/// Les boutons
 	JoystickButton *m_boutonMonteBras;
 	JoystickButton *m_boutonBaisserBras;
+	JoystickButton *m_boutonLancerBallon;
 
-
-	/// Commande Ã  appliquer quand le bouton \e Bouton est enfoncÃ©.
+	/// Commande Ã  appliquer quand les bouton sont enfoncÃ©.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
+	cmdLancerBallon m_LancerBallon;
 };

@@ -12,6 +12,8 @@
 
 #include <frc/commands/Command.h>
 
+#include <wpi/Logger.h>
+
 class cmdLancerBallon : public frc::Command
 {
  public:
@@ -21,4 +23,12 @@ class cmdLancerBallon : public frc::Command
 	bool IsFinished() override;
 	void End() override;
 	void Interrupted() override;
+
+ 	void setSpeed();
+
+	private:
+  	double m_speed;
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 };

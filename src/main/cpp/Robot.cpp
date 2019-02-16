@@ -14,6 +14,7 @@
 OI Robot::m_oi;
 sysBaseMobile Robot::m_sysBaseMobile;
 sysBras Robot::m_sysBras;
+sysPince Robot::m_sysPince;
 
 
 void Robot::RobotInit()
