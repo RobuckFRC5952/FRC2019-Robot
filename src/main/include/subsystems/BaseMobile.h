@@ -11,6 +11,7 @@
 /// \brief Sous-système représentant la base mobile avec les quatre moteurs et encodeurs.
 
 #include <frc/commands/Subsystem.h>
+#include <frc/drive/DifferentialDrive.h>
 #include <frc/Encoder.h>
 #include <frc/VictorSP.h>
 
@@ -34,7 +35,14 @@ class sysBaseMobile : public frc::Subsystem
 	frc::VictorSP m_DriveBaseMoteurDroit  {kBaseMobileMoteursD_PwmChannel};
 	frc::VictorSP m_DriveBaseMoteurGauche {kBaseMobileMoteursG_PwmChannel};
 	/// @}
+
+	frc::DifferentialDrive m_Drive {m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche};
+
  public:
 	sysBaseMobile();
 	void InitDefaultCommand() override;
+
+	void ArcadeDrive(double xSpeed, double zRotation);
+
+	void PutSmartDashboard();
 };

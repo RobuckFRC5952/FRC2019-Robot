@@ -12,6 +12,8 @@
 
 
 OI Robot::m_oi;
+sysBaseMobile Robot::m_sysBaseMobile;
+
 
 void Robot::RobotInit()
 {
@@ -96,6 +98,8 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
+	m_sysBaseMobile.ArcadeDrive(m_oi.m_joystick.GetY(), m_oi.m_joystick.GetX());
+	m_sysBaseMobile.PutSmartDashboard();
 }
 
 void Robot::TestPeriodic()

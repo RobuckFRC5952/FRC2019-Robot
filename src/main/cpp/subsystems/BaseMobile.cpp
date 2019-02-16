@@ -7,6 +7,11 @@
 
 #include "subsystems/BaseMobile.h"
 
+#include <array>
+
+#include <frc/SmartDashboard/SmartDashboard.h>
+
+
 sysBaseMobile::sysBaseMobile()
 	 : Subsystem(__func__)
 {
@@ -27,6 +32,7 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("MotG",  m_DriveBaseMoteurGauche);
 	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
+	AddChild("Drive", m_Drive);
 }
 
 void sysBaseMobile::InitDefaultCommand()
@@ -37,3 +43,23 @@ void sysBaseMobile::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
+{
+	m_Drive.ArcadeDrive(xSpeed, zRotation);
+}
+
+void sysBaseMobile::PutSmartDashboard()
+{
+	std::array<frc::Encoder const *, 2> encoders = {&m_DriveBaseMoteurGaucheEncoder, &m_DriveBaseMoteurDroitEncoder};
+	for (frc::Encoder const * encoder : encoders)
+	{
+		frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Count",     encoder->Get());
+		frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Raw",       encoder->GetRaw());
+		frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Distance",  encoder->GetDistance());
+		// frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Period",    encoder->GetPeriod());
+		frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Rate",      encoder->GetRate());
+		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Direction", encoder->GetDirection());
+		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Stopped",   encoder->GetStopped());
+	}
+}
