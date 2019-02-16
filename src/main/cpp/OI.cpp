@@ -15,4 +15,6 @@ OI::OI()
 : m_joystick(kJoystickPort)
 {
 	// Process operator interface input here.
+	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
+	m_bouton_Attrapper_la_hatch->WhileHeld(&m_AvancerCrochet);
 }

@@ -13,7 +13,7 @@
 
 OI Robot::m_oi;
 sysBaseMobile Robot::m_sysBaseMobile;
-
+sysCrochet Robot::m_sysCrochet;
 
 void Robot::RobotInit()
 {

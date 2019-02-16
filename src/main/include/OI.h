@@ -11,7 +11,9 @@
 /// \brief Interface de l'opérateur.
 
 #include <frc/Joystick.h>
-
+#include <frc/Buttons/JoystickButton.h>
+#include "commands/AvancerCrochet.h"
+using namespace frc;
 class OI
 {
  public:
@@ -19,4 +21,8 @@ class OI
 
 	/// Le joystick.
 	frc::Joystick m_joystick;
+
+	JoystickButton *m_bouton_Attrapper_la_hatch;
+	AvancerCrochet m_AvancerCrochet;
 };
+
