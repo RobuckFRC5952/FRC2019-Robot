@@ -21,6 +21,8 @@ sysBaseMobile::sysBaseMobile()
 	const double pouces_metre =    1.0 / 0.0254; // pouces/mètre.  Voir https://en.wikipedia.org/wiki/Conversion_of_units#Length
 	const double radius       =    3.0 / pouces_metre;
 
+	m_DriveBaseMoteurDroit.SetInverted(true);
+
 	// Convertir en mètres des encodeurs de 2048 ticks/tours avec roues de 6 pouces.
 	m_DriveBaseMoteurDroitEncoder.SetDistancePerPulse( (2.0 * M_PI * radius) / pulses_tour);
 	m_DriveBaseMoteurDroitEncoder.SetName("EncD");

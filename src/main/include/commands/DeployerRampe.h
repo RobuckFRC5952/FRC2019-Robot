@@ -8,13 +8,20 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include <wpi/Logger.h>
 
-class DeployerRampe : public frc::Command {
+
+class DeployerRampe : public frc::Command
+{
  public:
-  DeployerRampe();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+	DeployerRampe();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
+
+ private:
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 };

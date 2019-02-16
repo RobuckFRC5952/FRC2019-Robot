@@ -16,14 +16,15 @@ OI::OI()
 : m_joystick(kJoystickPort)
 {
 	// Process operator interface input here.
-	m_boutonBaisserBras = new JoystickButton(&m_joystick, kJoystickBaisser_bras);
-	m_boutonMonteBras = new JoystickButton(&m_joystick, kJoystickMonter_bras);
-	m_boutonLancerBallon = new JoystickButton(&m_joystick, kJoystickpousser_ballon);
-	m_boutonAttrapperBallon = new JoystickButton(&m_joystick, kJoystickattrapper_ballon);
+	m_boutonBaisserBras         = new JoystickButton(&m_joystick, kJoystickBaisser_bras);
+	m_boutonMonteBras           = new JoystickButton(&m_joystick, kJoystickMonter_bras);
+	m_boutonLancerBallon        = new JoystickButton(&m_joystick, kJoystickpousser_ballon);
+	m_boutonAttrapperBallon     = new JoystickButton(&m_joystick, kJoystickattrapper_ballon);
+	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
+
 	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
 	m_boutonMonteBras->WhileHeld(&m_MonteBras);
 	m_boutonLancerBallon->WhileHeld(&m_LancerBallon);
-	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
-	m_bouton_Attrapper_la_hatch->WhileHeld(&m_AvancerCrochet);
 	m_boutonAttrapperBallon->WhileHeld(&m_AttraperBallon);
+	m_bouton_Attrapper_la_hatch->WhileHeld(&m_AvancerCrochet);
 }

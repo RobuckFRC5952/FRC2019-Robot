@@ -7,25 +7,27 @@
 
 #pragma once
 
-#include <frc/Timer.h>
 #include <frc/commands/Command.h>
 #include <wpi/Logger.h>
+#include <frc/Timer.h>
 
-class DescendBras : public frc::Command {
+
+class DescendBras : public frc::Command
+{
  public:
-  DescendBras();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+	DescendBras();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 
-  void setSpeed();
+	void setSpeed();
 
  private:
-  double m_timeout;
-  double m_speed;
-  
-  /// Logger du sous-système.
+	double m_timeout;
+	double m_speed;
+
+	/// Logger du sous-système.
 	wpi::Logger m_logger;
 };

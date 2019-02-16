@@ -11,8 +11,8 @@
 #pragma once
 
 #include <frc/commands/Command.h>
-
 #include <wpi/Logger.h>
+
 
 class cmdLancerBallon : public frc::Command
 {
@@ -24,10 +24,10 @@ class cmdLancerBallon : public frc::Command
 	void End() override;
 	void Interrupted() override;
 
- 	void setSpeed();
+	void setSpeed(double speed);
 
-	private:
-  	double m_speed;
+ private:
+	double m_speed;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;

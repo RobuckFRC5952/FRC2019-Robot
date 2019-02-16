@@ -8,22 +8,23 @@
 #pragma once
 
 #include <frc/commands/Command.h>
-
 #include <wpi/Logger.h>
 
-class AttrapperBallon : public frc::Command {
+
+class AttrapperBallon : public frc::Command
+{
  public:
-  AttrapperBallon();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+	AttrapperBallon();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 
- 	void setSpeed();
+	void setSpeed(double speed);
 
-	private:
-  	double m_speed;
+ private:
+	double m_speed;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;

@@ -28,5 +28,5 @@ void sysBras::InitDefaultCommand()
 void sysBras::setSpeed(double speed)
 {
 	WPI_DEBUG3(m_logger,"sysBras::setSpeed vitesse: " << speed);
-
+	m_BrasMoteur.Set(speed);
 }

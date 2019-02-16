@@ -7,23 +7,47 @@
 
 #include "commands/DeployerRampe.h"
 
-DeployerRampe::DeployerRampe() {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
+#include "Logger.h"
+#include "Robot.h"
+
+
+DeployerRampe::DeployerRampe()
+	 : Command(__func__)
+	 , m_logger(log_func)
+{
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(Robot::chassis.get());
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 }
 
 // Called just before this Command runs the first time
-void DeployerRampe::Initialize() {}
+void DeployerRampe::Initialize()
+{
+	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+}
 
 // Called repeatedly when this Command is scheduled to run
-void DeployerRampe::Execute() {}
+void DeployerRampe::Execute()
+{
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool DeployerRampe::IsFinished() { return false; }
+bool DeployerRampe::IsFinished()
+{
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
+	return false;
+}
 
 // Called once after isFinished returns true
-void DeployerRampe::End() {}
+void DeployerRampe::End()
+{
+	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DeployerRampe::Interrupted() {}
+void DeployerRampe::Interrupted()
+{
+	WPI_WARNING(m_logger, GetName() << " " << __func__);
+}

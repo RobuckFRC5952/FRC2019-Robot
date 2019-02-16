@@ -9,25 +9,25 @@
 
 #include <frc/Timer.h>
 #include <frc/commands/Command.h>
-
 #include <wpi/Logger.h>
 
-class MonteBras : public frc::Command {
+
+class MonteBras : public frc::Command
+{
  public:
-  MonteBras();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+	MonteBras();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 
-  void setSpeed();
+	void setSpeed();
 
+ private:
+	double m_timeout;
+	double m_speed;
 
-  private:
-  double m_timeout;
-  double m_speed;
-
-  /// Logger du sous-système.
+	/// Logger du sous-système.
 	wpi::Logger m_logger;
 };

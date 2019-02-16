@@ -10,17 +10,20 @@
 #include <frc/commands/Command.h>
 #include <wpi/Logger.h>
 
-class AvancerCrochet : public frc::Command {
+
+class AvancerCrochet : public frc::Command
+{
  public:
-  AvancerCrochet();
-  void Initialize() override; 
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-  void setSpeed(double speed); 
-private:
-wpi::Logger m_logger; 
-  double m_timeout;
-  double m_speed;
+	AvancerCrochet();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
+	void setSpeed(double speed);
+
+ private:
+	wpi::Logger m_logger;
+	double m_timeout;
+	double m_speed;
 };

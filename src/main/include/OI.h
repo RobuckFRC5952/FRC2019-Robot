@@ -30,14 +30,14 @@ class OI
 	Joystick m_joystick;
 private:
 
-	/// Les boutons
+	/// Les boutons.
 	JoystickButton *m_boutonMonteBras;
 	JoystickButton *m_boutonBaisserBras;
 	JoystickButton *m_boutonLancerBallon;
 	JoystickButton *m_bouton_Attrapper_la_hatch;
 	JoystickButton *m_boutonAttrapperBallon;
 
-	/// Commande Ã  appliquer quand les bouton sont enfoncÃ©.
+	/// Commande à appliquer quand les boutons sont enfoncés.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
 	cmdLancerBallon m_LancerBallon;
