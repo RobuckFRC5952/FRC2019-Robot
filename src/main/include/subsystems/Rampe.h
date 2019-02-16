@@ -18,13 +18,11 @@
 class sysRampe : public frc::Subsystem
 {
  private:
-    // Controleur SPX qui s'occupe de la rampe
-	frc::PWMVictorSPX m_RampeMoteur {kRampeMoteur_PwmChannel};
-	// for methods that implement subsystem capabilities
+	// Controleur SPX qui s'occupe de la rampe
+	frc::PWMVictorSPX m_RampeMoteur{kRampeMoteur_PwmChannel};
 
  public:
 	sysRampe();
 	void InitDefaultCommand() override;
 	void SetSpeed(double speed);
-
 };

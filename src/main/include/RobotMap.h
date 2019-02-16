@@ -54,8 +54,8 @@ constexpr int kJoystick3DProPousser_la_hatch = 6;
 constexpr int kJoystick3DProDeployer_la_rampe = 11;
 constexpr int kJoystick3DProRemonter_la_rampe = 12;
 constexpr int kJoystick3DProThrottle = 0;
-constexpr int kJoystickATK3deployer_rampe = 7;
-constexpr int kJoystickATK3Remonter_rampe =8;
+// constexpr int kJoystickATK3deployer_rampe = 7;
+// constexpr int kJoystickATK3Remonter_rampe =8;
 /// @}
 /// \name Boutons des joystick Logitech ATK3
 /// @{

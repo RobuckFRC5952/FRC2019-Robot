@@ -13,10 +13,11 @@
 #include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
 
+#include "commands/DeployerRampe.h"
 
 class OI
 {
- public:
+  public:
 	OI();
 
 	/// Le joystick.
@@ -29,4 +30,7 @@ class OI
 	frc::JoystickButton m_button_Lacher_hatch;
 	frc::JoystickButton m_button_DeployerRampe;
 	frc::JoystickButton m_button_MonterRampe;
+
+  private:
+	DeployerRampe m_DeployerRampe;
 };

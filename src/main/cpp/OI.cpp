@@ -6,19 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
-
-//#include <frc/WPILib.h>
-
 #include "RobotMap.h"
 
+
 OI::OI()
+//Les bouttons du joystick 3D Pro.
 : m_joystick(kJoystickPort)
-, m_button_attrapebal (&m_joystick, kJoystickATK3attrapper_ballon)
-, m_button_Lancerbal (&m_joystick, kJoystickATK3pousser_ballon)
-, m_button_Attraper_hatch (&m_joystick, kJoystickATK3attrapper_la_hatch)
-, m_button_Lacher_hatch (&m_joystick, kJoystickATK3pousser_la_hatch)
-, m_button_DeployerRampe (&m_joystick, kJoystickATK3deployer_rampe)
-, m_button_MonterRampe (&m_joystick, kJoystickATK3Remonter_rampe)
+, m_button_attrapebal(&m_joystick, kJoystickattrapper_ballon)
+, m_button_Lancerbal(&m_joystick, kJoystickpousser_ballon)
+, m_button_Attraper_hatch(&m_joystick, kJoystickattrapper_la_hatch)
+, m_button_Lacher_hatch(&m_joystick, kJoystickpousser_la_hatch)
+, m_button_DeployerRampe(&m_joystick, kJoystickDeployer_la_rampe)
+, m_button_MonterRampe(&m_joystick, kJoystickRemonter_la_rampe)
+, m_DeployerRampe(0.1)
 {
-	// Process operator interface input here.
+	//Associer le boutton de deployer_rampe à la commande m_button_DeployerRampe
+	m_button_DeployerRampe.WhileHeld(&m_DeployerRampe);
 }
