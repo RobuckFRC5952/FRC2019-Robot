@@ -7,8 +7,10 @@
 
 #pragma once
 
-#include <Timer.h>
+#include <frc/Timer.h>
 #include <frc/commands/Command.h>
+
+#include <wpi/Logger.h>
 
 class MonteBras : public frc::Command {
  public:
@@ -19,7 +21,13 @@ class MonteBras : public frc::Command {
   void End() override;
   void Interrupted() override;
 
+  void setSpeed(double m_speed);
+
+
   private:
   double m_timeout;
   double m_speed;
+
+  /// Logger du sous-système.
+	wpi::Logger m_logger;
 };

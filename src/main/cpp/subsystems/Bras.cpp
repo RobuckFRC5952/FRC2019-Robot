@@ -14,6 +14,7 @@ sysBras::sysBras()
 
 void sysBras::InitDefaultCommand()
 {
+	WPI_DEBUG3(m_logger,"sysBras::InitDefaultCommand");
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }

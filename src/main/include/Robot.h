@@ -16,12 +16,14 @@
 
 #include "OI.h"
 #include "subsystems/BaseMobile.h"
+#include "subsystems/Bras.h"
 
 class Robot : public frc::TimedRobot
 {
  public:
 	static OI m_oi;
 	static sysBaseMobile m_sysBaseMobile;
+	static sysBras m_sysBras; //subsystem bras mobile
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

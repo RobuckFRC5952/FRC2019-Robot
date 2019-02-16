@@ -22,10 +22,10 @@ class OI
 {
  public:
 	OI();
-
-private:
 	/// Le joystick.
-	Joystick *m_joystick;
+	Joystick m_joystick;
+private:
+
 
 	/// Le bouton \e Monter_bras et Baisser_bras.
 	JoystickButton *m_boutonMonteBras;

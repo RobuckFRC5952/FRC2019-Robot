@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include <wpi/Logger.h>
 
 class DescendBras : public frc::Command {
  public:
@@ -17,4 +18,7 @@ class DescendBras : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+ private:
+  /// Logger du sous-système.
+	wpi::Logger m_logger;
 };

@@ -15,10 +15,15 @@
 
 #include "RobotMap.h"
 
+#include <wpi/Logger.h>
+
 class sysBras : public frc::Subsystem
 {
  private:
 	frc::PWMVictorSPX m_BrasMoteur {kBrasMoteur_PwmChannel};
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 
  public:
 	sysBras();
