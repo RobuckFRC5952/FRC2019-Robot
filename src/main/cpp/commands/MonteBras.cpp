@@ -10,16 +10,30 @@
 MonteBras::MonteBras() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+  m_timeout = 1; // timeout de 1 seconde a tester
+  m_speed = 0.5; //vitesse a tester
+  SetTimeout(m_timeout);
 }
 
 // Called just before this Command runs the first time
-void MonteBras::Initialize() {}
+void MonteBras::Initialize() 
+{
+  setSpeed(m_speed);
+}
 
 // Called repeatedly when this Command is scheduled to run
 void MonteBras::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool MonteBras::IsFinished() { return false; }
+bool MonteBras::IsFinished() 
+{ 
+  if (IsTimedOut())
+	{
+		//WPI_WARNING(OI::m_logger, GetName() << ": Delai d'attente de " << llvm::format("%5.2f", m_timeout) << " secondes expire.");
+		return true;
+	}
+  return false; 
+  }
 
 // Called once after isFinished returns true
 void MonteBras::End() {}

@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <Timer.h>
 #include <frc/commands/Command.h>
 
 class MonteBras : public frc::Command {
@@ -17,4 +18,8 @@ class MonteBras : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+
+  private:
+  double m_timeout;
+  double m_speed;
 };
