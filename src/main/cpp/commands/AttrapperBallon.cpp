@@ -5,53 +5,47 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/LancerBallon.h"
+#include "commands/AttrapperBallon.h"
 
 #include "Robot.h"
 
-cmdLancerBallon::cmdLancerBallon()
-	 : Command(__func__)
-{
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(Robot::chassis.get());
-  m_speed = -0.5; //vitesse a tester
+AttrapperBallon::AttrapperBallon() {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+  m_speed = 0.5; //vitesse a tester
   Requires(&Robot::m_sysBras);
 }
 
 // Called just before this Command runs the first time
-void cmdLancerBallon::Initialize()
+void AttrapperBallon::Initialize() 
 {
-  WPI_DEBUG3(m_logger,"cmdLancerBallon::Initialize");
+  WPI_DEBUG3(m_logger,"AttrapperBallon::Initialize");
 
   setSpeed();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void cmdLancerBallon::Execute()
+void AttrapperBallon::Execute() 
 {
-  WPI_DEBUG4(m_logger,"cmdLancerBallon::Execute");
+  WPI_DEBUG4(m_logger,"AttrapperBallon::Execute");
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool cmdLancerBallon::IsFinished()
-{
-	WPI_DEBUG4(m_logger,"cmdLancerBallon::IsFinished");
+bool AttrapperBallon::IsFinished() 
+{ 
+  WPI_DEBUG4(m_logger,"AttrapperBallon::IsFinished");
 	return false;
 }
 
 // Called once after isFinished returns true
-void cmdLancerBallon::End()
-{
-}
+void AttrapperBallon::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void cmdLancerBallon::Interrupted()
-{
-}
+void AttrapperBallon::Interrupted() {}
 
 
-void cmdLancerBallon::setSpeed()
+void AttrapperBallon::setSpeed()
 {
   Robot::m_sysPince.setSpeed(m_speed);
 }
