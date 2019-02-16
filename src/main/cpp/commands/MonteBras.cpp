@@ -37,7 +37,6 @@ bool MonteBras::IsFinished()
 { 
   if (IsTimedOut())
 	{
-		//WPI_WARNING(OI::m_logger, GetName() << ": Delai d'attente de " << llvm::format("%5.2f", m_timeout) << " secondes expire.");
     WPI_DEBUG4(m_logger,"MonteBras::IsFinished");
 		return true;
 	}

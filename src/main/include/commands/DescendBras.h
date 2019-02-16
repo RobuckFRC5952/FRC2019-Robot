@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <frc/Timer.h>
 #include <frc/commands/Command.h>
 #include <wpi/Logger.h>
 
@@ -18,7 +19,13 @@ class DescendBras : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+
+  void setSpeed();
+
  private:
+  double m_timeout;
+  double m_speed;
+  
   /// Logger du sous-système.
 	wpi::Logger m_logger;
 };
