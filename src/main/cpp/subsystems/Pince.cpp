@@ -5,11 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "Logger.h"
 #include "subsystems/Pince.h"
+
 
 sysPince::sysPince()
 	 : Subsystem(__func__)
+	 , m_logger(log_func)
 {
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
 }
 
 void sysPince::InitDefaultCommand()

@@ -7,6 +7,7 @@
 
 #include "commands/MonteBras.h"
 
+#include "Logger.h"
 #include "Robot.h"
 
 MonteBras::MonteBras() {
@@ -16,6 +17,7 @@ MonteBras::MonteBras() {
   m_speed = -0.5; //vitesse a tester
   SetTimeout(m_timeout);
   Requires(&Robot::m_sysBras);
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
 }
 
 // Called just before this Command runs the first time

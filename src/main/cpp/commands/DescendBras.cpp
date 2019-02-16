@@ -7,9 +7,11 @@
 
 #include "commands/DescendBras.h"
 
+#include "Logger.h"
 #include "Robot.h"
 
 DescendBras::DescendBras() {
+	 , m_logger(log_func)
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   m_timeout = 1; // timeout de 1 seconde a tester

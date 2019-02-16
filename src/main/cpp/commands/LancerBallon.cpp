@@ -7,10 +7,13 @@
 
 #include "commands/LancerBallon.h"
 
+#include "Logger.h"
 #include "Robot.h"
+
 
 cmdLancerBallon::cmdLancerBallon()
 	 : Command(__func__)
+		, m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
