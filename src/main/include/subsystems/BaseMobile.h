@@ -14,6 +14,7 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/Encoder.h>
 #include <frc/VictorSP.h>
+#include <wpi/Logger.h>
 
 #include "RobotMap.h"
 
@@ -37,6 +38,19 @@ class sysBaseMobile : public frc::Subsystem
 	/// @}
 
 	frc::DifferentialDrive m_Drive {m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche};
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
+
+	/** \name Variables pour comparer avec les nouvelles valeurs, de vitesse, de rotation, etc.
+	 *
+	 * Ceci permet d'afficher un message à la console que quand il y a changement.
+	 */
+	/// @{
+	double m_lastXSpeed = 0.0;
+	double m_lastZRotation = 0.0;
+	/// @}
+
 
  public:
 	sysBaseMobile();

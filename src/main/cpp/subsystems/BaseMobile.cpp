@@ -8,8 +8,10 @@
 #include "subsystems/BaseMobile.h"
 
 #include <array>
+#include <cmath>
 
 #include <frc/SmartDashboard/SmartDashboard.h>
+#include <wpi/Format.h>
 
 
 sysBaseMobile::sysBaseMobile()
@@ -33,6 +35,11 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
 	AddChild("Drive", m_Drive);
+
+	WPI_INFO(m_logger, "Moteur droit sur le canal PWM  " << m_DriveBaseMoteurDroit.GetChannel()
+	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderD_DioChannelA << " et " << kBaseMobileEncoderD_DioChannelB << ".");
+	WPI_INFO(m_logger, "Moteur gauche sur le canal PWM " << m_DriveBaseMoteurGauche.GetChannel()
+	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderG_DioChannelA << " et " << kBaseMobileEncoderG_DioChannelB << ".");
 }
 
 void sysBaseMobile::InitDefaultCommand()
@@ -47,6 +54,21 @@ void sysBaseMobile::InitDefaultCommand()
 void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 {
 	m_Drive.ArcadeDrive(xSpeed, zRotation);
+
+	// Afficher à la console seulement si une des valeurs changent de 5% par rapport à la dernière.
+	// Un message imprimé à chaque 20 ms est trop verbeux.
+	if ((std::fabs((xSpeed - m_lastXSpeed)/m_lastXSpeed) > 0.05) || (std::fabs((zRotation - m_lastZRotation)/m_lastZRotation) > 0.05))
+	{
+		WPI_DEBUG2(m_logger, "xSpeed:" << wpi::format("%5.2f", xSpeed) 
+		                  << "zRotation:" << wpi::format("%5.2f", zRotation)
+		                  << "Distances [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetDistance()) << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetDistance())
+		                  << "Rates     [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetRate())     << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetRate()));
+
+		// Enregistrer la vitesse courrant pour la comparer la prochaine fois qu'on exécute
+		// cette méthode avec une nouvelle valeur de 'speed'.
+		m_lastXSpeed    = xSpeed;
+		m_lastZRotation = zRotation;
+	}
 }
 
 void sysBaseMobile::PutSmartDashboard()
