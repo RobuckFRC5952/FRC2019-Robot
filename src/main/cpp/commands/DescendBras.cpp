@@ -13,7 +13,7 @@ DescendBras::DescendBras() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   m_timeout = 1; // timeout de 1 seconde a tester
-  m_speed = -0.5; //vitesse a tester
+  m_speed = 0.5; //vitesse a tester
   SetTimeout(m_timeout);
   Requires(&Robot::m_sysBras);
 }

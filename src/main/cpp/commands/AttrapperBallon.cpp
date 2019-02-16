@@ -12,7 +12,7 @@
 AttrapperBallon::AttrapperBallon() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  m_speed = 0.5; //vitesse a tester
+  m_speed = -0.5; //vitesse a tester
   Requires(&Robot::m_sysBras);
 }
 

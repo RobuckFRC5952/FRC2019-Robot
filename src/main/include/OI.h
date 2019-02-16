@@ -12,6 +12,7 @@
 #include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
 #include "commands/LancerBallon.h"
+#include "commands/AttrapperBallon.h"
 
 /// \file OI.h
 /// \brief Interface de l'opérateur.
@@ -34,11 +35,12 @@ private:
 	JoystickButton *m_boutonBaisserBras;
 	JoystickButton *m_boutonLancerBallon;
 	JoystickButton *m_bouton_Attrapper_la_hatch;
+	JoystickButton *m_boutonAttrapperBallon;
 
 	/// Commande Ã  appliquer quand les bouton sont enfoncÃ©.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
 	cmdLancerBallon m_LancerBallon;
 	AvancerCrochet m_AvancerCrochet;
+	AttrapperBallon m_AttraperBallon;
 };
-
