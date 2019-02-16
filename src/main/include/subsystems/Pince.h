@@ -15,11 +15,16 @@
 
 #include "RobotMap.h"
 
+#include <wpi/Logger.h>
+
 class sysPince : public frc::Subsystem
 {
  private:
 	/// Moteur TalonSRX pour la pince (elle controle deux moteurs)
 	frc::PWMTalonSRX m_PinceMoteur {kPinceMoteurs_PwmChannel};
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 
  public:
 	sysPince();

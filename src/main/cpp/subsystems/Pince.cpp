@@ -14,6 +14,7 @@ sysPince::sysPince()
 
 void sysPince::InitDefaultCommand()
 {
+	WPI_DEBUG3(m_logger,"sysPince::InitDefaultCommand");
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }
@@ -22,5 +23,5 @@ void sysPince::InitDefaultCommand()
 // here. Call these from Commands.
 void sysPince::setSpeed(double speed)
 {
-
+	WPI_DEBUG3(m_logger,"sysPince::setSpeed vitesse: " << speed);
 }
