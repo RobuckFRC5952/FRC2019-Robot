@@ -29,8 +29,8 @@ OI::OI()
 
 	m_boutonInverseDirection->WhenPressed(&m_InverseDirection);
 
-	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
-	m_boutonMonteBras->WhileHeld(&m_MonteBras);
+	// m_boutonBaisserBras->WhileHeld(&m_DescendBras);
+	// m_boutonMonteBras->WhileHeld(&m_MonteBras);
 
 	m_boutonLancerBallon->WhileHeld(&m_LancerBallon);
 	m_boutonAttrapperBallon->WhileHeld(&m_AttraperBallon);

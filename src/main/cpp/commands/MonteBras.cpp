@@ -55,7 +55,7 @@ bool MonteBras::IsFinished()
 void MonteBras::End()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-	Robot::m_sysBras.setSpeed(0.0);
+	// Robot::m_sysBras.setSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same
@@ -63,10 +63,10 @@ void MonteBras::End()
 void MonteBras::Interrupted()
 {
 	WPI_WARNING(m_logger, GetName() << " " << __func__);
-	Robot::m_sysBras.setSpeed(0.0);
+	// Robot::m_sysBras.setSpeed(0.0);
 }
 
 void MonteBras::setSpeed()
 {
-	Robot::m_sysBras.setSpeed(m_speed);
+	// Robot::m_sysBras.setSpeed(m_speed);
 }
