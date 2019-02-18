@@ -42,7 +42,7 @@ class sysBaseMobile : public frc::Subsystem
 	frc::VictorSP m_DriveBaseMoteurGauche {kBaseMobileMoteursG_PwmChannel};
 	/// @}
 
-	frc::DifferentialDrive m_Drive {m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche};
+	// frc::DifferentialDrive m_Drive {m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche};
 
 	eDirection m_direction {eDirection::Bras};
 

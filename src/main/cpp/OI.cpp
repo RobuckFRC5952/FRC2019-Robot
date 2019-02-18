@@ -13,24 +13,26 @@ OI::OI()
 : m_joystick(kJoystickPort)
 {
 	// Process operator interface input here.
+	m_boutonInverseDirection    = new frc::JoystickButton(&m_joystick, kJoystickInvDir);
+	m_boutonBaisserBras         = new frc::JoystickButton(&m_joystick, kJoystickBaisser_bras);
+	m_boutonMonteBras           = new frc::JoystickButton(&m_joystick, kJoystickMonter_bras);
 
-	m_boutonInverseDirection    = new JoystickButton(&m_joystick, kJoystickInvDir);
-	m_boutonBaisserBras         = new JoystickButton(&m_joystick, kJoystickBaisser_bras);
-	m_boutonMonteBras           = new JoystickButton(&m_joystick, kJoystickMonter_bras);
+	m_boutonLancerBallon        = new frc::JoystickButton(&m_joystick, kJoystickpousser_ballon);
+	m_boutonAttrapperBallon     = new frc::JoystickButton(&m_joystick, kJoystickattrapper_ballon);
 
-	m_boutonLancerBallon        = new JoystickButton(&m_joystick, kJoystickpousser_ballon);
-	m_boutonAttrapperBallon     = new JoystickButton(&m_joystick, kJoystickattrapper_ballon);
+	m_bouton_Attrapper_la_hatch = new frc::JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
+	m_bouton_Pousser_la_hatch   = new frc::JoystickButton(&m_joystick, kJoystickpousser_la_hatch);
 
-	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
-	m_bouton_Pousser_la_hatch   = new JoystickButton(&m_joystick, kJoystickpousser_la_hatch);
+	m_boutonDeployerRampe       = new frc::JoystickButton(&m_joystick, kJoystickDeployer_la_rampe);
+	m_boutonRemonterRampe       = new frc::JoystickButton(&m_joystick, kJoystickRemonter_la_rampe);
 
-	m_boutonDeployerRampe       = new JoystickButton(&m_joystick, kJoystickDeployer_la_rampe);
-	m_boutonRemonterRampe       = new JoystickButton(&m_joystick, kJoystickRemonter_la_rampe);
+	m_bouton_trigger            = new frc::JoystickButton(&m_joystick, kJoystickTrigger);
 
 	m_boutonInverseDirection->WhenPressed(&m_InverseDirection);
 
 	// m_boutonBaisserBras->WhileHeld(&m_DescendBras);
 	// m_boutonMonteBras->WhileHeld(&m_MonteBras);
+	m_bouton_trigger->ToggleWhenPressed(&m_testCycliqueWave);
 
 	m_boutonLancerBallon->WhileHeld(&m_LancerBallon);
 	m_boutonAttrapperBallon->WhileHeld(&m_AttraperBallon);

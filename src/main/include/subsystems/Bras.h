@@ -28,7 +28,7 @@ class sysBras : public frc::PIDSubsystem
 	frc::PWMVictorSPX m_BrasMoteur {kBrasMoteur_PwmChannel};
 
 	/// L'encodeur sur le moteur.
-	frc::Encoder m_encoder { kBras_DioChannelA, kBras_DioChannelB, false, frc::Encoder::EncodingType::k4X };
+	frc::Encoder m_encoder { kBrasEncoder_DioChannelA, kBrasEncoder_DioChannelB, true, frc::Encoder::EncodingType::k4X };
 
 	std::shared_ptr<frc::PIDController> m_pidController;
 
@@ -46,7 +46,9 @@ class sysBras : public frc::PIDSubsystem
 	void EnablePID(double k_p, double k_i, double k_d, double k_f);
 	void DisablePID();
 
+	double getPosition();
 	void setPosition(double radian);
+
 	// void setSpeed(double speed);
 
 	void PutSmartDashboard();

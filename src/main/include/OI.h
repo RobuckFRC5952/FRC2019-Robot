@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
+#include <frc/Joystick.h>
 
 #include "commands/InverserDirection.h"
 #include "commands/MonteBras.h"
@@ -19,30 +19,33 @@
 #include "commands/RetracterCrochet.h"
 #include "commands/DeployerRampe.h"
 
+#include "commands/testCycliqueWave.h"
 
-using namespace frc;
+
 class OI
 {
  public:
 	OI();
 	/// Le joystick.
-	Joystick m_joystick;
+	frc::Joystick m_joystick;
 private:
 
 	/// Les boutons.
-	JoystickButton *m_boutonInverseDirection;
+	frc::JoystickButton *m_boutonInverseDirection;
 
-	JoystickButton *m_boutonMonteBras;
-	JoystickButton *m_boutonBaisserBras;
+	frc::JoystickButton *m_boutonMonteBras;
+	frc::JoystickButton *m_boutonBaisserBras;
 
-	JoystickButton *m_boutonLancerBallon;
-	JoystickButton *m_boutonAttrapperBallon;
+	frc::JoystickButton *m_boutonLancerBallon;
+	frc::JoystickButton *m_boutonAttrapperBallon;
 
-	JoystickButton *m_bouton_Attrapper_la_hatch;
-	JoystickButton *m_bouton_Pousser_la_hatch;
+	frc::JoystickButton *m_bouton_Attrapper_la_hatch;
+	frc::JoystickButton *m_bouton_Pousser_la_hatch;
 
-	JoystickButton *m_boutonDeployerRampe;
-	JoystickButton *m_boutonRemonterRampe;
+	frc::JoystickButton *m_boutonDeployerRampe;
+	frc::JoystickButton *m_boutonRemonterRampe;
+
+	frc::JoystickButton *m_bouton_trigger;
 
 	/// Commande à appliquer quand les boutons sont enfoncés.
 
@@ -55,4 +58,6 @@ private:
 	RetracterCrochet m_RetracterCrochet;
 	DeployerRampe m_DeployerRampe {-0.2};
 	DeployerRampe m_RemonterRampe { 0.8};
+	
+	testCycliqueWave m_testCycliqueWave;
 };

@@ -112,8 +112,9 @@ void Robot::TeleopPeriodic()
 	}
 	double speed = m_oi.m_joystick.GetY();
 	double rotation = m_oi.m_joystick.GetX() * 0.75;
-	m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
+	// m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
 	m_sysBaseMobile.PutSmartDashboard();
+	// m_sysBras.setSpeed(m_oi.m_joystick.GetY());
 	m_sysBras.PutSmartDashboard();
 }
 
