@@ -22,6 +22,8 @@ sysBras::sysBras()
 	 : PIDSubsystem(__func__, 0.0, 0.0, 0.0, 0.0)
 	 , m_logger(log_func)
 {
+	m_BrasMoteur.SetInverted(true);
+
 	// Encodeur: 2048 pulses par révolution.
 	const int pulses_tour = 2048;
 
@@ -36,7 +38,7 @@ sysBras::sysBras()
 	// Elles sont toutes de 0.0 dans ce contructeur.
 	m_pidController = GetPIDController();
 
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 
 	frc::SmartDashboard::PutNumber("SetPoint", 0.0);
 	frc::SmartDashboard::PutNumber("FeedBack", 0.0);
@@ -105,6 +107,11 @@ void sysBras::setPosition(double radian)
 // 	WPI_DEBUG3(m_logger,"sysBras::setSpeed vitesse: " << speed);
 // 	m_BrasMoteur.Set(speed);
 // }
+
+void sysBras::resetEnc()
+{
+	m_encoder.Reset();
+}
 
 void sysBras::PutSmartDashboard()
 {

@@ -38,6 +38,8 @@ testCycliqueWave::testCycliqueWave()
 	frc::SmartDashboard::PutNumber("Amplitude",  m_amplitude); // radians
 	frc::SmartDashboard::PutNumber("Offset",     m_offset);    // radians
 	frc::SmartDashboard::PutNumber("Pulsations", m_omega);     // rad/sec
+
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 }
 
 // Called just before this Command runs the first time

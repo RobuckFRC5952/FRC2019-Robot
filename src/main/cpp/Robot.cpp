@@ -97,6 +97,7 @@ void Robot::TeleopInit()
 		m_autonomousCommand->Cancel();
 		m_autonomousCommand = nullptr;
 	}
+	m_sysBras.resetEnc();
 }
 
 void Robot::TeleopPeriodic()

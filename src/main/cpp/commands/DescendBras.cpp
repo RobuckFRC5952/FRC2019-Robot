@@ -20,7 +20,7 @@ DescendBras::DescendBras()
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysBras);
 	m_timeout = 1; // timeout de 1 seconde a tester
-	m_speed = 0.1; //vitesse a tester
+	m_speed = -0.15; //vitesse a tester
 	SetTimeout(m_timeout);
 	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 }

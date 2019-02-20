@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#define _USE_MATH_DEFINES 
+
 #include "subsystems/BaseMobile.h"
 
 #include <array>
