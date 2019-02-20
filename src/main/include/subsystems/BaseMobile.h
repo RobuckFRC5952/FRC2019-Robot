@@ -18,6 +18,11 @@
 
 #include "RobotMap.h"
 
+enum class eDirection
+{
+	Bras,
+	Crochet,
+};
 
 class sysBaseMobile : public frc::Subsystem
 {
@@ -39,6 +44,8 @@ class sysBaseMobile : public frc::Subsystem
 
 	frc::DifferentialDrive m_Drive {m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche};
 
+	eDirection m_direction {eDirection::Bras};
+
 	/// Logger du sous-système.
 	wpi::Logger m_logger;
 
@@ -57,6 +64,8 @@ class sysBaseMobile : public frc::Subsystem
 	void InitDefaultCommand() override;
 
 	void ArcadeDrive(double xSpeed, double zRotation);
+
+	void setDirection(eDirection direction);
 
 	void PutSmartDashboard();
 };

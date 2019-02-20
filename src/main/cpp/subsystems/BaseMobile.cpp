@@ -55,6 +55,10 @@ void sysBaseMobile::InitDefaultCommand()
 
 void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 {
+	if (m_direction == eDirection::Crochet)
+	{
+		xSpeed *= -1.0;
+	}
 	m_Drive.ArcadeDrive(xSpeed, zRotation);
 
 	// Afficher à la console seulement si une des valeurs changent de 5% par rapport à la dernière.
@@ -71,6 +75,11 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 		m_lastXSpeed    = xSpeed;
 		m_lastZRotation = zRotation;
 	}
+}
+
+void sysBaseMobile::setDirection(eDirection direction)
+{
+	m_direction = direction;
 }
 
 void sysBaseMobile::PutSmartDashboard()

@@ -10,6 +10,7 @@
 #include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
 
+#include "commands/InverserDirection.h"
 #include "commands/MonteBras.h"
 #include "commands/DescendBras.h"
 #include "commands/LancerBallon.h"
@@ -29,6 +30,8 @@ class OI
 private:
 
 	/// Les boutons.
+	JoystickButton *m_boutonInverseDirection;
+
 	JoystickButton *m_boutonMonteBras;
 	JoystickButton *m_boutonBaisserBras;
 
@@ -42,6 +45,8 @@ private:
 	JoystickButton *m_boutonRemonterRampe;
 
 	/// Commande à appliquer quand les boutons sont enfoncés.
+
+	InverserDirection m_InverseDirection;
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
 	cmdLancerBallon m_LancerBallon;

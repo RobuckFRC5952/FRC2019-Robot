@@ -47,6 +47,7 @@ constexpr int kJoystickPort = 0;
 /// \name Boutons du joystick Logitech Extreme 3D Pro
 /// @{
 constexpr int kJoystick3DProTrigger = 1;
+constexpr int kJoystick3DProInvDir = 2;
 constexpr int kJoystick3DProMonter_bras = 10;
 constexpr int kJoystick3DProBaisser_bras = 9;
 constexpr int kJoystick3DProAttrapper_ballon = 5;
@@ -60,6 +61,7 @@ constexpr int kJoystick3DProThrottle = 0;
 /// \name Boutons des joystick Logitech ATK3
 /// @{
 constexpr int kJoystickATK3Trigger = 1;
+constexpr int kJoystickATK3InvDir = 2;
 constexpr int kJoystickATK3Monter_bras = 11;
 constexpr int kJoystickATK3Baisser_bras = 10;
 constexpr int kJoystickATK3Attrapper_ballon = 2;
@@ -74,6 +76,7 @@ constexpr int kJoystickATK3Throttle = 0;
 #ifdef USE_LOGITECH_ATK3
 /// Boutton Trigger pour ...
 constexpr int kJoystickTrigger = kJoystickATK3Trigger;
+constexpr int kJoystickInvDir = kJoystickATK3InvDir;
 constexpr int kJoystickattrapper_ballon = kJoystickATK3Attrapper_ballon;
 constexpr int kJoystickpousser_ballon = kJoystickATK3Pousser_ballon;
 constexpr int kJoystickattrapper_la_hatch = kJoystickATK3Attrapper_la_hatch;
@@ -87,6 +90,7 @@ constexpr int kJoystickBaisser_bras = kJoystickATK3Baisser_bras;
 #ifdef USE_LOGITECH_X3DPRO
 /// Boutton Trigger pour ...
 constexpr int kJoystickTrigger = kJoystick3DProTrigger;
+constexpr int kJoystickInvDir = kJoystick3DProInvDir;
 constexpr int kJoystickattrapper_ballon = kJoystick3DProAttrapper_ballon;
 constexpr int kJoystickpousser_ballon = kJoystick3DProPousser_ballon;
 constexpr int kJoystickattrapper_la_hatch = kJoystick3DProAttrapper_la_hatch;
