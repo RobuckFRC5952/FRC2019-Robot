@@ -11,11 +11,18 @@
 /// \brief Sous-système représentant le crochet pour transporter un panneaux de trappe.
 #include <frc/Talon.h>
 #include <frc/commands/Subsystem.h>
+#include <frc/DigitalInput.h>
+
 #include "RobotMap.h"
+
 class sysCrochet : public frc::Subsystem
 {
  private:
 	frc::Talon m_CrochetMoteur {kCrochetMoteur_PwmChannel};
+
+	/// Interrupteur de fin de course sont branchés en 'Normaly Closed'.
+	frc::DigitalInput m_limitSwitchBas  {kCrochetLimitSwitchBas_DioChannel};
+	frc::DigitalInput m_limitSwitchHaut {kCrochetLimitSwitchHaut_DioChannel};
 
  public:
 	sysCrochet();

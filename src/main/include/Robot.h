@@ -13,20 +13,22 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
+
 #include "OI.h"
+
 #include "subsystems/BaseMobile.h"
 #include "subsystems/Bras.h"
 #include "subsystems/Pince.h"
-#include "subsystems/Crochet.h" 
+#include "subsystems/Crochet.h"
 
 class Robot : public frc::TimedRobot
 {
  public:
 	static OI m_oi;
 	static sysBaseMobile m_sysBaseMobile;
-	static sysBras m_sysBras; //subsystem bras mobile
-	static sysPince m_sysPince; //subsystem pince
-    static sysCrochet m_sysCrochet;
+	static sysBras       m_sysBras;
+	static sysPince      m_sysPince;
+	static sysCrochet    m_sysCrochet;
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

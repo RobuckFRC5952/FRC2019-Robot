@@ -12,11 +12,11 @@
 
 
 OI Robot::m_oi;
-sysBaseMobile Robot::m_sysBaseMobile;
-sysBras Robot::m_sysBras;
-sysPince Robot::m_sysPince;
 
-sysCrochet Robot::m_sysCrochet;
+sysBaseMobile Robot::m_sysBaseMobile;
+sysBras       Robot::m_sysBras;
+sysPince      Robot::m_sysPince;
+sysCrochet    Robot::m_sysCrochet;
 
 void Robot::RobotInit()
 {
