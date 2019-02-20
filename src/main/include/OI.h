@@ -7,20 +7,15 @@
 
 #pragma once
 
-#include "commands/DescendBras.h"
-#include "commands/MonteBras.h"
 #include <frc/Joystick.h>
 #include <frc/Buttons/JoystickButton.h>
+
+#include "commands/MonteBras.h"
+#include "commands/DescendBras.h"
 #include "commands/LancerBallon.h"
 #include "commands/AttrapperBallon.h"
-
-/// \file OI.h
-/// \brief Interface de l'opérateur.
-using namespace frc;
-
-#include <frc/Joystick.h>
-#include <frc/Buttons/JoystickButton.h>
 #include "commands/AvancerCrochet.h"
+#include "commands/RetracterCrochet.h"
 using namespace frc;
 class OI
 {
@@ -33,14 +28,17 @@ private:
 	/// Les boutons.
 	JoystickButton *m_boutonMonteBras;
 	JoystickButton *m_boutonBaisserBras;
+
 	JoystickButton *m_boutonLancerBallon;
-	JoystickButton *m_bouton_Attrapper_la_hatch;
 	JoystickButton *m_boutonAttrapperBallon;
 
+	JoystickButton *m_bouton_Attrapper_la_hatch;
+	JoystickButton *m_bouton_Pousser_la_hatch;
 	/// Commande à appliquer quand les boutons sont enfoncés.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
 	cmdLancerBallon m_LancerBallon;
-	AvancerCrochet m_AvancerCrochet;
 	AttrapperBallon m_AttraperBallon;
+	AvancerCrochet m_AvancerCrochet;
+	RetracterCrochet m_RetracterCrochet;
 };

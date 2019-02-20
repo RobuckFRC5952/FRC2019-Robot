@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/AvancerCrochet.h"
+#include "commands/RetracterCrochet.h"
 
 #include "Logger.h"
 #include "Robot.h"
@@ -13,31 +13,31 @@
 #include "subsystems/Crochet.h"
 
 
-AvancerCrochet::AvancerCrochet()
+RetracterCrochet::RetracterCrochet()
 	 : Command(__func__)
 	 , m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysCrochet);
-	m_speed = 1.0; //vitesse a tester
+	m_speed = -1.0; //vitesse a tester
 	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 }
 
 // Called just before this Command runs the first time
-void AvancerCrochet::Initialize()
+void RetracterCrochet::Initialize()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void AvancerCrochet::Execute()
+void RetracterCrochet::Execute()
 {
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
 	setSpeed(m_speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool AvancerCrochet::IsFinished()
+bool RetracterCrochet::IsFinished()
 {
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
 	if (IsTimedOut())
@@ -49,7 +49,7 @@ bool AvancerCrochet::IsFinished()
 }
 
 // Called once after isFinished returns true
-void AvancerCrochet::End()
+void RetracterCrochet::End()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
 	setSpeed(0.0);
@@ -57,13 +57,13 @@ void AvancerCrochet::End()
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void AvancerCrochet::Interrupted()
+void RetracterCrochet::Interrupted()
 {
 	WPI_WARNING(m_logger, GetName() << " " << __func__);
 	setSpeed(0.0);
 }
 
-void AvancerCrochet::setSpeed(double speed)
+void RetracterCrochet::setSpeed(double speed)
 {
 	// Enregistrer la nouvelle vitesse désirée (point de consigne).
 	Robot::m_sysCrochet.setSpeed(speed);
