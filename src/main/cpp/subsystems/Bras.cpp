@@ -19,7 +19,7 @@
 
 
 sysBras::sysBras()
-	 : PIDSubsystem(__func__, 0.0, 0.0, 0.0, 0.0)
+	 : PIDSubsystem(__func__, 1.0, 0.0, 1.0, 0.0)
 	 , m_logger(log_func)
 {
 	m_BrasMoteur.SetInverted(true);
@@ -35,15 +35,16 @@ sysBras::sysBras()
 	m_encoder.SetName("Enc");
 
 	// Récupérer le PID du sous-système pour être capable de configurer ces constantes.
-	// Elles sont toutes de 0.0 dans ce contructeur.
 	m_pidController = GetPIDController();
 
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
 	frc::SmartDashboard::PutNumber("SetPoint", 0.0);
 	frc::SmartDashboard::PutNumber("FeedBack", 0.0);
 	frc::SmartDashboard::PutNumber("Error",    0.0);
 	frc::SmartDashboard::PutNumber("Commande", 0.0);
+
+	frc::SmartDashboard::PutNumber("PutGET", 0.0);
 }
 
 void sysBras::InitDefaultCommand()
@@ -55,12 +56,15 @@ void sysBras::InitDefaultCommand()
 
 double sysBras::ReturnPIDInput()
 {
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " m_encoder.GetDistance " << m_encoder.GetDistance());
 	return m_encoder.GetDistance();
 }
 
 void sysBras::UsePIDOutput(double output)
 {
-	m_BrasMoteur.Set(output);
+	double plus = frc::SmartDashboard::GetNumber("PutGET", 0.0);
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " output: " << output << ", plus: " << plus);
+	m_BrasMoteur.Set(output + plus);
 }
 
 // Put methods for controlling this subsystem
@@ -77,14 +81,15 @@ void sysBras::EnablePID(double k_p, double k_i, double k_d, double k_f)
 
 	m_pidController->SetPID(k_p, k_i, k_d, k_f);
 	m_pidController->SetSetpoint(m_encoder.GetDistance());
-	m_pidController->SetInputRange( 0.0, 1.0); // rad
-	m_pidController->SetOutputRange(0.0, 1.0); // rad
+	m_pidController->SetInputRange( 0.0, 1.2); // rad
+	m_pidController->SetOutputRange(-1.0, 1.0); // rad
+	m_pidController->Reset();
 	Enable();
 }
 
 void sysBras::DisablePID()
 {
-	WPI_DEBUG(m_logger, GetName() + " " + __func__);
+	WPI_DEBUG3(m_logger, GetName() + " " + __func__);
 
 	// Désactiver le régulateur PID.
 	// Disable();

@@ -28,8 +28,6 @@ testCycliqueWave::testCycliqueWave()
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysBras);
 
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG2);
-
 	// Offrir des valeurs par défaut.
 	frc::SmartDashboard::PutNumber("kP", m_kP);
 	frc::SmartDashboard::PutNumber("kI", m_kI);
@@ -95,7 +93,8 @@ void testCycliqueWave::Execute()
 	m_lastSine = sine;
 
 	// Varier la position du bras entre sa position initiale et une position initiale + 2·amplitude.
-	double position = m_position - m_amplitude + m_amplitude*std::cos(m_omega * TimeSinceInitialized());;
+	m_offset = frc::SmartDashboard::GetNumber("Offset", m_offset);
+	double position = m_position + m_offset - m_amplitude + m_amplitude*std::cos(m_omega * TimeSinceInitialized());;
 	Robot::m_sysBras.setPosition(position);
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " Position: " << wpi::format("%6.3f", position));
 }

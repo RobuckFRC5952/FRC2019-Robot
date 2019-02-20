@@ -1,0 +1,241 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="PutGET" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="388" y="161"/>
+	</widget>
+	<widget field="Commande" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
+		<location x="0" y="672"/>
+		<width>688</width>
+		<height>96</height>
+		<property name="Buffer Size (samples)" value="100"/>
+	</widget>
+	<widget field="Error" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
+		<location x="0" y="576"/>
+		<width>688</width>
+		<height>96</height>
+		<property name="Buffer Size (samples)" value="100"/>
+	</widget>
+	<widget field="FeedBack" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
+		<location x="0" y="480"/>
+		<width>688</width>
+		<height>96</height>
+		<property name="Buffer Size (samples)" value="100"/>
+	</widget>
+	<widget field="SetPoint" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
+		<location x="5" y="378"/>
+		<width>683</width>
+		<height>102</height>
+		<property name="Buffer Size (samples)" value="100"/>
+	</widget>
+	<widget field="Auto Modes" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="0" y="630"/>
+	</widget>
+	<widget field="EncG_Count" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="19" y="220"/>
+	</widget>
+	<widget field="EncD_Rate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="202" y="284"/>
+	</widget>
+	<widget field="Amplitude" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="335" y="60"/>
+	</widget>
+	<widget field="EncD_Raw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="203" y="192"/>
+	</widget>
+	<widget field="EncG_Stopped" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="8" y="348"/>
+	</widget>
+	<widget field="EncD_Direction" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="181" y="316"/>
+	</widget>
+	<widget field="EncD_Stopped" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="184" y="348"/>
+	</widget>
+	<widget field="Enc_Rate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="34" y="92"/>
+	</widget>
+	<widget field="EncD_Count" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="195" y="224"/>
+	</widget>
+	<widget field="EncG_Rate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="26" y="284"/>
+	</widget>
+	<widget field="EncG_Distance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="6" y="252"/>
+	</widget>
+	<widget field="Auto Selector" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="273" y="6"/>
+	</widget>
+	<widget field="Pulsations" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="334" y="124"/>
+	</widget>
+	<widget field="EncG_Direction" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="5" y="316"/>
+	</widget>
+	<widget field="Enc_Distance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="14" y="60"/>
+	</widget>
+	<widget field="EncD_Distance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="182" y="252"/>
+	</widget>
+	<widget field="EncG_Raw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="27" y="192"/>
+		<height>20</height>
+	</widget>
+	<widget field="kP" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="212" y="32"/>
+	</widget>
+	<widget field="kF" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="212" y="124"/>
+	</widget>
+	<widget field="kI" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="214" y="60"/>
+	</widget>
+	<widget field="kD" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="211" y="92"/>
+	</widget>
+	<widget field="Enc_Raw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="35" y="28"/>
+	</widget>
+	<widget field="Enc_Direction" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="12" y="124"/>
+		<height>20</height>
+	</widget>
+	<widget field="Enc_Stopped" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="16" y="156"/>
+	</widget>
+	<widget field="Offset" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="354" y="92"/>
+	</widget>
+	<widget field="Enc_Count" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="27" y="0"/>
+	</widget>
+	<widget field="dessine_rectangle" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="545" y="52"/>
+	</widget>
+	<widget field="distance_cible" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="578" y="22"/>
+	</widget>
+</dashboard>
+<live-window>
+	<widget field="sysRampe" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="314" y="23"/>
+	</widget>
+	<widget field="sysPince" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="314" y="0"/>
+	</widget>
+	<widget field="sysCrochet" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="0" y="737"/>
+	</widget>
+	<widget field="sysBras" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<widget field="PIDController" type="PIDController" class="edu.wpi.first.smartdashboard.gui.elements.PIDEditor">
+			<location x="6" y="16"/>
+			<height>155</height>
+			<width>146</width>
+		</widget>
+		<location x="0" y="714"/>
+		<width>158</width>
+		<height>177</height>
+	</widget>
+	<widget field="sysBaseMobile" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<widget field="EncD" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="16"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<widget field="EncG" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="113"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<widget field="MotG" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="210"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="MotD" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="255"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<location x="0" y="624"/>
+		<width>313</width>
+		<height>306</height>
+	</widget>
+	<widget field="Ungrouped" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<widget field="PWMVictorSPX[0]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="16"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="Encoder[0]" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="61"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<widget field="Encoder[2]" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="158"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMVictorSPX[1]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="255"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMVictorSPX[2]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="300"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="Encoder[4]" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="345"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMVictorSPX[3]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="442"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMVictorSPX[4]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="487"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMVictorSPX[5]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="532"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="DigitalInput[6]" type="Digital Input" class="edu.wpi.first.smartdashboard.livewindow.elements.DigitalInputDisplay">
+			<location x="6" y="577"/>
+			<height>20</height>
+			<width>301</width>
+		</widget>
+		<widget field="DigitalInput[7]" type="Digital Input" class="edu.wpi.first.smartdashboard.livewindow.elements.DigitalInputDisplay">
+			<location x="6" y="597"/>
+			<height>20</height>
+			<width>301</width>
+		</widget>
+		<widget field="PWMTalonSRX[3]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="617"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="Talon[5]" type="Speed Controller" class="edu.wpi.first.smartdashboard.livewindow.elements.SpeedController">
+			<location x="6" y="662"/>
+			<height>45</height>
+			<width>301</width>
+		</widget>
+		<widget field="Enc" type="Quadrature Encoder" class="edu.wpi.first.smartdashboard.livewindow.elements.EncoderDisplay">
+			<location x="6" y="707"/>
+			<height>97</height>
+			<width>301</width>
+		</widget>
+		<location x="0" y="0"/>
+		<width>313</width>
+		<height>810</height>
+	</widget>
+</live-window>
+</xml>
