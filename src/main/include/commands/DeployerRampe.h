@@ -14,7 +14,7 @@
 class DeployerRampe : public frc::Command
 {
  public:
-	DeployerRampe();
+	DeployerRampe(double speed);
 	void Initialize() override;
 	void Execute() override;
 	bool IsFinished() override;
@@ -23,5 +23,6 @@ class DeployerRampe : public frc::Command
 
  private:
 	/// Logger du sous-système.
+	double m_speed;
 	wpi::Logger m_logger;
 };

@@ -22,6 +22,10 @@ OI::OI()
 	m_bouton_Attrapper_la_hatch = new JoystickButton(&m_joystick, kJoystickattrapper_la_hatch);
 	m_bouton_Pousser_la_hatch   = new JoystickButton(&m_joystick, kJoystickpousser_la_hatch);
 
+	m_boutonDeployerRampe       = new JoystickButton(&m_joystick, kJoystickDeployer_la_rampe);
+	m_boutonRemonterRampe       = new JoystickButton(&m_joystick, kJoystickRemonter_la_rampe);
+
+
 	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
 	m_boutonMonteBras->WhileHeld(&m_MonteBras);
 
@@ -31,4 +35,6 @@ OI::OI()
 	m_bouton_Attrapper_la_hatch->WhileHeld(&m_AvancerCrochet);
 	m_bouton_Pousser_la_hatch->WhileHeld(&m_RetracterCrochet);
 
+	m_boutonDeployerRampe->WhileHeld(&m_DeployerRampe);
+	m_boutonRemonterRampe->WhileHeld(&m_RemonterRampe);
 }

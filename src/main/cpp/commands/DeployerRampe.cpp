@@ -11,12 +11,13 @@
 #include "Robot.h"
 
 
-DeployerRampe::DeployerRampe()
+DeployerRampe::DeployerRampe(double speed)
 	 : Command(__func__)
+	 , m_speed(speed)
 	 , m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(Robot::chassis.get());
+	Requires(&Robot::m_sysRampe);
 	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
 }
 
@@ -24,6 +25,7 @@ DeployerRampe::DeployerRampe()
 void DeployerRampe::Initialize()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+	Robot::m_sysRampe.setSpeed(m_speed);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -43,6 +45,7 @@ bool DeployerRampe::IsFinished()
 void DeployerRampe::End()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+	Robot::m_sysRampe.setSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same
@@ -50,4 +53,5 @@ void DeployerRampe::End()
 void DeployerRampe::Interrupted()
 {
 	WPI_WARNING(m_logger, GetName() << " " << __func__);
+	Robot::m_sysRampe.setSpeed(0.0);
 }

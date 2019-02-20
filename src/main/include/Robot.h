@@ -20,6 +20,7 @@
 #include "subsystems/Bras.h"
 #include "subsystems/Pince.h"
 #include "subsystems/Crochet.h"
+#include "subsystems/Rampe.h"
 
 class Robot : public frc::TimedRobot
 {
@@ -29,6 +30,7 @@ class Robot : public frc::TimedRobot
 	static sysBras       m_sysBras;
 	static sysPince      m_sysPince;
 	static sysCrochet    m_sysCrochet;
+	static sysRampe      m_sysRampe;
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

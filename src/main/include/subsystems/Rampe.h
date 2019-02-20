@@ -15,14 +15,19 @@
 
 #include "RobotMap.h"
 
+#include <wpi/Logger.h>
+
 class sysRampe : public frc::Subsystem
 {
  private:
-    // Controleur SPX qui s'occupe de la rampe
-	frc::PWMVictorSPX m_RampeMoteur {kRampeMoteur_PwmChannel};
-	// for methods that implement subsystem capabilities
+	// Controleur SPX qui s'occupe de la rampe
+	frc::PWMVictorSPX m_RampeMoteur{kRampeMoteur_PwmChannel};
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 
  public:
 	sysRampe();
 	void InitDefaultCommand() override;
+	void setSpeed(double speed);
 };

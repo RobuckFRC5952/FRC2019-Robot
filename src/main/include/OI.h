@@ -16,6 +16,9 @@
 #include "commands/AttrapperBallon.h"
 #include "commands/AvancerCrochet.h"
 #include "commands/RetracterCrochet.h"
+#include "commands/DeployerRampe.h"
+
+
 using namespace frc;
 class OI
 {
@@ -34,6 +37,10 @@ private:
 
 	JoystickButton *m_bouton_Attrapper_la_hatch;
 	JoystickButton *m_bouton_Pousser_la_hatch;
+
+	JoystickButton *m_boutonDeployerRampe;
+	JoystickButton *m_boutonRemonterRampe;
+
 	/// Commande à appliquer quand les boutons sont enfoncés.
 	MonteBras m_MonteBras;
 	DescendBras m_DescendBras;
@@ -41,4 +48,6 @@ private:
 	AttrapperBallon m_AttraperBallon;
 	AvancerCrochet m_AvancerCrochet;
 	RetracterCrochet m_RetracterCrochet;
+	DeployerRampe m_DeployerRampe {-0.2};
+	DeployerRampe m_RemonterRampe { 0.8};
 };
