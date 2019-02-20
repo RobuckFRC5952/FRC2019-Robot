@@ -47,12 +47,12 @@ constexpr int kJoystickPort = 0;
 /// \name Boutons du joystick Logitech Extreme 3D Pro
 /// @{
 constexpr int kJoystick3DProTrigger = 1;
-constexpr int kJoystick3DProMonter_bras = 10; 
+constexpr int kJoystick3DProMonter_bras = 10;
 constexpr int kJoystick3DProBaisser_bras = 9;
-constexpr int kJoystick3DProAttrapper_ballon = 3; 
-constexpr int kJoystick3DProPousser_ballon = 5; 
-constexpr int kJoystick3DProAttrapper_la_hatch = 4; 
-constexpr int kJoystick3DProPousser_la_hatch = 6; 
+constexpr int kJoystick3DProAttrapper_ballon = 5;
+constexpr int kJoystick3DProPousser_ballon = 3;
+constexpr int kJoystick3DProAttrapper_la_hatch = 4;
+constexpr int kJoystick3DProPousser_la_hatch = 6;
 constexpr int kJoystick3DProDeployer_la_rampe = 11;
 constexpr int kJoystick3DProRemonter_la_rampe = 12;
 constexpr int kJoystick3DProThrottle = 0;

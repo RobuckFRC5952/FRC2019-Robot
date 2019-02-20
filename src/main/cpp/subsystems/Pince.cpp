@@ -5,9 +5,9 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Logger.h"
 #include "subsystems/Pince.h"
 
+#include "Logger.h"
 
 sysPince::sysPince()
 	 : Subsystem(__func__)
