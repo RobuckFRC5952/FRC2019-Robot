@@ -24,11 +24,19 @@ sysBras::sysBras()
 {
 	m_BrasMoteur.SetInverted(true);
 
+#define MONTECHARGE
+#ifdef MONTECHARGE
+	double m_gearbox_ratio = 71.0;
+	double m_encoder_ratio =  7.0;
+	double RadPerPulse = 2.0 * M_PI / (m_gearbox_ratio * m_encoder_ratio);
+	m_encoder.SetDistancePerPulse(RadPerPulse);
+#else
 	// Encodeur: 2048 pulses par révolution.
 	const int pulses_tour = 2048;
 
 	// Convertir en radian la distance de l'encodeur.
 	m_encoder.SetDistancePerPulse( (2.0 * M_PI) / pulses_tour);
+#endif
 
 	// Spécifier pour le régulateur que l'encodeur sera utilisé en déplacement et non pas vitesse.
 	m_encoder.SetPIDSourceType(frc::PIDSourceType::kDisplacement);
