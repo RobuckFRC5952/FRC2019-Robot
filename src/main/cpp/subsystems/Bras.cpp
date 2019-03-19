@@ -89,7 +89,7 @@ void sysBras::EnablePID(double k_p, double k_i, double k_d, double k_f)
 
 	m_pidController->SetPID(k_p, k_i, k_d, k_f);
 	m_pidController->SetSetpoint(m_encoder.GetDistance());
-	m_pidController->SetInputRange( -1.2, 0.0); // rad
+	m_pidController->SetInputRange(posMin, posMax); // rad
 	m_pidController->SetOutputRange(-0.5, 0.5); // rad
 	m_pidController->Reset();
 	Enable();

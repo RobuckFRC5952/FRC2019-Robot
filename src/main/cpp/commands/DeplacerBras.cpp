@@ -5,68 +5,59 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/MonteBras.h"
+#include "commands/DeplacerBras.h"
+
+#include <wpi/Format.h>
 
 #include "Logger.h"
 #include "Robot.h"
-
 #include "subsystems/Bras.h"
 
-
-MonteBras::MonteBras()
+cmdDeplacerBras::cmdDeplacerBras(double position)
 	 : Command(__func__)
+	 , m_Position(position)
+	 , m_lastTime(0.0)
 	 , m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysBras);
-	m_timeout = 1;  // timeout de 1 seconde a tester
-	m_speed = 0.5; //vitesse a tester
-	SetTimeout(m_timeout);
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
+
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
 }
 
 // Called just before this Command runs the first time
-void MonteBras::Initialize()
+void cmdDeplacerBras::Initialize()
 {
-	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-
-	setSpeed();
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
+	m_lastTime = TimeSinceInitialized();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MonteBras::Execute()
+void cmdDeplacerBras::Execute()
 {
-	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
+	if (((TimeSinceInitialized() - m_lastTime) > 0.25) ||
+	    (m_logger.min_level() <= wpi::WPI_LOG_DEBUG4))
+	{
+		WPI_DEBUG2(m_logger, GetName() << " " << __func__ << wpi::format(" %5.2f %5.2f", m_Position, TimeSinceInitialized()));
+		m_lastTime = TimeSinceInitialized();
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MonteBras::IsFinished()
+bool cmdDeplacerBras::IsFinished()
 {
-	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
-	if (IsTimedOut())
-	{
-		WPI_DEBUG4(m_logger, "MonteBras::IsFinished");
-		return true;
-	}
-	return false;
+	return TimeSinceInitialized() > 5.0;
 }
 
 // Called once after isFinished returns true
-void MonteBras::End()
+void cmdDeplacerBras::End()
 {
-	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-	// Robot::m_sysBras.setSpeed(0.0);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MonteBras::Interrupted()
+void cmdDeplacerBras::Interrupted()
 {
-	WPI_WARNING(m_logger, GetName() << " " << __func__);
-	// Robot::m_sysBras.setSpeed(0.0);
-}
-
-void MonteBras::setSpeed()
-{
-	// Robot::m_sysBras.setSpeed(m_speed);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 }

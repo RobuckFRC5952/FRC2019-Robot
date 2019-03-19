@@ -11,8 +11,8 @@
 #include <frc/Joystick.h>
 
 #include "commands/InverserDirection.h"
-#include "commands/MonteBras.h"
-#include "commands/DescendBras.h"
+#include "commands/DeplacerBras.h"
+#include "commands/ArreterBras.h"
 #include "commands/LancerBallon.h"
 #include "commands/AttrapperBallon.h"
 #include "commands/AvancerCrochet.h"
@@ -33,7 +33,7 @@ private:
 	/// Les boutons.
 	frc::JoystickButton *m_boutonInverseDirection;
 
-	frc::JoystickButton *m_boutonMonteBras;
+	frc::JoystickButton *m_boutonMonterBras;
 	frc::JoystickButton *m_boutonBaisserBras;
 
 	frc::JoystickButton *m_boutonLancerBallon;
@@ -50,8 +50,11 @@ private:
 	/// Commande à appliquer quand les boutons sont enfoncés.
 
 	InverserDirection m_InverseDirection;
-	MonteBras m_MonteBras;
-	DescendBras m_DescendBras;
+
+	cmdDeplacerBras m_BaisserBras;
+	cmdDeplacerBras m_MonterBras;
+	cmdArreterBras m_ArreterBras;
+
 	cmdLancerBallon m_LancerBallon;
 	AttrapperBallon m_AttraperBallon;
 	AvancerCrochet m_AvancerCrochet;

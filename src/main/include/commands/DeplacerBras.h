@@ -7,26 +7,23 @@
 
 #pragma once
 
-#include <frc/Timer.h>
 #include <frc/commands/Command.h>
 #include <wpi/Logger.h>
 
-
-class MonteBras : public frc::Command
+class cmdDeplacerBras : public frc::Command
 {
  public:
-	MonteBras();
+	cmdDeplacerBras(double position);
 	void Initialize() override;
 	void Execute() override;
 	bool IsFinished() override;
 	void End() override;
 	void Interrupted() override;
 
-	void setSpeed();
-
  private:
-	double m_timeout;
-	double m_speed;
+	const double m_Position;
+
+	double m_lastTime;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;

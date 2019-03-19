@@ -5,68 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DescendBras.h"
+#include "commands/ArreterBras.h"
 
 #include "Logger.h"
 #include "Robot.h"
-
 #include "subsystems/Bras.h"
 
-
-DescendBras::DescendBras()
+cmdArreterBras::cmdArreterBras()
 	 : Command(__func__)
 	 , m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysBras);
-	m_timeout = 1; // timeout de 1 seconde a tester
-	m_speed = -0.15; //vitesse a tester
-	SetTimeout(m_timeout);
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
+
+	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
+
+	SetInterruptible(false);
 }
 
 // Called just before this Command runs the first time
-void DescendBras::Initialize()
+void cmdArreterBras::Initialize()
 {
-	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-
-	setSpeed();
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DescendBras::Execute()
-{
-	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
-}
+void cmdArreterBras::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool DescendBras::IsFinished()
+bool cmdArreterBras::IsFinished()
 {
-	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
-	if (IsTimedOut())
-	{
-		WPI_DEBUG4(m_logger, "DescendBras::IsFinished");
-		return true;
-	}
-	return false;
+	return TimeSinceInitialized() > 1.0;
 }
 
 // Called once after isFinished returns true
-void DescendBras::End()
+void cmdArreterBras::End()
 {
-	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-	// Robot::m_sysBras.setSpeed(0.0);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DescendBras::Interrupted()
+void cmdArreterBras::Interrupted()
 {
-	WPI_WARNING(m_logger, GetName() << " " << __func__);
-	// Robot::m_sysBras.setSpeed(0.0);
-}
-
-void DescendBras::setSpeed()
-{
-	// Robot::m_sysBras.setSpeed(m_speed);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 }
