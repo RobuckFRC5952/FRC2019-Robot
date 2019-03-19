@@ -49,6 +49,8 @@ class sysBras : public frc::PIDSubsystem
 	double getPositionFB();
 	void setPositionSP(double radian);
 
+	double getSpeedFB();
+
 	void resetEnc();
 
 	void PutSmartDashboard();

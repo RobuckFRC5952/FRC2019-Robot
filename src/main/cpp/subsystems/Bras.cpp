@@ -118,6 +118,10 @@ void sysBras::setPositionSP(double radian)
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " radian: " << wpi::format("%6.3f", radian) << wpi::format(", %6.3f", m_pidController->GetSetpoint()));
 }
 
+double sysBras::getSpeedFB()
+{
+	return m_encoder.GetRate();
+}
 
 void sysBras::resetEnc()
 {
