@@ -54,6 +54,6 @@ class sysBras : public frc::PIDSubsystem
 
 	void PutSmartDashboard();
 
-	static constexpr double posMin = -1.2; // radian
-	static constexpr double posMax =  0.0; // radian 
+	static const double posMin;
+	static const double posMax;
 };

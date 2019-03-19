@@ -17,6 +17,9 @@
 
 #include "Logger.h"
 
+// Limites physique du sous-système.
+const double sysBras::posMin = -1.2; // radian
+const double sysBras::posMax =  0.0; // radian 
 
 sysBras::sysBras()
 	 : PIDSubsystem(__func__, 1.0, 0.0, 1.0, 0.0)
