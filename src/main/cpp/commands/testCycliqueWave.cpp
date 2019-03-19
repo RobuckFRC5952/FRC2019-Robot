@@ -52,7 +52,7 @@ void testCycliqueWave::Initialize()
 	m_kD = frc::SmartDashboard::GetNumber("kD", 0.0);
 	m_kF = frc::SmartDashboard::GetNumber("kF", 0.0);
 	// Position initiale et minimale du bras pendant les cycles.
-	m_position = Robot::m_sysBras.getPosition();
+	m_position = Robot::m_sysBras.getPositionFB();
 	Robot::m_sysBras.EnablePID(m_kP, m_kI, m_kD, m_kF);
 }
 
@@ -95,7 +95,7 @@ void testCycliqueWave::Execute()
 	// Varier la position du bras entre sa position initiale et une position initiale + 2·amplitude.
 	m_offset = frc::SmartDashboard::GetNumber("Offset", m_offset);
 	double position = m_position + m_offset - m_amplitude + m_amplitude*std::cos(m_omega * TimeSinceInitialized());;
-	Robot::m_sysBras.setPosition(position);
+	Robot::m_sysBras.setPositionSP(position);
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " Position: " << wpi::format("%6.3f", position));
 }
 

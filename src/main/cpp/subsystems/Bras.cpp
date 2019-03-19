@@ -107,22 +107,17 @@ void sysBras::DisablePID()
 	m_pidController->Reset();
 }
 
-double sysBras::getPosition()
+double sysBras::getPositionFB()
 {
 	return m_encoder.GetDistance();
 }
 
-void sysBras::setPosition(double radian)
+void sysBras::setPositionSP(double radian)
 {
 	m_pidController->SetSetpoint(radian);
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " radian: " << wpi::format("%6.3f", radian) << wpi::format(", %6.3f", m_pidController->GetSetpoint()));
 }
 
-// void sysBras::setSpeed(double speed)
-// {
-// 	WPI_DEBUG3(m_logger,"sysBras::setSpeed vitesse: " << speed);
-// 	m_BrasMoteur.Set(speed);
-// }
 
 void sysBras::resetEnc()
 {
