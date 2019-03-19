@@ -13,11 +13,16 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <wpi/Logger.h>
+#include <frc/DriverStation.h>
+
+#include "Logger.h"
 #include "OI.h"
 #include "subsystems/BaseMobile.h"
 #include "subsystems/Bras.h"
 #include "subsystems/Pince.h"
-#include "subsystems/Crochet.h" 
+#include "subsystems/Crochet.h"
+
 
 class Robot : public frc::TimedRobot
 {
@@ -26,7 +31,11 @@ class Robot : public frc::TimedRobot
 	static sysBaseMobile m_sysBaseMobile;
 	static sysBras m_sysBras; //subsystem bras mobile
 	static sysPince m_sysPince; //subsystem pince
-    static sysCrochet m_sysCrochet;
+   static sysCrochet m_sysCrochet;
+	enum frc::DriverStation::Alliance Rouge_ou_Bleu;
+
+	wpi::Logger m_logger{log_func};
+
 
 	void RobotInit() override;
 	void RobotPeriodic() override;

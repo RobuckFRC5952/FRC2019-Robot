@@ -7,6 +7,7 @@
 
 #include "Robot.h"
 
+
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -21,6 +22,13 @@ sysCrochet Robot::m_sysCrochet;
 void Robot::RobotInit()
 {
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+	Rouge_ou_Bleu = frc::DriverStation::GetInstance().GetAlliance();
+	if (Rouge_ou_Bleu == frc::DriverStation::Alliance::kBlue) {
+		WPI_DEBUG3(m_logger,"Mon alliance est bleu");
+	}
+	else  {
+		WPI_DEBUG3(m_logger,"Mon alliance est rouge");
+		}
 }
 
 /**
