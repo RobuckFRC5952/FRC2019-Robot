@@ -52,9 +52,19 @@ public:
 	 */
 	double getIntegratedSpeed() const;
 
+	/** Méthode pour calculer la vitesse au moment \c time.
+	 * \param[in] time Temps quelconque
+	 */
+	double getIntegratedSpeed(double time) const;
+
 	/** Méthode pour calculer la position au moment présent.
 	 */
 	double getIntegratedPosition() const;
+
+	/** Méthode pour calculer la position au moment \c time.
+	 * \param[in] time Temps quelconque
+	 */
+	double getIntegratedPosition(double time) const;
 
 private:
 	/// Accélération constante (L / sec²).

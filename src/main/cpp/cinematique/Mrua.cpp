@@ -35,9 +35,21 @@ double Mrua::getIntegratedSpeed() const
 	return m_acceleration * (time) + m_initial_speed;
 }
 
+double Mrua::getIntegratedSpeed(double time) const
+{
+	// Note: Si m_acceleration == inf et time == 0.0, le résultat est nan.
+	return m_acceleration * (time) + m_initial_speed;
+}
+
 double Mrua::getIntegratedPosition() const
 {
 	double time = m_time.Get();
+	// Note: Si m_acceleration == inf et time == 0.0, le résultat est nan.
+	return 1.0 / 2.0 * m_acceleration * pow(time, 2) + m_initial_speed * (time) + m_initial_position;
+}
+
+double Mrua::getIntegratedPosition(double time) const
+{
 	// Note: Si m_acceleration == inf et time == 0.0, le résultat est nan.
 	return 1.0 / 2.0 * m_acceleration * pow(time, 2) + m_initial_speed * (time) + m_initial_position;
 }
