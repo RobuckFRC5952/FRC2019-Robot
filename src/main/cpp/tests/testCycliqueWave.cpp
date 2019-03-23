@@ -7,7 +7,7 @@
 
 #define _USE_MATH_DEFINES 
 
-#include "commands/testCycliqueWave.h"
+#include "tests/testCycliqueWave.h"
 
 #include <frc/SmartDashboard/SmartDashboard.h>
 #include <wpi/Format.h>

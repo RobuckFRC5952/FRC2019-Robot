@@ -19,7 +19,7 @@
 #include "commands/RetracterCrochet.h"
 #include "commands/DeployerRampe.h"
 
-#include "commands/testCycliqueWave.h"
+#include "tests/testCycliqueWave.h"
 
 
 class OI
