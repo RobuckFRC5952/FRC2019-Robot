@@ -47,7 +47,9 @@ class sysBras : public frc::PIDSubsystem
 	void DisablePID();
 
 	double getPositionFB();
-	void setPositionSP(double radian);
+	double getPositionSP();
+
+	void   setPositionSP(double radian);
 
 	double getSpeedFB();
 
@@ -57,4 +59,6 @@ class sysBras : public frc::PIDSubsystem
 
 	static const double posMin;
 	static const double posMax;
+	static const double speedMax;
+	static const double accelMax;
 };

@@ -20,6 +20,8 @@
 // Limites physique du sous-système.
 const double sysBras::posMin = -1.2; // radian
 const double sysBras::posMax =  0.0; // radian 
+const double sysBras::speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
+const double sysBras::accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
 
 sysBras::sysBras()
 	 : PIDSubsystem(__func__, 1.0, 0.0, 1.0, 0.0)
@@ -110,6 +112,11 @@ void sysBras::DisablePID()
 double sysBras::getPositionFB()
 {
 	return m_encoder.GetDistance();
+}
+
+double sysBras::getPositionSP()
+{
+	return m_pidController->GetSetpoint();
 }
 
 void sysBras::setPositionSP(double radian)
