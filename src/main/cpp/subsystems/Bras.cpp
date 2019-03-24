@@ -18,8 +18,10 @@
 #include "Logger.h"
 
 // Limites physique du sous-système.
-const double sysBras::posMin = -1.2; // radian
-const double sysBras::posMax =  0.0; // radian 
+// const double sysBras::posMin   = -1.2; // radian
+// const double sysBras::posMax   =  0.0; // radian
+const double sysBras::posMin   = -M_PI; // radian
+const double sysBras::posMax   =  M_PI; // radian
 const double sysBras::speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
 const double sysBras::accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
 

@@ -98,6 +98,11 @@ void Robot::TeleopInit()
 		m_autonomousCommand = nullptr;
 	}
 	m_sysBras.resetEnc();
+	double m_kP = frc::SmartDashboard::GetNumber("kP", 0.0);
+	double m_kI = frc::SmartDashboard::GetNumber("kI", 0.0);
+	double m_kD = frc::SmartDashboard::GetNumber("kD", 0.0);
+	double m_kF = frc::SmartDashboard::GetNumber("kF", 0.0);
+	m_sysBras.EnablePID(m_kP, m_kI, m_kD, m_kF);
 }
 
 void Robot::TeleopPeriodic()
