@@ -24,7 +24,7 @@ cmdArreterBras::cmdArreterBras()
 	Requires(&Robot::m_sysBras);
 
 	// Ajuster le niveau de messages à la Console.
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG4);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
 	SetInterruptible(false);
 }
@@ -46,7 +46,7 @@ void cmdArreterBras::Execute()
 	// Restreindre la position par les limites du sous-système.
 	double position = std::max(sysBras::posMin, std::min(m_position, sysBras::posMax));
 
-	// Robot::m_sysBras.setPositionSP(position);
+	Robot::m_sysBras.setPositionSP(position);
 
 	// Log à chaque demi-seconde, ou si le logger log.
 	double time = TimeSinceInitialized();
@@ -91,7 +91,8 @@ void cmdArreterBras::setSpeedSP(double speed_sp)
 	m_speed_sp = speed_sp;
 
 	// Trouver la position et la vitesse actuelle du sous-système.
-	double current_position = Robot::m_sysBras.getPositionFB();
+	// double current_position = Robot::m_sysBras.getPositionFB();
+	double current_position = Robot::m_sysBras.getPositionSP();	// Comme ça, l'erreur ne tombe pas à zéro.
 	double current_speed    = Robot::m_sysBras.getSpeedFB();
 
 	// Trouver le signe de l'accélération. Il est en fonction de la vitesse 
