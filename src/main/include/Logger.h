@@ -22,9 +22,9 @@
 /// | \c WPI_ERROR   | Les erreurs, e.g., dépasser une limite de l'encodeur, ...
 /// | \c WPI_WARNING | Les warnings, e.g. un timeout d'une commande, ...
 /// | \c WPI_INFO    | Les noms des commandes et sous-commandes appelées, ...
-/// | \c WPI_DEBUG   | Afficher des données, calcules, etc.
-/// | \c WPI_DEBUG1  | Afficher des données, calcules, etc. récurrentes.
-/// | \c WPI_DEBUG2  | |
+/// | \c WPI_DEBUG   | Afficher quelques messages de plus.
+/// | \c WPI_DEBUG1  | Afficher des données, calcules, etc.
+/// | \c WPI_DEBUG2  | Afficher des données, calcules, etc. récurrentes.
 /// | \c WPI_DEBUG3  | Tracer l'entrée/sortie des fonctions non récurrentes.
 /// | \c WPI_DEBUG4  | Tracer l'entrée/sortie des fonctions récurrentes.
 
