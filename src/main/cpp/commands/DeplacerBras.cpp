@@ -13,51 +13,58 @@
 #include "Robot.h"
 #include "subsystems/Bras.h"
 
-cmdDeplacerBras::cmdDeplacerBras(double position)
-	 : Command(__func__)
-	 , m_Position(position)
-	 , m_lastTime(0.0)
-	 , m_logger(log_func)
+// TODO Generic, pass pointer to ISubSystem
+cmdDeplacerBras::cmdDeplacerBras(double position_sp)
+	 : cmdDeplaceMoteur(0.0, sysBras::speedMax, sysBras::accelMax)
+	 , m_position_sp(position_sp)
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysBras);
 
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
+	// Renommer la commande cmdDeplaceMoteur par cmdDeplacerBras.
+	SetName("DeplacerBras");
+
+	// Ajuster le niveau de messages à la Console.
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
 // Called just before this Command runs the first time
 void cmdDeplacerBras::Initialize()
 {
-	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
-	m_lastTime = TimeSinceInitialized();
+
+	// Se déplacer de la position courrante à la consigne (m_position_sp).
+	double current_position = Robot::m_sysBras.getPositionFB();
+	setDistance(m_position_sp - current_position);
+	WPI_INFO(m_logger, GetName() << " Position commence de " << wpi::format("%5.2f", current_position)
+	                             << " a "                    << wpi::format("%5.2f", m_position_sp));
+	cmdDeplaceMoteur::Initialize();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void cmdDeplacerBras::Execute()
 {
-	if (((TimeSinceInitialized() - m_lastTime) > 0.25) ||
-	    (m_logger.min_level() <= wpi::WPI_LOG_DEBUG4))
-	{
-		WPI_DEBUG2(m_logger, GetName() << " " << __func__ << wpi::format(" %5.2f %5.2f", m_Position, TimeSinceInitialized()));
-		m_lastTime = TimeSinceInitialized();
-	}
+	cmdDeplaceMoteur::Execute();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool cmdDeplacerBras::IsFinished()
 {
-	return TimeSinceInitialized() > 5.0;
+	return cmdDeplaceMoteur::IsFinished();
 }
 
 // Called once after isFinished returns true
 void cmdDeplacerBras::End()
 {
-	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
+	cmdDeplaceMoteur::End();
+	double position_sp = Robot::m_sysBras.getPositionSP();
+	WPI_INFO(m_logger, GetName() << " Position termine a " << wpi::format("%5.2f", position_sp));
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void cmdDeplacerBras::Interrupted()
 {
-	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
+	cmdDeplaceMoteur::Interrupted();
+	double position_sp = Robot::m_sysBras.getPositionSP();
+	WPI_INFO(m_logger, GetName() << " Interruption de la commande, position a " << wpi::format("%5.2f", position_sp));
 }

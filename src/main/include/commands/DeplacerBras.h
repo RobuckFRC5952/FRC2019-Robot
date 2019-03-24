@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include "cinematique/DeplaceMoteur.h"
+
 #include <wpi/Logger.h>
 
-class cmdDeplacerBras : public frc::Command
+class cmdDeplacerBras : public cmdDeplaceMoteur
 {
  public:
 	cmdDeplacerBras(double position);
@@ -21,10 +22,24 @@ class cmdDeplacerBras : public frc::Command
 	void Interrupted() override;
 
  private:
-	const double m_Position;
+	/** Position du sous-système Bras à atteindre
+	 * 
+	 * I.e. sysBras::posMin ou sysBras::posMax.
+	 */
+	double m_position_sp;
 
-	double m_lastTime;
+	/// La distance à parcourir.
+	// double m_distance;
 
-	/// Logger du sous-système.
-	wpi::Logger m_logger;
+	/** Vitesse maximale du moteur.
+	 * 
+	 * TODO Peut être offert par le sous-système.
+	 */
+	double m_speed_max;
+
+	/** La valeur de l'accélération.
+	 * 
+	 * TODO Peut être offert par le sous-système.
+	 */
+	double m_acceleration;
 };
