@@ -9,11 +9,15 @@
 
 #include <wpi/Format.h>
 
+#include "cinematique/Deplacement.h"
+#include "cinematique/Mrua.h"
 #include "Logger.h"
-#include "Robot.h"
+#include "subsystems/ISubsystem.h"
 
-cmdDeplaceMoteur::cmdDeplaceMoteur(double distance, double speed_max, double acceleration)
+
+cmdDeplaceMoteur::cmdDeplaceMoteur(ISubsystem & subsystem, double distance, double speed_max, double acceleration)
 	: Command(__func__)
+	, m_subsystem(subsystem)
 	, m_distance(distance)
 	, m_speed_max(speed_max)
 	, m_acceleration(acceleration)
@@ -40,7 +44,7 @@ void cmdDeplaceMoteur::Initialize()
 	// Trouver le profil de vitesse.
 	Deplacement d;
 	double initial_speed = 0.0;   // FIXME Initial and final speed.
-	double final_speed   = 0.0;   // FIXME Initial and final speed.
+	double final_speed   = 0.0;   // On assume qu'un déplacement de moteur se fait toujours à l'arrêt.
 
 	// L'object de type Deplacement peut lancer des exceptions de type: std::exception.
 	// Il faut les attrapper sinon l'application se termine automatiquement (et brutalement).
@@ -64,6 +68,7 @@ void cmdDeplaceMoteur::Initialize()
 		Cancel();
 		return;
 	}
+	// Si le déplacement est trop court, ignorer.
 	if (m_profile.back().m_time - m_profile.front().m_time <= 0.004)
 	{
 		WPI_WARNING(m_logger, GetName() << " Temps du profile trop petit.");
@@ -83,9 +88,8 @@ void cmdDeplaceMoteur::Initialize()
 	                              << " a  "      << wpi::format("%5.2f", v1)
 	                              << " pendant " << wpi::format("%6.3f", t1 - t0) << " sec.");
 
-	// Trouver la position et la vitesse actuelle du sous-système.
-	// TODO Generic
-	m_position = Robot::m_sysBras.getPositionFB();
+	// Trouver la position actuelle du sous-système.
+	m_position = m_subsystem.getPositionFB();
 
 	// Trouver le signe de l'accélération. Il est en fonction de la vitesse 
 	// désirée par rapport à la vitesse actuelle.
@@ -153,11 +157,11 @@ void cmdDeplaceMoteur::Execute()
 	double position = m_mrua->getIntegratedPosition(time_phase);
 
 	// Restreindre la position par les limites du sous-système.
-	// m_position = std::max(Robot::m_sysBras.posMin, std::min(position, Robot::m_sysBras.posMax));
+	// m_position = std::max(m_subsystem.getPositionMin(), std::min(position, m_subsystem.getPositionMax()));
 	m_position = position; // TEMP
 
 	// TODO if GetPIDSourceType() == frc::PIDSourceType::kDisplacement...
-	Robot::m_sysBras.setPositionSP(m_position);
+	m_subsystem.setPositionSP(m_position);
 
 	// Log à chaque demi-seconde, ou si le logger log.
 	if (((time - m_lastTime) > 0.5) ||
@@ -193,8 +197,6 @@ void cmdDeplaceMoteur::End()
 // subsystems is scheduled to run
 void cmdDeplaceMoteur::Interrupted()
 {
-	// Arrêter le moteur.
-	// TODO Robot::m_sysMonteCharge.setSpeed(0.0);
 	WPI_DEBUG(m_logger, GetName() << " " << __func__ << " Interruption de la commande.");
 }
 

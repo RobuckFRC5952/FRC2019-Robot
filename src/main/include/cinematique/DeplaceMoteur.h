@@ -14,12 +14,12 @@
 #include <vector>
 
 #include <frc/commands/Command.h>
-#include <frc/Timer.h>
 #include <wpi/Logger.h>
 
 #include "cinematique/Cinematique.h"
-#include "cinematique/Deplacement.h"
-#include "cinematique/Mrua.h"
+
+class Mrua;
+class ISubsystem;
 
 
 /** Commande pour faire tourner le moteur d'une distance désirée en suivant un
@@ -30,17 +30,20 @@
 class cmdDeplaceMoteur : public frc::Command
 {
  public:
-	cmdDeplaceMoteur(double distance, double speed_max, double acceleration = std::numeric_limits<double>::infinity());
+	cmdDeplaceMoteur(ISubsystem & subsystem, double distance, double speed_max, double acceleration = std::numeric_limits<double>::infinity());
 	virtual void Initialize() override;
 	virtual void Execute() override;
 	virtual bool IsFinished() override;
 	virtual void End() override;
 	virtual void Interrupted() override;
 
-	// Changer la distance à parcourir avan l'initialisation.
+	// Changer la distance à parcourir avant l'initialisation.
 	void setDistance(double distance);
 
  private:
+
+	/// La référence du sous-system contrôlé par cette commande.
+	ISubsystem & m_subsystem;
 
 	/// La distance relative à parcourir.
 	double m_distance;

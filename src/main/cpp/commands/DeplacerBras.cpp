@@ -13,9 +13,10 @@
 #include "Robot.h"
 #include "subsystems/Bras.h"
 
+
 // TODO Generic, pass pointer to ISubSystem
 cmdDeplacerBras::cmdDeplacerBras(double position_sp)
-	 : cmdDeplaceMoteur(0.0, sysBras::speedMax, sysBras::accelMax)
+	 : cmdDeplaceMoteur(Robot::m_sysBras, 0.0, Robot::m_sysBras.getSpeedMax(), Robot::m_sysBras.getAccelMax())
 	 , m_position_sp(position_sp)
 {
 	// Use Requires() here to declare subsystem dependencies

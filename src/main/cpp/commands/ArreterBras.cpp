@@ -15,9 +15,10 @@
 #include "Robot.h"
 #include "subsystems/Bras.h"
 
+
 cmdArreterBras::cmdArreterBras()
 	 : Command(__func__)
-	 , m_acceleration(sysBras::accelMax)	// FIXME TBD
+	 , m_acceleration(Robot::m_sysBras.getAccelMax())
 	 , m_logger(log_func)
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -44,7 +45,7 @@ void cmdArreterBras::Execute()
 	m_speed    = m_mrua->getIntegratedSpeed();
 
 	// Restreindre la position par les limites du sous-système.
-	double position = std::max(sysBras::posMin, std::min(m_position, sysBras::posMax));
+	double position = std::max(Robot::m_sysBras.getPositionMin(), std::min(m_position, Robot::m_sysBras.getPositionMax()));
 
 	Robot::m_sysBras.setPositionSP(position);
 

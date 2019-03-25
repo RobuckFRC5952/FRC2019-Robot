@@ -16,12 +16,13 @@
 #include <frc/Encoder.h>
 #include <frc/PWMVictorSPX.h>
 
-#include "RobotMap.h"
-
 #include <wpi/Logger.h>
 
+#include "ISubsystem.h"
+#include "RobotMap.h"
 
-class sysBras : public frc::PIDSubsystem
+
+class sysBras : public frc::PIDSubsystem, public ISubsystem
 {
  private:
 	/// Le moteur du bras.
@@ -30,13 +31,24 @@ class sysBras : public frc::PIDSubsystem
 	/// L'encodeur sur le moteur.
 	frc::Encoder m_encoder { kBrasEncoder_DioChannelA, kBrasEncoder_DioChannelB, true, frc::Encoder::EncodingType::k4X };
 
+	/// Pointeur sur le régulateur PID du sous-système.
 	std::shared_ptr<frc::PIDController> m_pidController;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;
 
+	/// Méthodes à implanter du PIDSubsystem.
 	virtual double ReturnPIDInput();
 	virtual void UsePIDOutput(double output);
+
+	/// \name Limites physique du bras.
+	/// Valeurs à déterminer pendant des tests.
+	/// @{
+	static double posMin;
+	static double posMax;
+	static double speedMax;
+	static double accelMax;
+	/// @}
 
  public:
 	sysBras();
@@ -44,21 +56,28 @@ class sysBras : public frc::PIDSubsystem
 	void InitDefaultCommand() override;
 
 	void EnablePID(double k_p, double k_i, double k_d, double k_f);
+
 	void DisablePID();
 
+	frc::PIDSourceType getPIDSourceType();
+
+	double getPositionMin();
+
+	double getPositionMax();
+
+	double getSpeedMax();
+
+	double getAccelMax();
+
 	double getPositionFB();
+
 	double getPositionSP();
 
-	void   setPositionSP(double radian);
+	void setPositionSP(double radian);
 
 	double getSpeedFB();
 
-	void resetEnc();
+	void resetPosition();
 
 	void PutSmartDashboard();
-
-	static const double posMin;
-	static const double posMax;
-	static const double speedMax;
-	static const double accelMax;
 };

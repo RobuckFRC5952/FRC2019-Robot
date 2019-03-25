@@ -97,7 +97,7 @@ void Robot::TeleopInit()
 		m_autonomousCommand->Cancel();
 		m_autonomousCommand = nullptr;
 	}
-	m_sysBras.resetEnc();
+	m_sysBras.resetPosition();
 	double m_kP = frc::SmartDashboard::GetNumber("kP", 0.0);
 	double m_kI = frc::SmartDashboard::GetNumber("kI", 0.0);
 	double m_kD = frc::SmartDashboard::GetNumber("kD", 0.0);

@@ -6,14 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
+#include "Robot.h"
 #include "RobotMap.h"
 #include "subsystems/Bras.h"
 
 
 OI::OI()
 : m_joystick(kJoystickPort)
-, m_BaisserBras(sysBras::posMin)
-, m_MonterBras(sysBras::posMax)
+, m_BaisserBras(Robot::m_sysBras.getPositionMin())
+, m_MonterBras(Robot::m_sysBras.getPositionMax())
 , m_ArreterBras()
 {
 	// Process operator interface input here.

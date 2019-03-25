@@ -18,12 +18,12 @@
 #include "Logger.h"
 
 // Limites physique du sous-système.
-// const double sysBras::posMin   = -1.2; // radian
-// const double sysBras::posMax   =  0.0; // radian
-const double sysBras::posMin   = -M_PI; // radian
-const double sysBras::posMax   =  M_PI; // radian
-const double sysBras::speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
-const double sysBras::accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
+// double sysBras::posMin   = -1.2; // radian
+// double sysBras::posMax   =  0.0; // radian
+double sysBras::posMin   = -M_PI; // radian
+double sysBras::posMax   =  M_PI; // radian
+double sysBras::speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
+double sysBras::accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
 
 sysBras::sysBras()
 	 : PIDSubsystem(__func__, 1.0, 0.0, 1.0, 0.0)
@@ -97,7 +97,7 @@ void sysBras::EnablePID(double k_p, double k_i, double k_d, double k_f)
 	m_pidController->SetPID(k_p, k_i, k_d, k_f);
 	m_pidController->SetSetpoint(m_encoder.GetDistance());
 	m_pidController->SetInputRange(posMin, posMax); // rad
-	m_pidController->SetOutputRange(-0.5, 0.5); // rad
+	m_pidController->SetOutputRange(-0.5, 0.5); // commande moteur normalisé.
 	m_pidController->Reset();
 	Enable();
 }
@@ -109,6 +109,31 @@ void sysBras::DisablePID()
 	// Désactiver le régulateur PID.
 	// Disable();
 	m_pidController->Reset();
+}
+
+frc::PIDSourceType sysBras::getPIDSourceType()
+{
+	return m_pidController->GetPIDSourceType();
+}
+
+double sysBras::getPositionMin()
+{
+	return posMin;
+}
+
+double sysBras::getPositionMax()
+{
+	return posMax;
+}
+
+double sysBras::getSpeedMax()
+{
+	return speedMax;
+}
+
+double sysBras::getAccelMax()
+{
+	return accelMax;
 }
 
 double sysBras::getPositionFB()
@@ -132,7 +157,7 @@ double sysBras::getSpeedFB()
 	return m_encoder.GetRate();
 }
 
-void sysBras::resetEnc()
+void sysBras::resetPosition()
 {
 	m_encoder.Reset();
 }
