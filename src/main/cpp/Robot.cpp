@@ -7,11 +7,16 @@
 
 #include "Robot.h"
 
+#include <iostream>
+
 #include <frc/commands/Scheduler.h>
+#include <frc/DriverStation.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
-
 OI Robot::m_oi;
+
+Test_position_et_couleur Robot::m_Rouge2;
+cmdAvanceEquipe1         Robot::m_Rouge1;
 
 sysBaseMobile Robot::m_sysBaseMobile;
 sysBras       Robot::m_sysBras;
@@ -72,8 +77,25 @@ void Robot::AutonomousInit()
 	// {
 	// 	m_autonomousCommand = &m_defaultAuto;
 	// }
-
-	m_autonomousCommand = m_chooser.GetSelected();
+	DriverStation::Alliance aliance = frc::DriverStation::GetInstance().GetAlliance();
+	int equipe = frc::DriverStation::GetInstance().GetLocation();
+	std::cout << "Aliance: " << aliance << ", equipe: " << equipe << std::endl;
+	if (aliance == frc::DriverStation::Alliance::kRed)
+	{
+		if (equipe == 1)
+		{
+			m_autonomousCommand = &m_Rouge1;
+		}
+		if (equipe == 2)
+		{
+			m_autonomousCommand = &m_Rouge2;
+		}
+	}
+	else if (aliance == frc::DriverStation::Alliance::kBlue)
+	{
+		std::cout << "TODO" << std::endl;
+	}
+	// m_autonomousCommand = m_chooser.GetSelected();
 
 	if (m_autonomousCommand != nullptr)
 	{

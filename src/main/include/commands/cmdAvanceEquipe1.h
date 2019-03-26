@@ -9,7 +9,7 @@
 
 #include <frc/commands/CommandGroup.h>
 
-class Test_position_et_couleur : public frc::CommandGroup {	
+class cmdAvanceEquipe1 : public frc::CommandGroup {
  public:
-  Test_position_et_couleur();
+  cmdAvanceEquipe1();
 };

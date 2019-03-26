@@ -16,6 +16,9 @@
 
 #include "OI.h"
 
+#include "commands/Test_position_et_couleur.h"
+#include "commands/cmdAvanceEquipe1.h"
+
 #include "subsystems/BaseMobile.h"
 #include "subsystems/Bras.h"
 #include "subsystems/Pince.h"
@@ -26,6 +29,10 @@ class Robot : public frc::TimedRobot
 {
  public:
 	static OI m_oi;
+
+	static Test_position_et_couleur m_Rouge2;
+	static cmdAvanceEquipe1 m_Rouge1;
+
 	static sysBaseMobile m_sysBaseMobile;
 	static sysBras       m_sysBras;
 	static sysPince      m_sysPince;

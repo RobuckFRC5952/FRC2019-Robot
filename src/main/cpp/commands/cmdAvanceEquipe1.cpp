@@ -5,17 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/Test_position_et_couleur.h"
+#include "commands/cmdAvanceEquipe1.h"
 
 #include <frc/commands/PrintCommand.h>
 #include <frc/commands/WaitCommand.h>
 
-
-Test_position_et_couleur::Test_position_et_couleur() {
+cmdAvanceEquipe1::cmdAvanceEquipe1() {
   // Add Commands here:
   // e.g. AddSequential(new Command1());
-  //      AddSequential(new Command2());
+   //      AddSequential(new Command2());
   // these will run in order.
+	AddSequential(new frc::PrintCommand("Allo"));
+	AddSequential(new frc::WaitCommand(1.0));
 
   // To run multiple commands at the same time,
   // use AddParallel()
@@ -28,11 +29,4 @@ Test_position_et_couleur::Test_position_et_couleur() {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-
-	//Tourne le moteur pendant 3 mètre à 1/2 de sa vitesse
-	AddSequential (new frc::PrintCommand("\nTourne le moteur à 1, avec acceleration de 0,30"));
-	AddSequential (new frc::WaitCommand(3.0));
-
-	AddSequential (new frc::PrintCommand("\nTourner de 90 degrés"));
-	AddSequential (new frc::WaitCommand(3.0));
 }
