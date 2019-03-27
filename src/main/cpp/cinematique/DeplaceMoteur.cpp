@@ -157,8 +157,7 @@ void cmdDeplaceMoteur::Execute()
 	double position = m_mrua->getIntegratedPosition(time_phase);
 
 	// Restreindre la position par les limites du sous-système.
-	// m_position = std::max(m_subsystem.getPositionMin(), std::min(position, m_subsystem.getPositionMax()));
-	m_position = position; // TEMP
+	m_position = std::max(m_subsystem.getPositionMin(), std::min(position, m_subsystem.getPositionMax()));
 
 	// TODO if GetPIDSourceType() == frc::PIDSourceType::kDisplacement...
 	m_subsystem.setPositionSP(m_position);

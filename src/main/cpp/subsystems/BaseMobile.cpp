@@ -38,7 +38,7 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("MotG",  m_DriveBaseMoteurGauche);
 	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
-	// AddChild("Drive", m_Drive);
+	AddChild("Drive", m_Drive);
 
 	WPI_INFO(m_logger, "Moteur droit sur le canal PWM  " << m_DriveBaseMoteurDroit.GetChannel()
 	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderD_DioChannelA << " et " << kBaseMobileEncoderD_DioChannelB << ".");
@@ -61,7 +61,7 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 	{
 		xSpeed *= -1.0;
 	}
-	// m_Drive.ArcadeDrive(xSpeed, zRotation);
+	m_Drive.ArcadeDrive(xSpeed, zRotation);
 
 	// Afficher à la console seulement si une des valeurs changent de 5% par rapport à la dernière.
 	// Un message imprimé à chaque 20 ms est trop verbeux.

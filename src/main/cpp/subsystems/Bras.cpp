@@ -18,10 +18,8 @@
 #include "Logger.h"
 
 // Limites physique du sous-système.
-// double sysBras::posMin   = -1.2; // radian
-// double sysBras::posMax   =  0.0; // radian
-double sysBras::posMin   = -M_PI; // radian
-double sysBras::posMax   =  M_PI; // radian
+double sysBras::posMin   = -1.2; // radian
+double sysBras::posMax   =  0.0; // radian
 double sysBras::speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
 double sysBras::accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
 
@@ -31,19 +29,11 @@ sysBras::sysBras()
 {
 	m_BrasMoteur.SetInverted(true);
 
-#define MONTECHARGE
-#ifdef MONTECHARGE
-	double m_gearbox_ratio = 71.0;
-	double m_encoder_ratio =  7.0;
-	double RadPerPulse = 2.0 * M_PI / (m_gearbox_ratio * m_encoder_ratio);
-	m_encoder.SetDistancePerPulse(RadPerPulse);
-#else
 	// Encodeur: 2048 pulses par révolution.
 	const int pulses_tour = 2048;
 
 	// Convertir en radian la distance de l'encodeur.
 	m_encoder.SetDistancePerPulse( (2.0 * M_PI) / pulses_tour);
-#endif
 
 	// Spécifier pour le régulateur que l'encodeur sera utilisé en déplacement et non pas vitesse.
 	m_encoder.SetPIDSourceType(frc::PIDSourceType::kDisplacement);
@@ -53,13 +43,6 @@ sysBras::sysBras()
 	m_pidController = GetPIDController();
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
-
-	frc::SmartDashboard::PutNumber("SetPoint", 0.0);
-	frc::SmartDashboard::PutNumber("FeedBack", 0.0);
-	frc::SmartDashboard::PutNumber("Error",    0.0);
-	frc::SmartDashboard::PutNumber("Commande", 0.0);
-
-	frc::SmartDashboard::PutNumber("PutGET", 0.0);
 }
 
 void sysBras::InitDefaultCommand()

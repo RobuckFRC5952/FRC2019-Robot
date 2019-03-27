@@ -19,8 +19,6 @@
 #include "commands/RetracterCrochet.h"
 #include "commands/DeployerRampe.h"
 
-#include "tests/testCycliqueWave.h"
-
 
 class OI
 {
@@ -45,8 +43,6 @@ private:
 	frc::JoystickButton *m_boutonDeployerRampe;
 	frc::JoystickButton *m_boutonRemonterRampe;
 
-	frc::JoystickButton *m_bouton_trigger;
-
 	/// Commande à appliquer quand les boutons sont enfoncés.
 
 	InverserDirection m_InverseDirection;
@@ -57,10 +53,10 @@ private:
 
 	cmdLancerBallon m_LancerBallon;
 	AttrapperBallon m_AttraperBallon;
+
 	AvancerCrochet m_AvancerCrochet;
 	RetracterCrochet m_RetracterCrochet;
+
 	DeployerRampe m_DeployerRampe {-0.2};
 	DeployerRampe m_RemonterRampe { 0.8};
-	
-	testCycliqueWave m_testCycliqueWave;
 };

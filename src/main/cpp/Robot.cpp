@@ -22,6 +22,9 @@ sysRampe      Robot::m_sysRampe;
 void Robot::RobotInit()
 {
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+	// TODO Le Bras DOIT être en position élevée.
+	// m_sysBras.resetPosition();
+	// m_sysBras.Enable();
 }
 
 /**
@@ -97,12 +100,6 @@ void Robot::TeleopInit()
 		m_autonomousCommand->Cancel();
 		m_autonomousCommand = nullptr;
 	}
-	m_sysBras.resetPosition();
-	double m_kP = frc::SmartDashboard::GetNumber("kP", 0.0);
-	double m_kI = frc::SmartDashboard::GetNumber("kI", 0.0);
-	double m_kD = frc::SmartDashboard::GetNumber("kD", 0.0);
-	double m_kF = frc::SmartDashboard::GetNumber("kF", 0.0);
-	m_sysBras.EnablePID(m_kP, m_kI, m_kD, m_kF);
 }
 
 void Robot::TeleopPeriodic()
@@ -118,9 +115,8 @@ void Robot::TeleopPeriodic()
 	}
 	double speed = m_oi.m_joystick.GetY();
 	double rotation = m_oi.m_joystick.GetX() * 0.75;
-	// m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
-	//m_sysBaseMobile.PutSmartDashboard();
-	// m_sysBras.setSpeed(m_oi.m_joystick.GetY());
+	m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
+	m_sysBaseMobile.PutSmartDashboard();
 	m_sysBras.PutSmartDashboard();
 }
 
