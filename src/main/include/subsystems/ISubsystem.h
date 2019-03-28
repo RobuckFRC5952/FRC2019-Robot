@@ -34,6 +34,8 @@ class ISubsystem
 	/// @{
 	virtual double getPositionFB() = 0;
 	virtual void   setPositionSP(double position) = 0;
+	virtual double getSpeedFB() = 0;
+	virtual void   setSpeedSP(double speed) = 0;
 	/// @}
 
 	/// Remettre à zéro la position du sous-système.

@@ -10,6 +10,7 @@
 #include "subsystems/Bras.h"
 
 #include <cmath>
+#include <stdexcept>
 
 #include <frc/PIDSource.h>
 #include <frc/SmartDashboard/SmartDashboard.h>
@@ -138,6 +139,12 @@ void sysBras::setPositionSP(double radian)
 double sysBras::getSpeedFB()
 {
 	return m_encoder.GetRate();
+}
+
+void sysBras::setSpeedSP(double speed)
+{
+	WPI_ERROR(m_logger, "Regulateur PID en position.");
+	throw(std::logic_error("Regulateur PID en position."));
 }
 
 void sysBras::resetPosition()
