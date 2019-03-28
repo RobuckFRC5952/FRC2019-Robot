@@ -5,11 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/cmdAvancerEquipe2.h"
 
-#include <frc/commands/CommandGroup.h>
+#include <frc/commands/PrintCommand.h>
+#include <frc/commands/WaitCommand.h>
 
-class Test_position_et_couleur : public frc::CommandGroup {	
- public:
-  Test_position_et_couleur();
-};
+cmdAvancerEquipe2::cmdAvancerEquipe2() {
+ //Tourne le moteur pendant 3 mètre à 1/2 de sa vitesse
+AddSequential (new frc::PrintCommand("\nTourne le moteur à 1, avec acceleration de 0,30"));
+AddSequential (new frc::WaitCommand(3.0));
+
+AddSequential (new frc::PrintCommand("\nTourner de 90 degrés"));
+AddSequential (new frc::WaitCommand(1.0));
+
+}

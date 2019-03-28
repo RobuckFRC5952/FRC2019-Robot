@@ -15,7 +15,7 @@
 
 OI Robot::m_oi;
 
-Test_position_et_couleur Robot::m_Rouge2;
+cmdAvancerEquipe2 Robot::m_Rouge2;
 cmdAvanceEquipe1         Robot::m_Rouge1;
 cmdAvanceEquipe3		 Robot::m_Rouge3;
 

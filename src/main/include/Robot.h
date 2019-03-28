@@ -16,7 +16,7 @@
 
 #include "OI.h"
 
-#include "commands/Test_position_et_couleur.h"
+#include "commands/cmdAvancerEquipe2.h"
 #include "commands/cmdAvanceEquipe1.h"
 #include "commands/cmdAvanceEquipe3.h"
 
@@ -31,7 +31,7 @@ class Robot : public frc::TimedRobot
  public:
 	static OI m_oi;
 
-	static Test_position_et_couleur m_Rouge2;
+	static cmdAvancerEquipe2 m_Rouge2;
 	static cmdAvanceEquipe1 m_Rouge1;
 	static cmdAvanceEquipe3 m_Rouge3;
 
