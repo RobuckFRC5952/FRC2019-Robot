@@ -14,6 +14,7 @@
 #include <vector>
 
 #include <frc/commands/Command.h>
+#include <frc/PIDSource.h>
 #include <wpi/Logger.h>
 
 #include "cinematique/Cinematique.h"
@@ -45,6 +46,8 @@ class cmdDeplaceMoteur : public frc::Command
 	/// La référence du sous-system contrôlé par cette commande.
 	ISubsystem & m_subsystem;
 
+	frc::PIDSourceType m_source_type;
+
 	/// La distance relative à parcourir.
 	double m_distance;
 
@@ -65,6 +68,9 @@ class cmdDeplaceMoteur : public frc::Command
 
 	// Position actuelle commandée.
 	double m_position;
+
+	// Vitesse actuelle commandée.
+	double m_speed;
 
  protected:
 
