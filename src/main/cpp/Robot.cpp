@@ -17,6 +17,7 @@ OI Robot::m_oi;
 
 Test_position_et_couleur Robot::m_Rouge2;
 cmdAvanceEquipe1         Robot::m_Rouge1;
+cmdAvanceEquipe3		 Robot::m_Rouge3;
 
 sysBaseMobile Robot::m_sysBaseMobile;
 sysBras       Robot::m_sysBras;
@@ -89,6 +90,10 @@ void Robot::AutonomousInit()
 		if (equipe == 2)
 		{
 			m_autonomousCommand = &m_Rouge2;
+		}
+		if (equipe == 3)
+		{
+			m_autonomousCommand = &m_Rouge3;
 		}
 	}
 	else if (aliance == frc::DriverStation::Alliance::kBlue)

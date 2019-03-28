@@ -18,6 +18,7 @@
 
 #include "commands/Test_position_et_couleur.h"
 #include "commands/cmdAvanceEquipe1.h"
+#include "commands/cmdAvanceEquipe3.h"
 
 #include "subsystems/BaseMobile.h"
 #include "subsystems/Bras.h"
@@ -32,6 +33,7 @@ class Robot : public frc::TimedRobot
 
 	static Test_position_et_couleur m_Rouge2;
 	static cmdAvanceEquipe1 m_Rouge1;
+	static cmdAvanceEquipe3 m_Rouge3;
 
 	static sysBaseMobile m_sysBaseMobile;
 	static sysBras       m_sysBras;
