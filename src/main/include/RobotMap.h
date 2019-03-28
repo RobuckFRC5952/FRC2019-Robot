@@ -24,6 +24,8 @@ constexpr int kBaseMobileEncoderD_DioChannelA = 0;
 constexpr int kBaseMobileEncoderD_DioChannelB = 1;
 constexpr int kBaseMobileEncoderG_DioChannelA = 2;
 constexpr int kBaseMobileEncoderG_DioChannelB = 3;
+constexpr int kBrasEncoder_DioChannelA = 4;
+constexpr int kBrasEncoder_DioChannelB = 5;
 constexpr int kCrochetLimitSwitchBas_DioChannel  = 7;
 constexpr int kCrochetLimitSwitchHaut_DioChannel = 6;
 /// @}

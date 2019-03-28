@@ -7,27 +7,51 @@
 
 #pragma once
 
-#include <frc/Timer.h>
+#include <memory>
+
 #include <frc/commands/Command.h>
 #include <wpi/Logger.h>
 
+#include "cinematique/Mrua.h"
 
-class MonteBras : public frc::Command
+
+class cmdArreterBras : public frc::Command
 {
  public:
-	MonteBras();
+	cmdArreterBras();
 	void Initialize() override;
 	void Execute() override;
 	bool IsFinished() override;
 	void End() override;
 	void Interrupted() override;
 
-	void setSpeed();
-
  private:
-	double m_timeout;
+
+	void setSpeedSP(double speed_sp);
+
+	/// Accélération du moteur (rad/sec²).
+	double m_acceleration;
+
+	/// Vitesse du moteur (rad/sec).
 	double m_speed;
+
+	/// Position du moteur (rad).
+	double m_position;
+
+	/// Vitesse désirée du moteur (rad/sec).
+	double m_speed_sp;
+
+	/// Objet de type Mrua réalloué en mémoire à chaque fois que la vitesse désirée est changée.
+	std::unique_ptr<Mrua> m_mrua;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;
+
+	/** \name Variables pour comparer avec leurs nouvelles valeurs.
+	 *
+	 * Ceci permet d'afficher un message à la console que quand il y a changement.
+	 */
+	/// @{
+	double m_lastTime;
+	/// @}
 };

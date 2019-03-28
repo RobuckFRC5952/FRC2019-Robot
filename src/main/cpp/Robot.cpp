@@ -22,6 +22,9 @@ sysRampe      Robot::m_sysRampe;
 void Robot::RobotInit()
 {
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+	// TODO Le Bras DOIT être en position élevée.
+	// m_sysBras.resetPosition();
+	// m_sysBras.Enable();
 }
 
 /**
@@ -114,6 +117,7 @@ void Robot::TeleopPeriodic()
 	double rotation = m_oi.m_joystick.GetX() * 0.75;
 	m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
 	m_sysBaseMobile.PutSmartDashboard();
+	m_sysBras.PutSmartDashboard();
 }
 
 void Robot::TestPeriodic()
