@@ -6,9 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
+
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "Robot.h"
 #include "RobotMap.h"
 #include "subsystems/Bras.h"
+#include "tests/testDeplaceBaseMobile.h"
 
 
 OI::OI()
@@ -48,4 +52,7 @@ OI::OI()
 
 	m_boutonDeployerRampe->WhileHeld(&m_DeployerRampe);
 	m_boutonRemonterRampe->WhileHeld(&m_RemonterRampe);
+
+	testDeplaceBaseMobile * cmd = new testDeplaceBaseMobile();
+	frc::SmartDashboard::PutData("DeplaceMoteur", cmd);
 }

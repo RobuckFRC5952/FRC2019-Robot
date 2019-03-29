@@ -219,3 +219,13 @@ void cmdDeplaceMoteur::setDistance(double distance)
 	m_distance = distance;
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__ << " m_distance " << m_distance);
 }
+
+void cmdDeplaceMoteur::setSpeedMax(double speed_max)
+{
+	m_speed_max = speed_max;
+}
+
+void cmdDeplaceMoteur::setAcceleration(double acceleration)
+{
+	m_acceleration = acceleration;
+}

@@ -38,8 +38,16 @@ class cmdDeplaceMoteur : public frc::Command
 	virtual void End() override;
 	virtual void Interrupted() override;
 
-	// Changer la distance à parcourir avant l'initialisation.
+	/// \name Setters
+	/// @{
+
+	/// Changer la distance à parcourir avant l'initialisation.
 	void setDistance(double distance);
+
+	void setSpeedMax(double speed_max);
+
+	void setAcceleration(double acceleration);
+	/// @}
 
  private:
 
