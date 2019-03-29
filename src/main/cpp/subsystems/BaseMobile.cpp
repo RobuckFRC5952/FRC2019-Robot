@@ -11,13 +11,33 @@
 
 #include <array>
 #include <cmath>
+#include <stdexcept>
+#include <limits>
 
 #include <frc/SmartDashboard/SmartDashboard.h>
 #include <wpi/Format.h>
 
+#include "Logger.h"
+
+
+// Limites physique du sous-système.
+double sysBaseMobile::speedMax =  1.5; // metre/sec 	TODO TBD
+double sysBaseMobile::accelMax =  2.0; // metre/sec²	TODO TBD
 
 sysBaseMobile::sysBaseMobile()
-	 : Subsystem(__func__)
+	: Subsystem(__func__)
+	, m_DriveBaseMoteurDroitEncoder( kBaseMobileEncoderD_DioChannelA, kBaseMobileEncoderD_DioChannelB, true)
+	, m_DriveBaseMoteurGaucheEncoder(kBaseMobileEncoderG_DioChannelA, kBaseMobileEncoderG_DioChannelB, false)
+	, m_DriveBaseMoteurDroit( kBaseMobileMoteursD_PwmChannel)
+	, m_DriveBaseMoteurGauche(kBaseMobileMoteursG_PwmChannel)
+	, m_Drive(m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche)
+	, m_direction(eDirection::Bras)
+	, m_speed_sp(0.0)
+	, m_rotation_rate_sp(0.0)
+	, m_pidSrcEncAvg(m_DriveBaseMoteurGaucheEncoder, m_DriveBaseMoteurDroitEncoder)
+	, m_pidController(0.0, 0.0, 0.0, m_pidSrcEncAvg, m_pidOutput)
+	, m_pidOutput(this)
+	, m_logger(log_func)
 {
 	const int    pulses_tour  = 2048;            // pulses/tour
 	const double pouces_metre =    1.0 / 0.0254; // pouces/mètre.  Voir https://en.wikipedia.org/wiki/Conversion_of_units#Length
@@ -34,11 +54,16 @@ sysBaseMobile::sysBaseMobile()
 	m_DriveBaseMoteurDroitEncoder.SetName("MotD");
 	m_DriveBaseMoteurGaucheEncoder.SetName("MotG");
 
-	AddChild("MotD",  m_DriveBaseMoteurDroit);
-	AddChild("MotG",  m_DriveBaseMoteurGauche);
-	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
-	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
-	AddChild("Drive", m_Drive);
+	m_pidSrcEncAvg.SetPIDSourceType(frc::PIDSourceType::kRate);
+
+	AddChild("MotD",       m_DriveBaseMoteurDroit);
+	AddChild("MotG",       m_DriveBaseMoteurGauche);
+	AddChild("EncD",       m_DriveBaseMoteurDroitEncoder);
+	AddChild("EncG",       m_DriveBaseMoteurGaucheEncoder);
+	AddChild("Drive",      m_Drive);
+	AddChild("Regulateur", m_pidController);
+
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
 	WPI_INFO(m_logger, "Moteur droit sur le canal PWM  " << m_DriveBaseMoteurDroit.GetChannel()
 	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderD_DioChannelA << " et " << kBaseMobileEncoderD_DioChannelB << ".");
@@ -67,7 +92,7 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 	// Un message imprimé à chaque 20 ms est trop verbeux.
 	if ((std::fabs((xSpeed - m_lastXSpeed)/m_lastXSpeed) > 0.05) || (std::fabs((zRotation - m_lastZRotation)/m_lastZRotation) > 0.05))
 	{
-		WPI_DEBUG2(m_logger, "xSpeed:" << wpi::format("%5.2f", xSpeed) 
+		WPI_DEBUG2(m_logger, "xSpeed:"    << wpi::format("%5.2f", xSpeed) 
 		                  << "zRotation:" << wpi::format("%5.2f", zRotation)
 		                  << "Distances [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetDistance()) << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetDistance())
 		                  << "Rates     [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetRate())     << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetRate()));
@@ -82,6 +107,87 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 void sysBaseMobile::setDirection(eDirection direction)
 {
 	m_direction = direction;
+}
+
+void sysBaseMobile::setSpeed(double speed)
+{
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " vitesse: " << wpi::format("%6.3f", speed));
+	m_speed_sp = speed;
+	m_Drive.ArcadeDrive(-m_speed_sp, m_rotation_rate_sp);
+}
+
+void sysBaseMobile::EnablePID(double k_p, double k_i, double k_d, double k_f)
+{
+	m_pidController.SetInputRange(-10.0, 10.0); // m/s TODO TDB
+	m_pidController.SetOutputRange(-10.0, 10.0); // m/s
+	m_pidController.SetSetpoint((m_DriveBaseMoteurGaucheEncoder.GetRate() + m_DriveBaseMoteurDroitEncoder.GetRate()) / 2.0);
+	m_pidController.SetPID(k_p, k_i, k_d, k_f);
+	WPI_DEBUG(m_logger, "pid: " << wpi::format("%5.2f", m_pidController.GetP())
+	                 << ", "    << wpi::format("%5.2f", m_pidController.GetI())
+	                 << ", "    << wpi::format("%5.2f", m_pidController.GetD())
+	                 << ", "    << wpi::format("%5.2f", m_pidController.GetF()));
+	m_pidController.Reset();
+	m_pidController.Enable();
+}
+
+void sysBaseMobile::DisablePID()
+{
+	m_pidController.Disable();
+	m_pidController.SetPID(0.0, 0.0, 0.0, 0.0);
+	m_pidController.Reset();
+}
+
+frc::PIDSourceType sysBaseMobile::getPIDSourceType()
+{
+	return m_pidController.GetPIDSourceType();
+}
+
+double sysBaseMobile::getPositionMin()
+{
+	return -std::numeric_limits<double>::infinity();
+}
+
+double sysBaseMobile::getPositionMax()
+{
+	return std::numeric_limits<double>::infinity();
+}
+
+double sysBaseMobile::getSpeedMax()
+{
+	return speedMax;
+}
+
+double sysBaseMobile::getAccelMax()
+{
+	return accelMax;
+}
+
+double sysBaseMobile::getPositionFB()
+{
+	return m_pidSrcEncAvg.PIDGet();
+}
+
+void sysBaseMobile::setPositionSP(double position)
+{
+	WPI_ERROR(m_logger, "Regulateur PID en vitesse.");
+	throw(std::logic_error("Regulateur PID en vitesse."));
+}
+
+double sysBaseMobile::getSpeedFB()
+{
+	return m_pidSrcEncAvg.PIDGet();
+}
+
+void sysBaseMobile::setSpeedSP(double speed)
+{
+	m_pidController.SetSetpoint(speed);
+	// WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " vitesse: " << wpi::format("%6.3f", speed) << wpi::format(", %6.3f", m_pidController.GetSetpoint()));
+}
+
+void sysBaseMobile::resetPosition()
+{
+	m_DriveBaseMoteurDroitEncoder.Reset();
+	m_DriveBaseMoteurGaucheEncoder.Reset();
 }
 
 void sysBaseMobile::PutSmartDashboard()
