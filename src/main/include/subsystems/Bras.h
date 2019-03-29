@@ -77,6 +77,8 @@ class sysBras : public frc::PIDSubsystem, public ISubsystem
 
 	double getSpeedFB();
 
+	void setSpeedSP(double speed);
+
 	void resetPosition();
 
 	void PutSmartDashboard();

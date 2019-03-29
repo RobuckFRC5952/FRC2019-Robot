@@ -88,8 +88,14 @@ void cmdDeplaceMoteur::Initialize()
 	                              << " a  "      << wpi::format("%5.2f", v1)
 	                              << " pendant " << wpi::format("%6.3f", t1 - t0) << " sec.");
 
-	// Trouver la position actuelle du sous-système.
-	m_position = m_subsystem.getPositionFB();
+	m_source_type = m_subsystem.getPIDSourceType();
+
+	m_position = 0.0;
+	if (m_source_type == frc::PIDSourceType::kDisplacement)
+	{
+		// Trouver la position actuelle du sous-système.
+		m_position = m_subsystem.getPositionFB();
+	}
 
 	// Trouver le signe de l'accélération. Il est en fonction de la vitesse 
 	// désirée par rapport à la vitesse actuelle.
@@ -154,22 +160,30 @@ void cmdDeplaceMoteur::Execute()
 	// Calculer le temps relatif au début de la (nouvelle) phase du profil en cours.
 	double const & t_i = m_profile[m_phase + 0].m_time;
 	double time_phase = time - t_i;
-	double position = m_mrua->getIntegratedPosition(time_phase);
 
+	double position = m_mrua->getIntegratedPosition(time_phase);
 	// Restreindre la position par les limites du sous-système.
 	m_position = std::max(m_subsystem.getPositionMin(), std::min(position, m_subsystem.getPositionMax()));
+	m_speed = m_mrua->getIntegratedSpeed(time_phase);
 
-	// TODO if GetPIDSourceType() == frc::PIDSourceType::kDisplacement...
-	m_subsystem.setPositionSP(m_position);
+	// Assigner la consigne en fonction du type de régulateur PID, déplacement ou vitesse.
+	if (m_source_type == frc::PIDSourceType::kDisplacement)
+	{
+		m_subsystem.setPositionSP(m_position);
+	}
+	if (m_source_type == frc::PIDSourceType::kRate)
+	{
+		WPI_DEBUG2(m_logger, GetName() << " " << __func__ << "m_speed: " << m_speed);
+		m_subsystem.setSpeedSP(m_speed);
+	}
 
 	// Log à chaque demi-seconde, ou si le logger log.
 	if (((time - m_lastTime) > 0.5) ||
 		(m_logger.min_level() <= wpi::WPI_LOG_DEBUG4))
 	{
-		double speed = m_mrua->getIntegratedSpeed(time_phase);
 		WPI_DEBUG(m_logger, GetName() << " " << __func__ 
 		                              << " m_position: " << wpi::format("%5.2f", m_position)
-		                              << ", speed: "     << wpi::format("%5.2f", speed));
+		                              << ", m_speed: "   << wpi::format("%5.2f", m_speed));
 		m_lastTime = time;
 	}
 }
@@ -204,4 +218,14 @@ void cmdDeplaceMoteur::setDistance(double distance)
 {
 	m_distance = distance;
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__ << " m_distance " << m_distance);
+}
+
+void cmdDeplaceMoteur::setSpeedMax(double speed_max)
+{
+	m_speed_max = speed_max;
+}
+
+void cmdDeplaceMoteur::setAcceleration(double acceleration)
+{
+	m_acceleration = acceleration;
 }
