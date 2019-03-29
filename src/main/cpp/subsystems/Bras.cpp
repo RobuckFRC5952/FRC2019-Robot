@@ -162,10 +162,4 @@ void sysBras::PutSmartDashboard()
 	frc::SmartDashboard::PutNumber( name + "_Rate",      m_encoder.GetRate());
 	frc::SmartDashboard::PutBoolean(name + "_Direction", m_encoder.GetDirection());
 	frc::SmartDashboard::PutBoolean(name + "_Stopped",   m_encoder.GetStopped());
-
-	// Afficher ces données dans des LinePlots du SmartDashboard.
-	frc::SmartDashboard::PutNumber("SetPoint", m_pidController->GetSetpoint());
-	frc::SmartDashboard::PutNumber("FeedBack", m_encoder.PIDGet());
-	frc::SmartDashboard::PutNumber("Error",    m_pidController->GetError());
-	frc::SmartDashboard::PutNumber("Commande", m_pidController->Get());
 }

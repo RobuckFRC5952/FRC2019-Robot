@@ -43,7 +43,7 @@ sysBaseMobile::sysBaseMobile()
 	const double pouces_metre =    1.0 / 0.0254; // pouces/mètre.  Voir https://en.wikipedia.org/wiki/Conversion_of_units#Length
 	const double radius       =    3.0 / pouces_metre;
 
-	m_DriveBaseMoteurDroit.SetInverted(true);
+	m_DriveBaseMoteurDroit.SetInverted(false);
 
 	// Convertir en mètres des encodeurs de 2048 ticks/tours avec roues de 6 pouces.
 	m_DriveBaseMoteurDroitEncoder.SetDistancePerPulse( (2.0 * M_PI * radius) / pulses_tour);
@@ -202,5 +202,11 @@ void sysBaseMobile::PutSmartDashboard()
 		frc::SmartDashboard::PutNumber(encoder->GetName()  + "_Rate",      encoder->GetRate());
 		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Direction", encoder->GetDirection());
 		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Stopped",   encoder->GetStopped());
+
+		// Afficher ces données dans des LinePlots du SmartDashboard.
+		frc::SmartDashboard::PutNumber("SetPoint", m_pidController.GetSetpoint());
+		frc::SmartDashboard::PutNumber("FeedBack", m_pidSrcEncAvg.PIDGet());
+		frc::SmartDashboard::PutNumber("Error",    m_pidController.GetError());
+		frc::SmartDashboard::PutNumber("Commande", m_pidController.Get());
 	}
 }
