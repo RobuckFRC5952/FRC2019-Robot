@@ -12,7 +12,9 @@
     ".project": true
   },
   "files.associations": {
-    "cmath": "cpp",
-    "complex": "cpp"
-  }
+	"cmath": "cpp",
+	"complex": "cpp",
+	"exception": "cpp",
+	"stdexcept": "cpp"
+}
 }

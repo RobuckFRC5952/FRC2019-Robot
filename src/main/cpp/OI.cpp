@@ -13,6 +13,7 @@
 #include "RobotMap.h"
 #include "subsystems/Bras.h"
 #include "tests/testDeplaceBaseMobile.h"
+#include "tests/ResetEncoder.h"
 
 
 OI::OI()
@@ -55,4 +56,6 @@ OI::OI()
 
 	testDeplaceBaseMobile * cmd = new testDeplaceBaseMobile();
 	frc::SmartDashboard::PutData("DeplaceMoteur", cmd);
+
+	frc::SmartDashboard::PutData("ResetEncoder", new cmdResetEncoder());
 }
