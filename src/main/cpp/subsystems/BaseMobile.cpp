@@ -12,6 +12,7 @@
 #include <array>
 #include <cmath>
 #include <stdexcept>
+#include <string>
 #include <limits>
 
 #include <frc/SmartDashboard/SmartDashboard.h>
@@ -203,4 +204,11 @@ void sysBaseMobile::PutSmartDashboard()
 		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Direction", encoder->GetDirection());
 		frc::SmartDashboard::PutBoolean(encoder->GetName() + "_Stopped",   encoder->GetStopped());
 	}
+
+	// Afficher ces données dans des LinePlots du SmartDashboard.
+	std::string const & name {"BaseMobile"};
+	frc::SmartDashboard::PutNumber(name + "_SetPoint", m_pidController.GetSetpoint());
+	frc::SmartDashboard::PutNumber(name + "_FeedBack", m_pidSrcEncAvg.PIDGet());
+	frc::SmartDashboard::PutNumber(name + "_Error",    m_pidController.GetError());
+	frc::SmartDashboard::PutNumber(name + "_Commande", m_pidController.Get());
 }
