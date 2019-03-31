@@ -27,6 +27,9 @@
 double sysBaseMobile::speedMax =  1.5; // metre/sec 	TODO TBD
 double sysBaseMobile::accelMax =  2.0; // metre/sec²	TODO TBD
 
+char const * sysBaseMobile::m_key_direction = "Direction";
+
+
 sysBaseMobile::sysBaseMobile()
 	: Subsystem(__func__)
 	, m_DriveBaseMoteurDroitEncoder( kBaseMobileEncoderD_DioChannelA, kBaseMobileEncoderD_DioChannelB, true)
@@ -117,9 +120,15 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 	}
 }
 
+eDirection sysBaseMobile::getDirection()
+{
+	return m_direction;
+}
+
 void sysBaseMobile::setDirection(eDirection direction)
 {
 	m_direction = direction;
+	frc::SmartDashboard::PutBoolean(m_key_direction, (m_direction == eDirection::Bras ? true : false));
 }
 
 void sysBaseMobile::setSpeed(double speed)

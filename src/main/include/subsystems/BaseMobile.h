@@ -76,6 +76,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	static double accelMax;
 	/// @}
 
+	static char const * m_key_direction;
+
 	/// Logger du sous-système.
 	wpi::Logger m_logger;
 
@@ -96,6 +98,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	void ArcadeDrive(double xSpeed, double zRotation);
 
+	eDirection getDirection();
 	void setDirection(eDirection direction);
 
 	void setSpeed(double speed);

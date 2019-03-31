@@ -8,15 +8,18 @@
 #pragma once
 
 #include <frc/commands/InstantCommand.h>
+#include <wpi/Logger.h>
 
 #include "../subsystems/BaseMobile.h"
 
 
-class InverserDirection : public frc::InstantCommand {
+class InverserDirection : public frc::InstantCommand
+{
  public:
-  InverserDirection();
-  void Initialize() override;
+	InverserDirection();
+	void Initialize() override;
 
-  private:
-  eDirection m_direction {eDirection::Bras};
+ private:
+	/// Logger de la commande.
+	wpi::Logger m_logger;
 };
