@@ -51,8 +51,8 @@ sysBaseMobile::sysBaseMobile()
 	m_DriveBaseMoteurGaucheEncoder.SetDistancePerPulse((2.0 * M_PI * radius) / pulses_tour);
 	m_DriveBaseMoteurGaucheEncoder.SetName("EncG");
 
-	m_DriveBaseMoteurDroitEncoder.SetName("MotD");
-	m_DriveBaseMoteurGaucheEncoder.SetName("MotG");
+	m_DriveBaseMoteurDroit.SetName("MotD");
+	m_DriveBaseMoteurGauche.SetName("MotG");
 
 	m_pidSrcEncAvg.SetPIDSourceType(frc::PIDSourceType::kRate);
 
