@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <frc/Buttons/JoystickButton.h>
 #include <frc/Joystick.h>
 
 #include "commands/InverserDirection.h"
@@ -18,6 +17,11 @@
 #include "commands/AvancerCrochet.h"
 #include "commands/RetracterCrochet.h"
 #include "commands/DeployerRampe.h"
+
+namespace frc
+{
+	class JoystickButton;
+}
 
 
 class OI

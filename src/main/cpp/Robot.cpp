@@ -7,6 +7,7 @@
 
 #include "Robot.h"
 
+#include <frc/commands/Command.h>
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 

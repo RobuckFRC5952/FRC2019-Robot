@@ -11,7 +11,6 @@
 /// \brief Le %Robot basé sur \b frc::TimedRobot.
 
 #include <frc/TimedRobot.h>
-#include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
 #include "OI.h"
@@ -21,6 +20,12 @@
 #include "subsystems/Pince.h"
 #include "subsystems/Crochet.h"
 #include "subsystems/Rampe.h"
+
+
+namespace frc
+{
+	class Command;
+}
 
 class Robot : public frc::TimedRobot
 {
