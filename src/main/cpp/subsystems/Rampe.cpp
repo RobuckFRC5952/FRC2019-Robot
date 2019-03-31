@@ -13,12 +13,12 @@ sysRampe::sysRampe()
 	 : Subsystem(__func__)
 	 , m_logger(log_func)
 {
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG3);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
 void sysRampe::InitDefaultCommand()
 {
-	WPI_DEBUG3(m_logger,"sysPince::InitDefaultCommand");
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }

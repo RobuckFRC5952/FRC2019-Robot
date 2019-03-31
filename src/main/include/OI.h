@@ -26,9 +26,10 @@ class OI
 	OI();
 	/// Le joystick.
 	frc::Joystick m_joystick;
-private:
 
-	/// Les boutons.
+private:
+	/// \name Les boutons.
+	/// @{
 	frc::JoystickButton *m_boutonInverseDirection;
 
 	frc::JoystickButton *m_boutonMonterBras;
@@ -42,9 +43,10 @@ private:
 
 	frc::JoystickButton *m_boutonDeployerRampe;
 	frc::JoystickButton *m_boutonRemonterRampe;
+	/// @}
 
-	/// Commande à appliquer quand les boutons sont enfoncés.
-
+	/// \name Commandes à appliquer quand les boutons sont stimulés.
+	/// @{
 	InverserDirection m_InverseDirection;
 
 	cmdDeplacerBras m_BaisserBras;
@@ -59,4 +61,5 @@ private:
 
 	DeployerRampe m_DeployerRampe {-0.2};
 	DeployerRampe m_RemonterRampe { 0.8};
+	/// @}
 };

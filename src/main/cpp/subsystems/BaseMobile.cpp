@@ -65,10 +65,10 @@ sysBaseMobile::sysBaseMobile()
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
-	WPI_INFO(m_logger, "Moteur droit sur le canal PWM  " << m_DriveBaseMoteurDroit.GetChannel()
-	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderD_DioChannelA << " et " << kBaseMobileEncoderD_DioChannelB << ".");
-	WPI_INFO(m_logger, "Moteur gauche sur le canal PWM " << m_DriveBaseMoteurGauche.GetChannel()
-	                << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderG_DioChannelA << " et " << kBaseMobileEncoderG_DioChannelB << ".");
+	WPI_DEBUG(m_logger, "Moteur droit sur le canal  PWM " << m_DriveBaseMoteurDroit.GetChannel()
+	                 << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderD_DioChannelA << " et " << kBaseMobileEncoderD_DioChannelB << ".");
+	WPI_DEBUG(m_logger, "Moteur gauche sur le canal PWM " << m_DriveBaseMoteurGauche.GetChannel()
+	                 << " avec encodeur sur les canaux DIO " << kBaseMobileEncoderG_DioChannelA << " et " << kBaseMobileEncoderG_DioChannelB << ".");
 }
 
 void sysBaseMobile::InitDefaultCommand()

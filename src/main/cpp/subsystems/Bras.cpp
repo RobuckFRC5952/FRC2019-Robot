@@ -48,7 +48,7 @@ sysBras::sysBras()
 
 void sysBras::InitDefaultCommand()
 {
-	WPI_DEBUG3(m_logger, GetName() + " " + __func__);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }
@@ -88,7 +88,7 @@ void sysBras::EnablePID(double k_p, double k_i, double k_d, double k_f)
 
 void sysBras::DisablePID()
 {
-	WPI_DEBUG3(m_logger, GetName() + " " + __func__);
+	WPI_DEBUG3(m_logger, GetName() << " " << __func__);
 
 	// Désactiver le régulateur PID.
 	// Disable();

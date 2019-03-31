@@ -20,7 +20,7 @@ RetracterCrochet::RetracterCrochet()
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysCrochet);
 	m_speed = -1.0; //vitesse a tester
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
 // Called just before this Command runs the first time
@@ -42,7 +42,7 @@ bool RetracterCrochet::IsFinished()
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__);
 	if (IsTimedOut())
 	{
-		//WPI_WARNING(OI::m_logger, GetName() << ": Delai d'attente de " << llvm::format("%5.2f", m_timeout) << " secondes expire.");
+		//WPI_WARNING(OI::m_logger, GetName() << " Delai d'attente de " << llvm::format("%5.2f", m_timeout) << " secondes expire.");
 		return true;
 	}
 	return false;

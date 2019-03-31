@@ -10,6 +10,8 @@
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include "Logger.h"
+
 
 OI Robot::m_oi;
 
@@ -21,6 +23,10 @@ sysRampe      Robot::m_sysRampe;
 
 void Robot::RobotInit()
 {
+	m_logger.SetLogger(log_func);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
+	WPI_INFO(m_logger, "ROBOT FRC 2019");
+
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 	// TODO Le Bras DOIT être en position élevée.
 	// m_sysBras.resetPosition();
@@ -37,6 +43,7 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
+	m_logger.SetLogger(log_func);
 }
 
 /**
@@ -66,6 +73,7 @@ void Robot::DisabledPeriodic()
  */
 void Robot::AutonomousInit()
 {
+	WPI_INFO(m_logger, __func__);
 	std::string autoSelected = frc::SmartDashboard::GetString("Auto Selector", "Default");
 	// if (autoSelected == "My Auto")
 	// {
@@ -91,6 +99,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
+	WPI_INFO(m_logger, __func__);
 	// This makes sure that the autonomous stops running when
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
