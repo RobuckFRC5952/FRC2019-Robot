@@ -19,6 +19,8 @@
 #include <wpi/Format.h>
 
 #include "Logger.h"
+#include "OI.h"
+#include "Robot.h"
 
 
 // Limites physique du sous-système.
@@ -32,6 +34,7 @@ sysBaseMobile::sysBaseMobile()
 	, m_DriveBaseMoteurDroit( kBaseMobileMoteursD_PwmChannel)
 	, m_DriveBaseMoteurGauche(kBaseMobileMoteursG_PwmChannel)
 	, m_Drive(m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche)
+	, m_cmdArcadeDriveJoystick(Robot::m_oi.m_joystick, *this)
 	, m_direction(eDirection::Bras)
 	, m_speed_sp(0.0)
 	, m_rotation_rate_sp(0.0)
@@ -75,7 +78,8 @@ sysBaseMobile::sysBaseMobile()
 void sysBaseMobile::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+	SetDefaultCommand(&m_cmdArcadeDriveJoystick);
 }
 
 // Put methods for controlling this subsystem

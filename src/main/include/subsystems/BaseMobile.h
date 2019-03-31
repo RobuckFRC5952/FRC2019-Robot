@@ -17,6 +17,7 @@
 #include <frc/VictorSP.h>
 #include <wpi/Logger.h>
 
+#include "commands/ArcadeDriveJoystick.h"
 #include "ISubsystem.h"
 #include "RobotMap.h"
 #include "subsystems/BaseMobilePidOutput.h"
@@ -47,6 +48,9 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	/// @}
 
 	frc::DifferentialDrive m_Drive;
+
+	/// Default Command
+	cmdArcadeDriveJoystick m_cmdArcadeDriveJoystick;
 
 	eDirection m_direction;
 

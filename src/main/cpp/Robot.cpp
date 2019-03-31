@@ -116,16 +116,6 @@ void Robot::TeleopPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
 
-	double gainVitesse  = 1.0;
-	double gainRotation = 1.0;
-	if (m_oi.m_joystick.GetTrigger())
-	{
-		gainVitesse = 0.5;
-		gainRotation = 0.75;
-	}
-	double speed = m_oi.m_joystick.GetY();
-	double rotation = m_oi.m_joystick.GetX() * 0.75;
-	m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
 	m_sysBaseMobile.PutSmartDashboard();
 	m_sysBras.PutSmartDashboard();
 }
