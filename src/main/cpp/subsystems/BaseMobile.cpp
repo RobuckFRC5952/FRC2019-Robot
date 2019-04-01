@@ -34,6 +34,7 @@ sysBaseMobile::sysBaseMobile()
 	, m_DriveBaseMoteurDroit( kBaseMobileMoteursD_PwmChannel)
 	, m_DriveBaseMoteurGauche(kBaseMobileMoteursG_PwmChannel)
 	, m_Drive(m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche)
+	, m_cmdArcadeDriveImmobile(*this)
 	, m_cmdArcadeDriveJoystick(Robot::m_oi.m_joystick, *this)
 	, m_direction(eDirection::Bras)
 	, m_speed_sp(0.0)
@@ -84,6 +85,13 @@ void sysBaseMobile::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void sysBaseMobile::SetImmobileCommand()
+{
+	// Set the default command for a subsystem here.
+	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
+	SetDefaultCommand(&m_cmdArcadeDriveImmobile);
+}
 
 void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 {
