@@ -7,8 +7,12 @@
 
 #include "Robot.h"
 
+#include <array>
+#include <string>
+
 #include <frc/commands/Command.h>
 #include <frc/commands/Scheduler.h>
+#include <frc/DriverStation.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Logger.h"
@@ -26,9 +30,19 @@ void Robot::RobotInit()
 {
 	m_logger.SetLogger(log_func);
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
-	WPI_INFO(m_logger, "ROBOT FRC 2019");
+	WPI_INFO(m_logger, "ESMR ROBUCK FRC 2019");
 
+	m_chooser.SetDefaultOption("Deplacer",  &m_cmdDeplacerBaseMobile);
+	m_chooser.AddOption(       "Station 1", &m_cmdGrpStation1);
+	m_chooser.AddOption(       "Station 2", &m_cmdGrpStation2);
+	m_chooser.AddOption(       "Station 3", &m_cmdGrpStation3);
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+	m_auto_mode.SetDefaultOption("Teleop Video",   &m_teleop_video);
+	m_auto_mode.AddOption(       "Start Position", &m_start_posotion);
+	m_auto_mode.AddOption(       "Auto Modes",     &m_cmd_chooser);
+	frc::SmartDashboard::PutData("Modes Autonomes", &m_auto_mode);
+
 	// TODO Le Bras DOIT être en position élevée.
 	// m_sysBras.resetPosition();
 	// m_sysBras.Enable();
@@ -44,7 +58,6 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
-	m_logger.SetLogger(log_func);
 }
 
 /**
@@ -54,6 +67,7 @@ void Robot::RobotPeriodic()
  */
 void Robot::DisabledInit()
 {
+	WPI_INFO(m_logger, __func__);
 }
 
 void Robot::DisabledPeriodic()
@@ -74,18 +88,70 @@ void Robot::DisabledPeriodic()
  */
 void Robot::AutonomousInit()
 {
-	WPI_INFO(m_logger, __func__);
-	std::string autoSelected = frc::SmartDashboard::GetString("Auto Selector", "Default");
-	// if (autoSelected == "My Auto")
-	// {
-	// 	m_autonomousCommand = &m_myAuto;
-	// }
-	// else
-	// {
-	// 	m_autonomousCommand = &m_defaultAuto;
-	// }
+	eAutonomousMode const mode_autonome = *(m_auto_mode.GetSelected());
+	if (mode_autonome == eAutonomousMode::TeleopVideo)
+	{
+		/// Réactiver la commande par défaut, au cas où elle avait été désactivé en mode autonome.
+		m_sysBaseMobile.InitDefaultCommand();
+	}
+	else
+	{
+		// Désactiver la commande par défaut du sous-système BaseMobile.
+		m_sysBaseMobile.SetImmobileCommand(); // latched into default, but current command remains!
+	}
+	// Arrêter la commande en cours.
+	frc::Command * cmd = m_sysBaseMobile.GetCurrentCommand();
+	if (cmd)
+	{
+		cmd->Cancel();
+	}
+	
+	switch (mode_autonome)
+	{
+		case eAutonomousMode::TeleopVideo:
+		{
+			WPI_INFO(m_logger, __func__ << " Teleop Video mode");
+			m_autonomousCommand = nullptr;
+		}
+		break;
 
-	m_autonomousCommand = m_chooser.GetSelected();
+		case eAutonomousMode::StartPosision:
+		{
+			// Trouver l'alliance et la station/position du robot.
+			frc::DriverStation & ds = frc::DriverStation::GetInstance();
+			enum frc::DriverStation::Alliance team_alliance = ds.GetAlliance();
+			std::array<std::string, 3> const alliance_str {"Red", "Blue", "Invalid"};
+			int team_location = ds.GetLocation();
+			WPI_INFO(m_logger, __func__ << " Start Posision Team Station: '" << alliance_str[team_alliance] << team_location << "'.");
+
+			switch (team_location)
+			{
+				case 1:
+					m_autonomousCommand = &m_cmdGrpStation1;
+				break;
+
+				case 2:
+					m_autonomousCommand = &m_cmdGrpStation2;
+				break;
+
+				case 3:
+					m_autonomousCommand = &m_cmdGrpStation3;
+				break;
+
+				default:
+					WPI_WARNING(m_logger, __func__ << " Unsupported team station.");
+				break;
+			}
+		}
+		break;
+
+		case eAutonomousMode::Chooser:
+		{
+			m_autonomousCommand = m_chooser.GetSelected();
+			WPI_INFO(m_logger, __func__ << " Chooser command: '" << m_autonomousCommand->GetName() << "'.");
+		}
+		break;
+	}
 
 	if (m_autonomousCommand != nullptr)
 	{
@@ -101,6 +167,15 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
 	WPI_INFO(m_logger, __func__);
+
+	/// Réactiver la commande par défaut, au cas où elle avait été désactivé en mode autonome.
+	m_sysBaseMobile.InitDefaultCommand();
+	frc::Command * cmd = m_sysBaseMobile.GetCurrentCommand();
+	if (cmd)
+	{
+		cmd->Cancel();
+	}
+
 	// This makes sure that the autonomous stops running when
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
@@ -116,16 +191,6 @@ void Robot::TeleopPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
 
-	double gainVitesse  = 1.0;
-	double gainRotation = 1.0;
-	if (m_oi.m_joystick.GetTrigger())
-	{
-		gainVitesse = 0.5;
-		gainRotation = 0.75;
-	}
-	double speed = m_oi.m_joystick.GetY();
-	double rotation = m_oi.m_joystick.GetX() * 0.75;
-	m_sysBaseMobile.ArcadeDrive(speed * gainVitesse, rotation * gainRotation);
 	m_sysBaseMobile.PutSmartDashboard();
 	m_sysBras.PutSmartDashboard();
 }

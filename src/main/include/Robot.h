@@ -21,6 +21,10 @@
 #include "subsystems/Crochet.h"
 #include "subsystems/Rampe.h"
 
+#include "commands/DeplacerBaseMobile.h"
+#include "commands/GrpStation1.h"
+#include "commands/GrpStation2.h"
+#include "commands/GrpStation3.h"
 
 namespace frc
 {
@@ -51,7 +55,24 @@ class Robot : public frc::TimedRobot
 	// Have it null by default so that if testing teleop it
 	// doesn't have undefined behavior and potentially crash.
 	frc::Command *m_autonomousCommand = nullptr;
+
+	/// Selecteur du mode autonome.
+	enum class eAutonomousMode
+	{
+		TeleopVideo,
+		StartPosision,
+		Chooser,
+	};
+	frc::SendableChooser<eAutonomousMode const *> m_auto_mode;
+	const eAutonomousMode m_teleop_video   = eAutonomousMode::TeleopVideo;
+	const eAutonomousMode m_start_posotion = eAutonomousMode::StartPosision;
+	const eAutonomousMode m_cmd_chooser    = eAutonomousMode::Chooser;
+
 	frc::SendableChooser<frc::Command *> m_chooser;
+	cmdDeplacerBaseMobile m_cmdDeplacerBaseMobile {1.0};
+	cmdGrpStation1 m_cmdGrpStation1;
+	cmdGrpStation2 m_cmdGrpStation2;
+	cmdGrpStation3 m_cmdGrpStation3;
 
 	/// Logger de la classe \c Robot.
 	wpi::Logger m_logger;

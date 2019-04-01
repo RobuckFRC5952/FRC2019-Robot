@@ -17,6 +17,8 @@
 #include <frc/VictorSP.h>
 #include <wpi/Logger.h>
 
+#include "commands/ArcadeDriveImmobile.h"
+#include "commands/ArcadeDriveJoystick.h"
 #include "ISubsystem.h"
 #include "RobotMap.h"
 #include "subsystems/BaseMobilePidOutput.h"
@@ -47,6 +49,10 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	/// @}
 
 	frc::DifferentialDrive m_Drive;
+
+	/// Default Commands
+	cmdArcadeDriveImmobile m_cmdArcadeDriveImmobile;
+	cmdArcadeDriveJoystick m_cmdArcadeDriveJoystick;
 
 	eDirection m_direction;
 
@@ -86,6 +92,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
  public:
 	sysBaseMobile();
 	void InitDefaultCommand() override;
+	void SetImmobileCommand();
 
 	void ArcadeDrive(double xSpeed, double zRotation);
 
