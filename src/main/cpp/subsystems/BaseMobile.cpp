@@ -24,8 +24,12 @@
 
 
 // Limites physique du sous-système.
-double sysBaseMobile::speedMax =  1.5; // metre/sec 	TODO TBD
-double sysBaseMobile::accelMax =  2.0; // metre/sec²	TODO TBD
+double sysBaseMobile::m_kP = 0.15;
+double sysBaseMobile::m_kI = 0.0;
+double sysBaseMobile::m_kD = 0.0;
+double sysBaseMobile::m_kF = 0.0;
+double sysBaseMobile::m_speedMax =  1.5; // metre/sec 	TODO TBD
+double sysBaseMobile::m_accelMax =  2.0; // metre/sec²	TODO TBD
 
 char const * sysBaseMobile::m_key_direction = "Direction";
 
@@ -138,6 +142,11 @@ void sysBaseMobile::setSpeed(double speed)
 	m_Drive.ArcadeDrive(-m_speed_sp, m_rotation_rate_sp);
 }
 
+void sysBaseMobile::EnablePID()
+{
+	EnablePID(m_kP, m_kI, m_kD, m_kF);
+}
+
 void sysBaseMobile::EnablePID(double k_p, double k_i, double k_d, double k_f)
 {
 	m_pidController.SetInputRange(-10.0, 10.0); // m/s TODO TDB
@@ -176,12 +185,12 @@ double sysBaseMobile::getPositionMax()
 
 double sysBaseMobile::getSpeedMax()
 {
-	return speedMax;
+	return m_speedMax;
 }
 
 double sysBaseMobile::getAccelMax()
 {
-	return accelMax;
+	return m_accelMax;
 }
 
 double sysBaseMobile::getPositionFB()

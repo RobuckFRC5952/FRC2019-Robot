@@ -67,13 +67,17 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	sysBaseMobilePidSource m_pidSrcEncAvg;
 	frc::PIDController     m_pidController;
 	sysBaseMobilePidOutput m_pidOutput;
+	static double m_kP;
+	static double m_kI;
+	static double m_kD;
+	static double m_kF;
 	/// @}
 
 	/// \name Limites physique du bras.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
-	static double speedMax;
-	static double accelMax;
+	static double m_speedMax;
+	static double m_accelMax;
 	/// @}
 
 	static char const * m_key_direction;
@@ -103,6 +107,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	void setSpeed(double speed);
 
+	void EnablePID();
+
 	/** Activer le régulateur PID du sous-système
 	 *
 	 * À l'activation du contrôleur, la vitesse désirée sera celle actuelle du
@@ -113,7 +119,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	 * \param k_d Constante dérivée
 	 * \param k_d Constante feed-forward
 	 */
-	void EnablePID(double k_p = 0.0, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+	void EnablePID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+
 	void DisablePID();
 
 	frc::PIDSourceType getPIDSourceType();

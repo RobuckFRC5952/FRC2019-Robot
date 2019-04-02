@@ -33,6 +33,10 @@ class sysBras : public frc::PIDSubsystem, public ISubsystem
 
 	/// Pointeur sur le régulateur PID du sous-système.
 	std::shared_ptr<frc::PIDController> m_pidController;
+	static double m_kP;
+	static double m_kI;
+	static double m_kD;
+	static double m_kF;
 
 	/// Logger du sous-système.
 	wpi::Logger m_logger;
@@ -44,10 +48,10 @@ class sysBras : public frc::PIDSubsystem, public ISubsystem
 	/// \name Limites physique du bras.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
-	static double posMin;
-	static double posMax;
-	static double speedMax;
-	static double accelMax;
+	static double m_posMin;
+	static double m_posMax;
+	static double m_speedMax;
+	static double m_accelMax;
 	/// @}
 
  public:
@@ -55,7 +59,9 @@ class sysBras : public frc::PIDSubsystem, public ISubsystem
 
 	void InitDefaultCommand() override;
 
-	void EnablePID(double k_p, double k_i, double k_d, double k_f);
+	void EnablePID();
+
+	void EnablePID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
 
 	void DisablePID();
 
