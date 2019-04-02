@@ -47,6 +47,10 @@ sysBras::sysBras()
 	// Récupérer le PID du sous-système pour être capable de configurer ces constantes.
 	m_pidController = GetPIDController();
 
+	AddChild("Mot", m_BrasMoteur);
+	AddChild("Enc", m_encoder);
+	AddChild("PID", m_pidController);
+
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 

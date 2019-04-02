@@ -13,6 +13,8 @@ sysRampe::sysRampe()
 	 : Subsystem(__func__)
 	 , m_logger(log_func)
 {
+	AddChild("Mot", m_RampeMoteur);
+
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 

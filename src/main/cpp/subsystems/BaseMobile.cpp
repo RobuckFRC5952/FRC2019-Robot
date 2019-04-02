@@ -68,12 +68,12 @@ sysBaseMobile::sysBaseMobile()
 
 	m_pidSrcEncAvg.SetPIDSourceType(frc::PIDSourceType::kRate);
 
-	AddChild("MotD",       m_DriveBaseMoteurDroit);
-	AddChild("MotG",       m_DriveBaseMoteurGauche);
-	AddChild("EncD",       m_DriveBaseMoteurDroitEncoder);
-	AddChild("EncG",       m_DriveBaseMoteurGaucheEncoder);
-	AddChild("Drive",      m_Drive);
-	AddChild("Regulateur", m_pidController);
+	AddChild("MotD",  m_DriveBaseMoteurDroit);
+	AddChild("MotG",  m_DriveBaseMoteurGauche);
+	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
+	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
+	AddChild("Drive", m_Drive);
+	AddChild("PID",   m_pidController);
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 

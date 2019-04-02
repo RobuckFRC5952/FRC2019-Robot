@@ -13,6 +13,9 @@
 sysCrochet::sysCrochet()
 	 : Subsystem(__func__)
 {
+	AddChild("Mot",       m_CrochetMoteur);
+	AddChild("LimSwBas",  m_limitSwitchBas);
+	AddChild("LimSwHaut", m_limitSwitchHaut);
 }
 
 void sysCrochet::InitDefaultCommand()

@@ -9,10 +9,13 @@
 
 #include "Logger.h"
 
+
 sysPince::sysPince()
 	 : Subsystem(__func__)
 	 , m_logger(log_func)
 {
+	AddChild("Mot", m_PinceMoteur);
+
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
