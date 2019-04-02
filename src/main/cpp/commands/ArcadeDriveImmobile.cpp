@@ -31,7 +31,14 @@ void cmdArcadeDriveImmobile::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void cmdArcadeDriveImmobile::Execute()
 {
-	m_sysBaseMobile.ArcadeDrive(0.0, 0.0);
+	if (m_sysBaseMobile.IsEnabled())
+	{
+		m_sysBaseMobile.setSpeedSP(0.0);
+	}
+	else
+	{
+		m_sysBaseMobile.ArcadeDrive(0.0, 0.0);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

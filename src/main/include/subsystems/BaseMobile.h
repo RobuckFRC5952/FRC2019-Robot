@@ -107,6 +107,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	void setSpeed(double speed);
 
+	bool IsEnabled();
+
 	void EnablePID();
 
 	/** Activer le régulateur PID du sous-système

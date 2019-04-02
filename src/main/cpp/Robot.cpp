@@ -44,8 +44,7 @@ void Robot::RobotInit()
 	frc::SmartDashboard::PutData("Modes Autonomes", &m_auto_mode);
 
 	// TODO Le Bras DOIT être en position élevée.
-	// m_sysBras.resetPosition();
-	// m_sysBras.Enable();
+	m_sysBras.resetPosition();
 }
 
 /**
@@ -68,6 +67,13 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit()
 {
 	WPI_INFO(m_logger, __func__);
+
+	// Désactiver les régulateur même si après DisableInit, il n'y a pas de 
+	// commandes envoyées aux moteurs.  Au AutonomousInit ou TeleopInit, on veut
+	// refaire un EnablePID pour prendre la distance courrante des encodeurs et 
+	// avoir une erreur minimale.
+	m_sysBaseMobile.DisablePID();
+	m_sysBras.DisablePID();
 }
 
 void Robot::DisabledPeriodic()
@@ -93,12 +99,20 @@ void Robot::AutonomousInit()
 	{
 		/// Réactiver la commande par défaut, au cas où elle avait été désactivé en mode autonome.
 		m_sysBaseMobile.InitDefaultCommand();
+		m_sysBaseMobile.DisablePID();
 	}
 	else
 	{
-		// Désactiver la commande par défaut du sous-système BaseMobile.
-		m_sysBaseMobile.SetImmobileCommand(); // latched into default, but current command remains!
+		// Changer la commande par défaut du sous-système BaseMobile à Immobile.
+		m_sysBaseMobile.SetImmobileCommand();
+
+		/// Activer le régulateur du sous-système.
+		m_sysBaseMobile.EnablePID();
 	}
+
+	/// Activer les autres régulateurs des sous-systèmes.
+	// m_sysBras.EnablePID(); TODO
+
 	// Arrêter la commande en cours.
 	frc::Command * cmd = m_sysBaseMobile.GetCurrentCommand();
 	if (cmd)
@@ -185,6 +199,8 @@ void Robot::TeleopInit()
 		m_autonomousCommand->Cancel();
 		m_autonomousCommand = nullptr;
 	}
+	m_sysBaseMobile.DisablePID();
+	// m_sysBras.EnablePID(); TODO
 }
 
 void Robot::TeleopPeriodic()

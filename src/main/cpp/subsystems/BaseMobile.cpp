@@ -142,6 +142,11 @@ void sysBaseMobile::setSpeed(double speed)
 	m_Drive.ArcadeDrive(-m_speed_sp, m_rotation_rate_sp);
 }
 
+bool sysBaseMobile::IsEnabled()
+{
+	return m_pidController.IsEnabled();
+}
+
 void sysBaseMobile::EnablePID()
 {
 	EnablePID(m_kP, m_kI, m_kD, m_kF);
