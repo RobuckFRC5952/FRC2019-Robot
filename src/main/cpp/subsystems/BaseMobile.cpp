@@ -55,8 +55,8 @@ sysBaseMobile::sysBaseMobile()
 	, m_speed_sp(0.0)
 	, m_rotation_rate_sp(0.0)
 	, m_pidSrcEncAvg(m_DriveBaseMoteurGaucheEncoder, m_DriveBaseMoteurDroitEncoder)
-	, m_pidController(0.0, 0.0, 0.0, m_pidSrcEncAvg, m_pidOutput)
 	, m_pidOutput(this)
+	, m_pidController(0.0, 0.0, 0.0, m_pidSrcEncAvg, m_pidOutput)
 	, m_logger(log_func)
 {
 	const int    pulses_tour  = 2048;            // pulses/tour

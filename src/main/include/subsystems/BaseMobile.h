@@ -70,8 +70,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	/// \name Régulateur PID pour le contrôle de vitesse.
 	/// @{
 	sysBaseMobilePidSource m_pidSrcEncAvg;
-	frc::PIDController     m_pidController;
 	sysBaseMobilePidOutput m_pidOutput;
+	frc::PIDController     m_pidController;
 	static double m_speed_kP;
 	static double m_speed_kI;
 	static double m_speed_kD;
