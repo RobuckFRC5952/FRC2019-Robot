@@ -90,11 +90,13 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	static double const kToleranceDegrees;
 	/// @}
 
-	/// \name Limites physique du bras.
+	/// \name Limites physique de la base mobile.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
 	static double m_speedMax;
 	static double m_accelMax;
+	static double m_rotationMax;
+	static double m_rot_accelMax;
 	/// @}
 
 	static char const * m_key_direction;
@@ -153,6 +155,10 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	double getSpeedMax();
 
 	double getAccelMax();
+
+	double getRotationSpeedMax();
+
+	double getRotationAccelMax();
 
 	double getPositionFB();
 

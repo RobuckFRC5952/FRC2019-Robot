@@ -37,6 +37,8 @@ double sysBaseMobile::m_turn_kI  =  0.0;
 double sysBaseMobile::m_turn_kD  =  0.0;
 double sysBaseMobile::m_turn_kF  =  0.0;
 double const sysBaseMobile::kToleranceDegrees = 2.0f;
+double sysBaseMobile::m_rotationMax  = 30.0; // degree/sec	TODO TBD
+double sysBaseMobile::m_rot_accelMax = 30.0; // degree/sec²	TODO TBD
 
 char const * sysBaseMobile::m_key_direction = "Direction";
 
@@ -258,6 +260,16 @@ double sysBaseMobile::getSpeedMax()
 double sysBaseMobile::getAccelMax()
 {
 	return m_accelMax;
+}
+
+double sysBaseMobile::getRotationSpeedMax()
+{
+	return m_rotationMax;
+}
+
+double sysBaseMobile::getRotationAccelMax()
+{
+	return m_rot_accelMax;
 }
 
 double sysBaseMobile::getPositionFB()
