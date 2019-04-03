@@ -18,6 +18,8 @@
 #include <frc/SmartDashboard/SmartDashboard.h>
 #include <wpi/Format.h>
 
+#include "AHRS.h"
+
 #include "Logger.h"
 #include "OI.h"
 #include "Robot.h"
@@ -41,6 +43,7 @@ sysBaseMobile::sysBaseMobile()
 	, m_DriveBaseMoteurDroit( kBaseMobileMoteursD_PwmChannel)
 	, m_DriveBaseMoteurGauche(kBaseMobileMoteursG_PwmChannel)
 	, m_Drive(m_DriveBaseMoteurDroit, m_DriveBaseMoteurGauche)
+	, m_ahrs(nullptr)
 	, m_cmdArcadeDriveImmobile(*this)
 	, m_cmdArcadeDriveJoystick(Robot::m_oi.m_joystick, *this)
 	, m_direction(eDirection::Bras)
@@ -56,6 +59,28 @@ sysBaseMobile::sysBaseMobile()
 	const double radius       =    3.0 / pouces_metre;
 
 	m_DriveBaseMoteurDroit.SetInverted(true);
+	try
+	{
+		/***********************************************************************
+		 * navX-MXP:
+		 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.
+		 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+		 *
+		 * navX-Micro:
+		 * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
+		 * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
+		 *
+		 * Multiple navX-model devices on a single robot are supported.
+		 ************************************************************************/
+		m_ahrs = new AHRS(SPI::Port::kMXP);
+	}
+	catch (std::exception const & ex)
+	{
+		std::string err_string = "Error instantiating navX MXP:  ";
+		err_string += ex.what();
+		WPI_ERROR(m_logger, GetName() << " " << err_string.c_str());
+	}
+
 
 	// Convertir en mètres des encodeurs de 2048 ticks/tours avec roues de 6 pouces.
 	m_DriveBaseMoteurDroitEncoder.SetDistancePerPulse( (2.0 * M_PI * radius) / pulses_tour);

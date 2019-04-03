@@ -24,6 +24,9 @@
 #include "subsystems/BaseMobilePidOutput.h"
 #include "subsystems/BaseMobilePidSource.h"
 
+
+class AHRS;
+
 enum class eDirection
 {
 	Bras,
@@ -49,6 +52,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	/// @}
 
 	frc::DifferentialDrive m_Drive;
+
+	AHRS * m_ahrs; // navX MXP
 
 	/// Default Commands
 	cmdArcadeDriveImmobile m_cmdArcadeDriveImmobile;
