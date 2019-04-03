@@ -23,6 +23,7 @@
 #include "RobotMap.h"
 #include "subsystems/BaseMobilePidOutput.h"
 #include "subsystems/BaseMobilePidSource.h"
+#include "subsystems/BaseMobileTurnPidOutput.h"
 
 
 class AHRS;
@@ -88,6 +89,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	static double m_turn_kF;
 	static double const kToleranceDegrees;
 	/// @}
+
 	/// \name Limites physique du bras.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
@@ -121,6 +123,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	void setDirection(eDirection direction);
 
 	void setSpeed(double speed);
+	void setRotationRate(double rotation_rate);
 
 	bool IsEnabled();
 
@@ -137,6 +140,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	 * \param k_d Constante feed-forward
 	 */
 	void EnableSpeedPID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+	void EnableTurnPID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
 
 	void DisablePID();
 
@@ -157,6 +161,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	double getSpeedFB();
 
 	void setSpeedSP(double speed);
+
+	void setRotationRateSP(double rotation_rate);
 
 	virtual void resetPosition();
 

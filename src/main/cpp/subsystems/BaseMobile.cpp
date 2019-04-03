@@ -57,6 +57,8 @@ sysBaseMobile::sysBaseMobile()
 	, m_pidSrcEncAvg(m_DriveBaseMoteurGaucheEncoder, m_DriveBaseMoteurDroitEncoder)
 	, m_pidOutput(this)
 	, m_pidController(0.0, 0.0, 0.0, m_pidSrcEncAvg, m_pidOutput)
+	, m_turnPidOutput(this)
+	, m_turnPidController(nullptr)
 	, m_logger(log_func)
 {
 	const int    pulses_tour  = 2048;            // pulses/tour
@@ -86,6 +88,7 @@ sysBaseMobile::sysBaseMobile()
 		WPI_ERROR(m_logger, GetName() << " " << err_string.c_str());
 	}
 
+	m_turnPidController = new frc::PIDController(0.0, 0.0, 0.0, m_ahrs, &m_turnPidOutput);
 
 	// Convertir en mètres des encodeurs de 2048 ticks/tours avec roues de 6 pouces.
 	m_DriveBaseMoteurDroitEncoder.SetDistancePerPulse( (2.0 * M_PI * radius) / pulses_tour);
@@ -104,6 +107,7 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
 	AddChild("Drive", m_Drive);
 	AddChild("PidSpeed",     m_pidController);
+	AddChild("PidRotation", *m_turnPidController);
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
@@ -172,14 +176,22 @@ void sysBaseMobile::setSpeed(double speed)
 	m_Drive.ArcadeDrive(-m_speed_sp, m_rotation_rate_sp);
 }
 
+void sysBaseMobile::setRotationRate(double rotation_rate)
+{
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " rotation_rate: " << wpi::format("%6.3f", rotation_rate));
+	m_rotation_rate_sp = rotation_rate;
+	m_Drive.ArcadeDrive(-m_speed_sp, m_rotation_rate_sp);
+}
+
 bool sysBaseMobile::IsEnabled()
 {
-	return m_pidController.IsEnabled();
+	return m_pidController.IsEnabled() && m_turnPidController->IsEnabled();
 }
 
 void sysBaseMobile::EnablePID()
 {
 	EnableSpeedPID(m_speed_kP, m_speed_kI, m_speed_kD, m_speed_kF);
+	EnableTurnPID(m_turn_kP, m_turn_kP, m_turn_kP, m_turn_kP);
 }
 
 void sysBaseMobile::EnableSpeedPID(double k_p, double k_i, double k_d, double k_f)
@@ -196,11 +208,31 @@ void sysBaseMobile::EnableSpeedPID(double k_p, double k_i, double k_d, double k_
 	m_pidController.Enable();
 }
 
+void sysBaseMobile::EnableTurnPID(double k_p, double k_i, double k_d, double k_f)
+{
+	m_turnPidController->SetInputRange(-180.0, 180.0);
+	m_turnPidController->SetOutputRange( -1.0,   1.0);
+	m_turnPidController->SetAbsoluteTolerance(kToleranceDegrees);
+	m_turnPidController->SetContinuous(true);
+	m_turnPidController->SetSetpoint(0.0);
+	m_turnPidController->SetPID(k_p, k_i, k_d, k_f);
+	WPI_DEBUG(m_logger, "speed pid: " << wpi::format("%5.2f", m_turnPidController->GetP())
+	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetI())
+	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetD())
+	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetF()));
+	m_turnPidController->Reset();
+	m_turnPidController->Enable();
+}
+
 void sysBaseMobile::DisablePID()
 {
 	m_pidController.Disable();
 	m_pidController.SetPID(0.0, 0.0, 0.0, 0.0);
 	m_pidController.Reset();
+
+	// m_turnPidController->Disable();
+	m_turnPidController->Reset();
+	m_turnPidController->SetPID(0.0, 0.0, 0.0, 0.0);
 }
 
 frc::PIDSourceType sysBaseMobile::getPIDSourceType()
@@ -250,6 +282,12 @@ void sysBaseMobile::setSpeedSP(double speed)
 	// WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " vitesse: " << wpi::format("%6.3f", speed) << wpi::format(", %6.3f", m_pidController.GetSetpoint()));
 }
 
+void sysBaseMobile::setRotationRateSP(double rotation_rate)
+{
+	m_turnPidController->SetSetpoint(rotation_rate);
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " rotation_rate: " << wpi::format("%6.3f", rotation_rate) << wpi::format(", %6.3f", m_turnPidController->GetSetpoint()));
+}
+
 void sysBaseMobile::resetPosition()
 {
 	m_DriveBaseMoteurDroitEncoder.Reset();
@@ -271,9 +309,18 @@ void sysBaseMobile::PutSmartDashboard()
 	}
 
 	// Afficher ces données dans des LinePlots du SmartDashboard.
-	std::string const & name {"BaseMobile"};
-	frc::SmartDashboard::PutNumber(name + "_SetPoint", m_pidController.GetSetpoint());
-	frc::SmartDashboard::PutNumber(name + "_FeedBack", m_pidSrcEncAvg.PIDGet());
-	frc::SmartDashboard::PutNumber(name + "_Error",    m_pidController.GetError());
-	frc::SmartDashboard::PutNumber(name + "_Commande", m_pidController.Get());
+	{
+		std::string const & name {"BaseMobile"};
+		frc::SmartDashboard::PutNumber(name + "_SetPoint", m_pidController.GetSetpoint());
+		frc::SmartDashboard::PutNumber(name + "_FeedBack", m_pidSrcEncAvg.PIDGet());
+		frc::SmartDashboard::PutNumber(name + "_Error",    m_pidController.GetError());
+		frc::SmartDashboard::PutNumber(name + "_Commande", m_pidController.Get());
+	}
+	{
+		std::string const & name {"TurnPid"};
+		frc::SmartDashboard::PutNumber(name + "_SetPoint", m_turnPidController->GetSetpoint());
+		frc::SmartDashboard::PutNumber(name + "_FeedBack", m_ahrs->GetYaw());
+		frc::SmartDashboard::PutNumber(name + "_Error",    m_turnPidController->GetError());
+		frc::SmartDashboard::PutNumber(name + "_Commande", m_turnPidController->Get());
+	}
 }
