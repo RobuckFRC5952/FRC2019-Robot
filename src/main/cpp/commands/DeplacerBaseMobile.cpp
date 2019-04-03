@@ -8,6 +8,7 @@
 #include "commands/DeplacerBaseMobile.h"
 
 #include <wpi/Format.h>
+#include <wpi/Logger.h>
 
 #include "Logger.h"
 #include "Robot.h"

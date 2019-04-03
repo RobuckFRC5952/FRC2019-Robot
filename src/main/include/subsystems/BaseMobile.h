@@ -72,12 +72,22 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	sysBaseMobilePidSource m_pidSrcEncAvg;
 	frc::PIDController     m_pidController;
 	sysBaseMobilePidOutput m_pidOutput;
-	static double m_kP;
-	static double m_kI;
-	static double m_kD;
-	static double m_kF;
+	static double m_speed_kP;
+	static double m_speed_kI;
+	static double m_speed_kD;
+	static double m_speed_kF;
 	/// @}
 
+	/// \name Régulateur PID pour le contrôle de rotation.
+	/// @{
+	sysBaseMobileTurnPidOutput m_turnPidOutput;
+	frc::PIDController * m_turnPidController;
+	static double m_turn_kP;
+	static double m_turn_kI;
+	static double m_turn_kD;
+	static double m_turn_kF;
+	static double const kToleranceDegrees;
+	/// @}
 	/// \name Limites physique du bras.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
@@ -126,7 +136,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	 * \param k_d Constante dérivée
 	 * \param k_d Constante feed-forward
 	 */
-	void EnablePID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+	void EnableSpeedPID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
 
 	void DisablePID();
 

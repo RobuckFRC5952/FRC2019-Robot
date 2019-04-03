@@ -10,7 +10,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <wpi/Format.h>
 
-#include "cinematique/Mrua.h"
 #include "Robot.h"
 #include "subsystems/BaseMobile.h"
 
@@ -67,7 +66,7 @@ void testDeplaceBaseMobile::Initialize()
 	double kI = frc::SmartDashboard::GetNumber(m_key_kI, 0.0);
 	double kD = frc::SmartDashboard::GetNumber(m_key_kD, 0.0);
 	double kF = frc::SmartDashboard::GetNumber(m_key_kF, 0.0);
-	Robot::m_sysBaseMobile.EnablePID(kP, kI, kD, kF);
+	Robot::m_sysBaseMobile.EnableSpeedPID(kP, kI, kD, kF);
 
 	cmdDeplaceMoteur::Initialize();
 }

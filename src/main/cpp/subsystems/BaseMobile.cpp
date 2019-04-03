@@ -26,12 +26,17 @@
 
 
 // Limites physique du sous-système.
-double sysBaseMobile::m_kP = 0.15;
-double sysBaseMobile::m_kI = 0.0;
-double sysBaseMobile::m_kD = 0.0;
-double sysBaseMobile::m_kF = 0.0;
+double sysBaseMobile::m_speed_kP =  0.15;
+double sysBaseMobile::m_speed_kI =  0.0;
+double sysBaseMobile::m_speed_kD =  0.0;
+double sysBaseMobile::m_speed_kF =  0.0;
 double sysBaseMobile::m_speedMax =  1.5; // metre/sec 	TODO TBD
 double sysBaseMobile::m_accelMax =  2.0; // metre/sec²	TODO TBD
+double sysBaseMobile::m_turn_kP  =  0.03;
+double sysBaseMobile::m_turn_kI  =  0.0;
+double sysBaseMobile::m_turn_kD  =  0.0;
+double sysBaseMobile::m_turn_kF  =  0.0;
+double const sysBaseMobile::kToleranceDegrees = 2.0f;
 
 char const * sysBaseMobile::m_key_direction = "Direction";
 
@@ -98,7 +103,7 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("EncD",  m_DriveBaseMoteurDroitEncoder);
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
 	AddChild("Drive", m_Drive);
-	AddChild("PID",   m_pidController);
+	AddChild("PidSpeed",     m_pidController);
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
@@ -174,19 +179,19 @@ bool sysBaseMobile::IsEnabled()
 
 void sysBaseMobile::EnablePID()
 {
-	EnablePID(m_kP, m_kI, m_kD, m_kF);
+	EnableSpeedPID(m_speed_kP, m_speed_kI, m_speed_kD, m_speed_kF);
 }
 
-void sysBaseMobile::EnablePID(double k_p, double k_i, double k_d, double k_f)
+void sysBaseMobile::EnableSpeedPID(double k_p, double k_i, double k_d, double k_f)
 {
 	m_pidController.SetInputRange(-10.0, 10.0); // m/s TODO TDB
 	m_pidController.SetOutputRange(-10.0, 10.0); // m/s
 	m_pidController.SetSetpoint((m_DriveBaseMoteurGaucheEncoder.GetRate() + m_DriveBaseMoteurDroitEncoder.GetRate()) / 2.0);
 	m_pidController.SetPID(k_p, k_i, k_d, k_f);
-	WPI_DEBUG(m_logger, "pid: " << wpi::format("%5.2f", m_pidController.GetP())
-	                 << ", "    << wpi::format("%5.2f", m_pidController.GetI())
-	                 << ", "    << wpi::format("%5.2f", m_pidController.GetD())
-	                 << ", "    << wpi::format("%5.2f", m_pidController.GetF()));
+	WPI_DEBUG(m_logger, "speed pid: " << wpi::format("%5.2f", m_pidController.GetP())
+	                 << ", "          << wpi::format("%5.2f", m_pidController.GetI())
+	                 << ", "          << wpi::format("%5.2f", m_pidController.GetD())
+	                 << ", "          << wpi::format("%5.2f", m_pidController.GetF()));
 	m_pidController.Reset();
 	m_pidController.Enable();
 }
