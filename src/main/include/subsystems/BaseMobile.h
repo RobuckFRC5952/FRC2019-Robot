@@ -23,6 +23,10 @@
 #include "RobotMap.h"
 #include "subsystems/BaseMobilePidOutput.h"
 #include "subsystems/BaseMobilePidSource.h"
+#include "subsystems/BaseMobileTurnPidOutput.h"
+
+
+class AHRS;
 
 enum class eDirection
 {
@@ -50,6 +54,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	frc::DifferentialDrive m_Drive;
 
+	AHRS * m_ahrs; // navX MXP
+
 	/// Default Commands
 	cmdArcadeDriveImmobile m_cmdArcadeDriveImmobile;
 	cmdArcadeDriveJoystick m_cmdArcadeDriveJoystick;
@@ -65,19 +71,32 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	/// \name Régulateur PID pour le contrôle de vitesse.
 	/// @{
 	sysBaseMobilePidSource m_pidSrcEncAvg;
-	frc::PIDController     m_pidController;
 	sysBaseMobilePidOutput m_pidOutput;
-	static double m_kP;
-	static double m_kI;
-	static double m_kD;
-	static double m_kF;
+	frc::PIDController     m_pidController;
+	static double m_speed_kP;
+	static double m_speed_kI;
+	static double m_speed_kD;
+	static double m_speed_kF;
 	/// @}
 
-	/// \name Limites physique du bras.
+	/// \name Régulateur PID pour le contrôle de rotation.
+	/// @{
+	sysBaseMobileTurnPidOutput m_turnPidOutput;
+	frc::PIDController * m_turnPidController;
+	static double m_turn_kP;
+	static double m_turn_kI;
+	static double m_turn_kD;
+	static double m_turn_kF;
+	static double const kToleranceDegrees;
+	/// @}
+
+	/// \name Limites physique de la base mobile.
 	/// Valeurs à déterminer pendant des tests.
 	/// @{
 	static double m_speedMax;
 	static double m_accelMax;
+	static double m_rotationMax;
+	static double m_rot_accelMax;
 	/// @}
 
 	static char const * m_key_direction;
@@ -106,6 +125,7 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	void setDirection(eDirection direction);
 
 	void setSpeed(double speed);
+	void setRotationRate(double rotation_rate);
 
 	bool IsEnabled();
 
@@ -121,7 +141,8 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	 * \param k_d Constante dérivée
 	 * \param k_d Constante feed-forward
 	 */
-	void EnablePID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+	void EnableSpeedPID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
+	void EnableTurnPID(double k_p, double k_i = 0.0, double k_d = 0.0, double k_f = 0.0);
 
 	void DisablePID();
 
@@ -135,6 +156,10 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	double getAccelMax();
 
+	double getRotationSpeedMax();
+
+	double getRotationAccelMax();
+
 	double getPositionFB();
 
 	void setPositionSP(double position);
@@ -142,6 +167,10 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 	double getSpeedFB();
 
 	void setSpeedSP(double speed);
+
+	double getRotationFB();
+
+	void setRotationSP(double rotation);
 
 	virtual void resetPosition();
 

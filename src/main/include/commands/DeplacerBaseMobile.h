@@ -9,8 +9,6 @@
 
 #include "cinematique/DeplaceMoteur.h"
 
-#include <wpi/Logger.h>
-
 class cmdDeplacerBaseMobile : public cmdDeplaceMoteur
 {
  public:
