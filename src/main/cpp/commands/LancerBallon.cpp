@@ -19,14 +19,14 @@ cmdLancerBallon::cmdLancerBallon()
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Robot::m_sysPince);
-	m_logger.set_min_level(wpi::WPI_LOG_DEBUG1);
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
 // Called just before this Command runs the first time
 void cmdLancerBallon::Initialize()
 {
 	WPI_DEBUG1(m_logger, GetName() << " " << __func__);
-	m_speed = 1.0; //vitesse a tester
+	m_speed = -1.0;
 	setSpeed(m_speed);
 }
 

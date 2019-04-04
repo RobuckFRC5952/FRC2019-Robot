@@ -59,7 +59,7 @@ void AvancerCrochet::End()
 // subsystems is scheduled to run
 void AvancerCrochet::Interrupted()
 {
-	WPI_WARNING(m_logger, GetName() << " " << __func__);
+	WPI_INFO(m_logger, GetName() << " " << __func__);
 	setSpeed(0.0);
 }
 
