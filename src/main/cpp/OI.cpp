@@ -14,6 +14,7 @@
 #include "RobotMap.h"
 #include "subsystems/Bras.h"
 #include "tests/testDeplaceBaseMobile.h"
+#include "tests/testTourneBaseMobile.h"
 #include "tests/ResetEncoder.h"
 
 
@@ -56,5 +57,6 @@ OI::OI()
 	m_boutonRemonterRampe->WhileHeld(&m_RemonterRampe);
 
 	frc::SmartDashboard::PutData("DeplaceMoteur", new testDeplaceBaseMobile());
+	frc::SmartDashboard::PutData("TourneMoteur",  new testTourneBaseMobile());
 	frc::SmartDashboard::PutData("ResetEncoder",  new cmdResetEncoder());
 }

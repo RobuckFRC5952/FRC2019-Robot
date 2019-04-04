@@ -48,6 +48,9 @@ class cmdTournerBaseMobile : public frc::Command
 	/// Objet de type Mrua réalloué en mémoire à chaque fois que la vitesse désirée est changée.
 	std::unique_ptr<Mrua> m_mrua;
 
+	// Position actuelle commandée.
+	double m_position;
+
 	// Vitesse actuelle commandée.
 	double m_speed;
 

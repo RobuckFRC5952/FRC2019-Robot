@@ -91,14 +91,15 @@ void cmdTournerBaseMobile::Initialize()
 	                              << " a  "      << wpi::format("%5.2f", v1)
 	                              << " pendant " << wpi::format("%6.3f", t1 - t0) << " sec.");
 
-	// TODO rotation absolue?
+	// Trouver la rotation actuelle du sous-système.
+	m_position = Robot::m_sysBaseMobile.getRotationFB();
 
 	// Trouver le signe de l'accélération. Il est en fonction de la vitesse 
 	// désirée par rapport à la vitesse actuelle.
 	double acceleration = std::copysign(m_rotation_acceleration, v1 - v0);
 
 	// Utiliser un nouvel object Mrua pour calculer la vitesse et la position en fonction du temps.
-	m_mrua.reset(new Mrua(acceleration, v0, 0.0));
+	m_mrua.reset(new Mrua(acceleration, v0, m_position));
 	WPI_DEBUG1(m_logger, GetName() << " Mrua: " << *m_mrua);
 
 	m_lastTime = 0.0;
@@ -146,6 +147,7 @@ void cmdTournerBaseMobile::Execute()
 		// Note: le temps initial de la nouvelle phase est le temps final la phase précédente.
 		double position = m_mrua->getIntegratedPosition(t_i - t_p);
 		WPI_DEBUG(m_logger, GetName() << " " << __func__ 
+		                              << " m_position: " << wpi::format("%5.2f", m_position)
 		                              << ", position: "  << wpi::format("%5.2f", position)
 		                              << ", speed: "     << wpi::format("%5.2f", v_i));
 		m_mrua.reset(new Mrua(acceleration, v_i, position));
@@ -156,18 +158,20 @@ void cmdTournerBaseMobile::Execute()
 	double const & t_i = m_profile[m_phase + 0].m_time;
 	double time_phase = time - t_i;
 
+	m_position = m_mrua->getIntegratedPosition(time_phase);
 	m_speed = m_mrua->getIntegratedSpeed(time_phase);
 
 	// Assigner la consigne en fonction du type de régulateur PID turn.
 	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << "m_speed: " << m_speed);
-	Robot::m_sysBaseMobile.setRotationRateSP(m_speed);
+	Robot::m_sysBaseMobile.setRotationSP(m_position);
 
 	// Log à chaque demi-seconde, ou si le logger log.
 	if (((time - m_lastTime) > 0.5) ||
 		(m_logger.min_level() <= wpi::WPI_LOG_DEBUG4))
 	{
 		WPI_DEBUG(m_logger, GetName() << " " << __func__ 
-		                              << ", m_speed: "   << wpi::format("%5.2f", m_speed));
+		                              << " m_position: " << wpi::format("%5.2f", m_position) << " degres"
+		                              << ", m_speed: "   << wpi::format("%5.2f", m_speed)    << " degres/sec");
 		m_lastTime = time;
 	}
 }

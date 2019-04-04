@@ -168,7 +168,9 @@ class sysBaseMobile : public frc::Subsystem, public ISubsystem
 
 	void setSpeedSP(double speed);
 
-	void setRotationRateSP(double rotation_rate);
+	double getRotationFB();
+
+	void setRotationSP(double rotation);
 
 	virtual void resetPosition();
 

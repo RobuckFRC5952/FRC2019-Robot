@@ -33,7 +33,7 @@ cmdDeplacerBaseMobile::cmdDeplacerBaseMobile(double distance)
 void cmdDeplacerBaseMobile::Initialize()
 {
 	setDistance(m_distance);
-	WPI_INFO(m_logger, GetName() << " Deplacement de " << wpi::format("%5.2f", m_distance));
+	WPI_INFO(m_logger, GetName() << " Deplacement de " << wpi::format("%5.2f", m_distance) << " metres.");
 	cmdDeplaceMoteur::Initialize();
 }
 

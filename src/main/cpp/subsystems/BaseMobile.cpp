@@ -32,13 +32,15 @@ double sysBaseMobile::m_speed_kD =  0.0;
 double sysBaseMobile::m_speed_kF =  0.0;
 double sysBaseMobile::m_speedMax =  1.5; // metre/sec 	TODO TBD
 double sysBaseMobile::m_accelMax =  2.0; // metre/sec²	TODO TBD
-double sysBaseMobile::m_turn_kP  =  0.03;
-double sysBaseMobile::m_turn_kI  =  0.0;
-double sysBaseMobile::m_turn_kD  =  0.0;
+
+double sysBaseMobile::m_turn_kP  =  0.02;
+double sysBaseMobile::m_turn_kI  =  0.002;
+double sysBaseMobile::m_turn_kD  =  0.01;
 double sysBaseMobile::m_turn_kF  =  0.0;
+
 double const sysBaseMobile::kToleranceDegrees = 2.0f;
-double sysBaseMobile::m_rotationMax  = 30.0; // degree/sec	TODO TBD
-double sysBaseMobile::m_rot_accelMax = 30.0; // degree/sec²	TODO TBD
+double sysBaseMobile::m_rotationMax  = 60.0; // degree/sec	TODO TBD
+double sysBaseMobile::m_rot_accelMax = 20.0; // degree/sec²	TODO TBD
 
 char const * sysBaseMobile::m_key_direction = "Direction";
 
@@ -149,9 +151,9 @@ void sysBaseMobile::ArcadeDrive(double xSpeed, double zRotation)
 	if ((std::fabs((xSpeed - m_lastXSpeed)/m_lastXSpeed) > 0.05) || (std::fabs((zRotation - m_lastZRotation)/m_lastZRotation) > 0.05))
 	{
 		WPI_DEBUG2(m_logger, "xSpeed:"    << wpi::format("%5.2f", xSpeed) 
-		                  << "zRotation:" << wpi::format("%5.2f", zRotation)
-		                  << "Distances [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetDistance()) << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetDistance())
-		                  << "Rates     [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetRate())     << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetRate()));
+		                  << " zRotation:" << wpi::format("%5.2f", zRotation)
+		                  << " Distances [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetDistance()) << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetDistance())
+		                  << " Rates     [EncD, EncG]: " << wpi::format("%5.2f", m_DriveBaseMoteurDroitEncoder.GetRate())     << " " << wpi::format("%5.2f", m_DriveBaseMoteurGaucheEncoder.GetRate()));
 
 		// Enregistrer la vitesse courrant pour la comparer la prochaine fois qu'on exécute
 		// cette méthode avec une nouvelle valeur de 'speed'.
@@ -212,8 +214,8 @@ void sysBaseMobile::EnableSpeedPID(double k_p, double k_i, double k_d, double k_
 
 void sysBaseMobile::EnableTurnPID(double k_p, double k_i, double k_d, double k_f)
 {
-	m_turnPidController->SetInputRange(-180.0, 180.0);
-	m_turnPidController->SetOutputRange( -1.0,   1.0);
+	m_turnPidController->SetInputRange(-180.0, 180.0); // degrés
+	m_turnPidController->SetOutputRange( -1.0,   1.0); // moteur normalisé
 	m_turnPidController->SetAbsoluteTolerance(kToleranceDegrees);
 	m_turnPidController->SetContinuous(true);
 	m_turnPidController->SetSetpoint(0.0);
@@ -294,10 +296,19 @@ void sysBaseMobile::setSpeedSP(double speed)
 	// WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " vitesse: " << wpi::format("%6.3f", speed) << wpi::format(", %6.3f", m_pidController.GetSetpoint()));
 }
 
-void sysBaseMobile::setRotationRateSP(double rotation_rate)
+double sysBaseMobile::getRotationFB()
 {
-	m_turnPidController->SetSetpoint(rotation_rate);
-	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " rotation_rate: " << wpi::format("%6.3f", rotation_rate) << wpi::format(", %6.3f", m_turnPidController->GetSetpoint()));
+	return m_ahrs->GetYaw();
+}
+
+void sysBaseMobile::setRotationSP(double rotation)
+{
+	// Utiliser l'opérateur Modulo pour calculer le reste de la division par 360.0 degrés.
+	// Sauf qu'on veut pas entre [0.0, 360.0] mais entre [-180.0, 180.0].
+	const double translation = std::copysign(180.0, rotation);
+	double angle = std::fmod(rotation + translation, 360.0) - translation;
+	m_turnPidController->SetSetpoint(angle);
+	WPI_DEBUG2(m_logger, GetName() << " " << __func__ << " angle: " << wpi::format("%5.1f, %5.1f", angle, rotation));
 }
 
 void sysBaseMobile::resetPosition()
@@ -322,7 +333,7 @@ void sysBaseMobile::PutSmartDashboard()
 
 	// Afficher ces données dans des LinePlots du SmartDashboard.
 	{
-		std::string const & name {"BaseMobile"};
+		std::string const & name {"SpeedPid"};
 		frc::SmartDashboard::PutNumber(name + "_SetPoint", m_pidController.GetSetpoint());
 		frc::SmartDashboard::PutNumber(name + "_FeedBack", m_pidSrcEncAvg.PIDGet());
 		frc::SmartDashboard::PutNumber(name + "_Error",    m_pidController.GetError());
