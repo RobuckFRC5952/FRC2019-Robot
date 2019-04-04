@@ -63,7 +63,7 @@ private:
 	AvancerCrochet m_AvancerCrochet;
 	RetracterCrochet m_RetracterCrochet;
 
-	DeployerRampe m_DeployerRampe {-0.2};
+	DeployerRampe m_DeployerRampe {-0.4};
 	DeployerRampe m_RemonterRampe { 0.8};
 	/// @}
 };

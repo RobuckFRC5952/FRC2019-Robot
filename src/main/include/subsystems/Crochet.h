@@ -12,6 +12,7 @@
 #include <frc/Talon.h>
 #include <frc/commands/Subsystem.h>
 #include <frc/DigitalInput.h>
+#include <wpi/Logger.h>
 
 #include "RobotMap.h"
 
@@ -23,6 +24,9 @@ class sysCrochet : public frc::Subsystem
 	/// Interrupteur de fin de course sont branchés en 'Normaly Closed'.
 	frc::DigitalInput m_limitSwitchBas  {kCrochetLimitSwitchBas_DioChannel};
 	frc::DigitalInput m_limitSwitchHaut {kCrochetLimitSwitchHaut_DioChannel};
+
+	/// Logger du sous-système.
+	wpi::Logger m_logger;
 
  public:
 	sysCrochet();

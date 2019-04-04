@@ -23,13 +23,13 @@ double sysBras::m_kP = 1.0;
 double sysBras::m_kI = 0.0;
 double sysBras::m_kD = 1.0;
 double sysBras::m_kF = 0.0;
-double sysBras::m_posMin   = -1.2; // radian
+double sysBras::m_posMin   = -1.4; // radian
 double sysBras::m_posMax   =  0.0; // radian
-double sysBras::m_speedMax =  2.0 * M_PI; // radian/sec 	TODO TBD
-double sysBras::m_accelMax =  3.0 * M_PI; // radian/sec²	TODO TBD
+double sysBras::m_speedMax =  1.0 * M_PI; // radian/sec
+double sysBras::m_accelMax =  1.0 * M_PI; // radian/sec²
 
 sysBras::sysBras()
-	 : PIDSubsystem(__func__, 1.0, 0.0, 1.0, 0.0)
+	 : PIDSubsystem(__func__, sysBras::m_kP, sysBras::m_kI, sysBras::m_kD, sysBras::m_kF)
 	 , m_logger(log_func)
 {
 	m_BrasMoteur.SetInverted(true);

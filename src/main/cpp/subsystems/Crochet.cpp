@@ -9,13 +9,20 @@
 
 #include <algorithm>
 
+#include <wpi/Format.h>
+
+#include "Logger.h"
+
 
 sysCrochet::sysCrochet()
 	 : Subsystem(__func__)
+	, m_logger(log_func)
 {
 	AddChild("Mot",       m_CrochetMoteur);
 	AddChild("LimSwBas",  m_limitSwitchBas);
 	AddChild("LimSwHaut", m_limitSwitchHaut);
+
+	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 }
 
 void sysCrochet::InitDefaultCommand()
@@ -46,5 +53,6 @@ void sysCrochet::setSpeed(double speed)
 		speed = std::min(0.0, speed);
 	}
 
+	WPI_DEBUG2(m_logger, "speed:" << wpi::format("%5.2f", speed));
 	m_CrochetMoteur.Set(speed);
 }

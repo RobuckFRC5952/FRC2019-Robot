@@ -111,7 +111,7 @@ void Robot::AutonomousInit()
 	}
 
 	/// Activer les autres régulateurs des sous-systèmes.
-	// m_sysBras.EnablePID(); TODO
+	m_sysBras.EnablePID();
 
 	// Arrêter la commande en cours.
 	frc::Command * cmd = m_sysBaseMobile.GetCurrentCommand();
@@ -200,7 +200,7 @@ void Robot::TeleopInit()
 		m_autonomousCommand = nullptr;
 	}
 	m_sysBaseMobile.DisablePID();
-	// m_sysBras.EnablePID(); TODO
+	m_sysBras.EnablePID();
 }
 
 void Robot::TeleopPeriodic()

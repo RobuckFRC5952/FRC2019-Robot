@@ -43,8 +43,8 @@ constexpr int kRampeMoteur_PwmChannel = 2;
 /// Port du joystick utilisé
 constexpr int kJoystickPort = 0;
 
-// #define USE_LOGITECH_ATK3
-#define USE_LOGITECH_X3DPRO
+#define USE_LOGITECH_ATK3
+//#define USE_LOGITECH_X3DPRO
 
 /// \name Boutons du joystick Logitech Extreme 3D Pro
 /// @{
@@ -63,7 +63,7 @@ constexpr int kJoystick3DProThrottle = 0;
 /// \name Boutons des joystick Logitech ATK3
 /// @{
 constexpr int kJoystickATK3Trigger = 1;
-constexpr int kJoystickATK3InvDir = 2;
+constexpr int kJoystickATK3InvDir = 7;
 constexpr int kJoystickATK3Monter_bras = 11;
 constexpr int kJoystickATK3Baisser_bras = 10;
 constexpr int kJoystickATK3Attrapper_ballon = 2;
@@ -83,7 +83,7 @@ constexpr int kJoystickattrapper_ballon = kJoystickATK3Attrapper_ballon;
 constexpr int kJoystickpousser_ballon = kJoystickATK3Pousser_ballon;
 constexpr int kJoystickattrapper_la_hatch = kJoystickATK3Attrapper_la_hatch;
 constexpr int kJoystickpousser_la_hatch = kJoystickATK3Pousser_la_hatch;
-constexpr int kJoystickthrottle = kJoystickATKTthrottle;
+// constexpr int kJoystickthrottle = kJoystickATKTthrottle;
 constexpr int kJoystickDeployer_la_rampe = kJoystickATK3Deployer_la_rampe;
 constexpr int kJoystickRemonter_la_rampe = kJoystickATK3Remonter_la_rampe;
 constexpr int kJoystickMonter_bras = kJoystickATK3Monter_bras;

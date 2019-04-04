@@ -22,6 +22,7 @@ void cmdResetEncoder::Initialize() {}
 void cmdResetEncoder::Execute()
 {
 	Robot::m_sysBaseMobile.resetPosition();
+	Robot::m_sysBras.resetPosition();
 }
 
 // Make this return true when this Command no longer needs to run execute()
