@@ -10,6 +10,9 @@
 #include <frc/commands/PrintCommand.h>
 #include <frc/commands/WaitCommand.h>
 
+#include "commands/DeplacerBaseMobile.h"
+#include "commands/TournerBaseMobile.h"
+
 
 cmdGrpStation2::cmdGrpStation2()
 	 : CommandGroup(__func__)
@@ -30,6 +33,7 @@ cmdGrpStation2::cmdGrpStation2()
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential(new frc::PrintCommand(GetName() + " "));
-	AddSequential(new frc::WaitCommand(1.0));
+	AddSequential(new frc::PrintCommand(GetName() + " Avancer de 3.0 m."));
+	double distance = 3.60;
+	AddSequential(new cmdDeplacerBaseMobile(distance));
 }

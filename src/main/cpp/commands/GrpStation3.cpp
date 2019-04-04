@@ -10,6 +10,9 @@
 #include <frc/commands/PrintCommand.h>
 #include <frc/commands/WaitCommand.h>
 
+#include "commands/DeplacerBaseMobile.h"
+#include "commands/TournerBaseMobile.h"
+
 
 cmdGrpStation3::cmdGrpStation3()
 	 : CommandGroup(__func__)
@@ -30,6 +33,34 @@ cmdGrpStation3::cmdGrpStation3()
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential(new frc::PrintCommand(GetName() + " "));
-	AddSequential(new frc::WaitCommand(1.0));
+	double distance = 0.0;
+	double rotation = 0.0;
+
+	AddSequential(new frc::PrintCommand(GetName() + " Avancer de 3.0 m."));
+	distance = 3.0;
+	AddSequential(new cmdDeplacerBaseMobile(distance));
+
+	AddSequential(new frc::PrintCommand(GetName() + " Tourner de 45 degres."));
+	rotation = 45.0;
+	AddSequential(new cmdTournerBaseMobile(rotation));
+
+	AddSequential(new frc::PrintCommand(GetName() + " Avancer de sqrt(2) m."));
+	distance = std::sqrt(2.0);
+	AddSequential(new cmdDeplacerBaseMobile(distance));
+
+	AddSequential(new frc::PrintCommand(GetName() + " Tourner de -45 degres."));
+	rotation = -45.0;
+	AddSequential(new cmdTournerBaseMobile(rotation));
+
+	AddSequential(new frc::PrintCommand(GetName() + " Avancer de 2.5 m."));
+	distance = 2.5;
+	AddSequential(new cmdDeplacerBaseMobile(distance));
+
+	AddSequential(new frc::PrintCommand(GetName() + " Tourner de -90 degres."));
+	rotation = -90.0;
+	AddSequential(new cmdTournerBaseMobile(rotation));
+
+	// AddSequential(new frc::PrintCommand(GetName() + " Avancer de 2.5 m."));
+	// distance = 1.0;
+	// AddSequential(new cmdDeplacerBaseMobile(distance));
 }
