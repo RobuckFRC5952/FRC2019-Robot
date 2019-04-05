@@ -70,29 +70,29 @@ sysBaseMobile::sysBaseMobile()
 	const double radius       =    3.0 / pouces_metre;
 
 	m_DriveBaseMoteurDroit.SetInverted(true);
-	try
-	{
-		/***********************************************************************
-		 * navX-MXP:
-		 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.
-		 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
-		 *
-		 * navX-Micro:
-		 * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
-		 * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
-		 *
-		 * Multiple navX-model devices on a single robot are supported.
-		 ************************************************************************/
-		m_ahrs = new AHRS(SPI::Port::kMXP);
-	}
-	catch (std::exception const & ex)
-	{
-		std::string err_string = "Error instantiating navX MXP:  ";
-		err_string += ex.what();
-		WPI_ERROR(m_logger, GetName() << " " << err_string.c_str());
-	}
+	// try
+	// {
+	// 	/***********************************************************************
+	// 	 * navX-MXP:
+	// 	 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.
+	// 	 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+	// 	 *
+	// 	 * navX-Micro:
+	// 	 * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
+	// 	 * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
+	// 	 *
+	// 	 * Multiple navX-model devices on a single robot are supported.
+	// 	 ************************************************************************/
+	// 	m_ahrs = new AHRS(SPI::Port::kMXP);
+	// }
+	// catch (std::exception const & ex)
+	// {
+	// 	std::string err_string = "Error instantiating navX MXP:  ";
+	// 	err_string += ex.what();
+	// 	WPI_ERROR(m_logger, GetName() << " " << err_string.c_str());
+	// }
 
-	m_turnPidController = new frc::PIDController(0.0, 0.0, 0.0, m_ahrs, &m_turnPidOutput);
+	// m_turnPidController = new frc::PIDController(0.0, 0.0, 0.0, m_ahrs, &m_turnPidOutput);
 
 	// Convertir en mètres des encodeurs de 2048 ticks/tours avec roues de 6 pouces.
 	m_DriveBaseMoteurDroitEncoder.SetDistancePerPulse( (2.0 * M_PI * radius) / pulses_tour);
@@ -111,7 +111,7 @@ sysBaseMobile::sysBaseMobile()
 	AddChild("EncG",  m_DriveBaseMoteurGaucheEncoder);
 	AddChild("Drive", m_Drive);
 	AddChild("PidSpeed",     m_pidController);
-	AddChild("PidRotation", *m_turnPidController);
+	// AddChild("PidRotation", *m_turnPidController);
 
 	m_logger.set_min_level(wpi::WPI_LOG_INFO);
 
@@ -189,7 +189,7 @@ void sysBaseMobile::setRotationRate(double rotation_rate)
 
 bool sysBaseMobile::IsEnabled()
 {
-	return m_pidController.IsEnabled() && m_turnPidController->IsEnabled();
+	return m_pidController.IsEnabled();// && m_turnPidController->IsEnabled();
 }
 
 void sysBaseMobile::EnablePID()
@@ -214,18 +214,18 @@ void sysBaseMobile::EnableSpeedPID(double k_p, double k_i, double k_d, double k_
 
 void sysBaseMobile::EnableTurnPID(double k_p, double k_i, double k_d, double k_f)
 {
-	m_turnPidController->SetInputRange(-180.0, 180.0); // degrés
-	m_turnPidController->SetOutputRange( -1.0,   1.0); // moteur normalisé
-	m_turnPidController->SetAbsoluteTolerance(kToleranceDegrees);
-	m_turnPidController->SetContinuous(true);
-	m_turnPidController->SetSetpoint(0.0);
-	m_turnPidController->SetPID(k_p, k_i, k_d, k_f);
-	WPI_DEBUG(m_logger, "speed pid: " << wpi::format("%5.2f", m_turnPidController->GetP())
-	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetI())
-	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetD())
-	                 << ", "          << wpi::format("%5.2f", m_turnPidController->GetF()));
-	m_turnPidController->Reset();
-	m_turnPidController->Enable();
+	// m_turnPidController->SetInputRange(-180.0, 180.0); // degrés
+	// m_turnPidController->SetOutputRange( -1.0,   1.0); // moteur normalisé
+	// m_turnPidController->SetAbsoluteTolerance(kToleranceDegrees);
+	// m_turnPidController->SetContinuous(true);
+	// m_turnPidController->SetSetpoint(0.0);
+	// m_turnPidController->SetPID(k_p, k_i, k_d, k_f);
+	// WPI_DEBUG(m_logger, "speed pid: " << wpi::format("%5.2f", m_turnPidController->GetP())
+	//                  << ", "          << wpi::format("%5.2f", m_turnPidController->GetI())
+	//                  << ", "          << wpi::format("%5.2f", m_turnPidController->GetD())
+	//                  << ", "          << wpi::format("%5.2f", m_turnPidController->GetF()));
+	// m_turnPidController->Reset();
+	// m_turnPidController->Enable();
 }
 
 void sysBaseMobile::DisablePID()
@@ -235,8 +235,8 @@ void sysBaseMobile::DisablePID()
 	m_pidController.Reset();
 
 	// m_turnPidController->Disable();
-	m_turnPidController->Reset();
-	m_turnPidController->SetPID(0.0, 0.0, 0.0, 0.0);
+	// m_turnPidController->Reset();
+	// m_turnPidController->SetPID(0.0, 0.0, 0.0, 0.0);
 }
 
 frc::PIDSourceType sysBaseMobile::getPIDSourceType()
@@ -298,7 +298,8 @@ void sysBaseMobile::setSpeedSP(double speed)
 
 double sysBaseMobile::getRotationFB()
 {
-	return m_ahrs->GetYaw();
+	// return m_ahrs->GetYaw();
+	return 0.0;
 }
 
 void sysBaseMobile::setRotationSP(double rotation)
@@ -341,9 +342,9 @@ void sysBaseMobile::PutSmartDashboard()
 	}
 	{
 		std::string const & name {"TurnPid"};
-		frc::SmartDashboard::PutNumber(name + "_SetPoint", m_turnPidController->GetSetpoint());
-		frc::SmartDashboard::PutNumber(name + "_FeedBack", m_ahrs->GetYaw());
-		frc::SmartDashboard::PutNumber(name + "_Error",    m_turnPidController->GetError());
-		frc::SmartDashboard::PutNumber(name + "_Commande", m_turnPidController->Get());
+		// frc::SmartDashboard::PutNumber(name + "_SetPoint", m_turnPidController->GetSetpoint());
+		// frc::SmartDashboard::PutNumber(name + "_FeedBack", m_ahrs->GetYaw());
+		// frc::SmartDashboard::PutNumber(name + "_Error",    m_turnPidController->GetError());
+		// frc::SmartDashboard::PutNumber(name + "_Commande", m_turnPidController->Get());
 	}
 }
