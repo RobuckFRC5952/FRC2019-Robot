@@ -52,6 +52,6 @@ void DeployerRampe::End()
 // subsystems is scheduled to run
 void DeployerRampe::Interrupted()
 {
-	WPI_WARNING(m_logger, GetName() << " " << __func__);
+	WPI_INFO(m_logger, GetName() << " " << __func__);
 	Robot::m_sysRampe.setSpeed(0.0);
 }
