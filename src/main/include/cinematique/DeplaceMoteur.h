@@ -18,6 +18,7 @@
 #include <wpi/Logger.h>
 
 #include "cinematique/Cinematique.h"
+#include "cinematique/Mrua.h"
 
 class Mrua;
 class ISubsystem;

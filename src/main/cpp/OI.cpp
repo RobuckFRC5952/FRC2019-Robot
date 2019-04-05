@@ -20,9 +20,6 @@
 
 OI::OI()
 : m_joystick(kJoystickPort)
-, m_BaisserBras(Robot::m_sysBras.getPositionMin())
-, m_MonterBras(Robot::m_sysBras.getPositionMax())
-, m_ArreterBras()
 {
 	// Process operator interface input here.
 	m_boutonInverseDirection    = new frc::JoystickButton(&m_joystick, kJoystickInvDir);
@@ -41,11 +38,8 @@ OI::OI()
 
 	m_boutonInverseDirection->WhenPressed(&m_InverseDirection);
 
-	m_boutonBaisserBras->WhenPressed(&m_BaisserBras);
-	m_boutonBaisserBras->WhenReleased(&m_ArreterBras);
-
-	m_boutonMonterBras->WhenPressed(&m_MonterBras);
-	m_boutonMonterBras->WhenReleased(&m_ArreterBras);
+	m_boutonBaisserBras->WhileHeld(&m_DescendBras);
+	m_boutonMonterBras->WhileHeld(&m_MonteBras);
 
 	m_boutonLancerBallon->WhileHeld(&m_LancerBallon);
 	m_boutonAttrapperBallon->WhileHeld(&m_AttraperBallon);

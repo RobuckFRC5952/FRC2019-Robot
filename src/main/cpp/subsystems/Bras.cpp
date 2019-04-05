@@ -93,7 +93,6 @@ void sysBras::EnablePID(double k_p, double k_i, double k_d, double k_f)
 
 	m_pidController->SetPID(k_p, k_i, k_d, k_f);
 	m_pidController->SetSetpoint(m_encoder.GetDistance());
-	m_pidController->SetInputRange(m_posMin, m_posMax); // rad
 	m_pidController->SetOutputRange(-0.20, 0.15); // commande moteur normalisé.
 	m_pidController->Reset();
 	Enable();
@@ -158,6 +157,16 @@ void sysBras::setSpeedSP(double speed)
 {
 	WPI_ERROR(m_logger, "Regulateur PID en position.");
 	throw(std::logic_error("Regulateur PID en position."));
+}
+
+void sysBras::setSpeedMonte()
+{
+	m_BrasMoteur.Set(0.12);  // Voir EnablePID
+}
+
+void sysBras::setSpeedDescent()
+{
+	m_BrasMoteur.Set(-0.18);  // Voir EnablePID
 }
 
 void sysBras::resetPosition()

@@ -10,8 +10,8 @@
 #include <frc/Joystick.h>
 
 #include "commands/InverserDirection.h"
-#include "commands/DeplacerBras.h"
-#include "commands/ArreterBras.h"
+#include "commands/MonteBras.h"
+#include "commands/DescendBras.h"
 #include "commands/LancerBallon.h"
 #include "commands/AttrapperBallon.h"
 #include "commands/AvancerCrochet.h"
@@ -53,9 +53,8 @@ private:
 	/// @{
 	InverserDirection m_InverseDirection;
 
-	cmdDeplacerBras m_BaisserBras;
-	cmdDeplacerBras m_MonterBras;
-	cmdArreterBras m_ArreterBras;
+	MonteBras m_MonteBras;
+	DescendBras m_DescendBras;
 
 	cmdLancerBallon m_LancerBallon;
 	AttrapperBallon m_AttraperBallon;
