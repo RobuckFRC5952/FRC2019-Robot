@@ -45,11 +45,14 @@ void Robot::RobotInit()
 	m_auto_mode.AddOption(       "Auto Modes",     &m_cmd_chooser);
 	frc::SmartDashboard::PutData("Modes Autonomes", &m_auto_mode);
 
+	m_cam_server = frc::CameraServer::GetInstance();
 	m_camera_bras = frc::CameraServer::GetInstance()->StartAutomaticCapture("Devant",   0);
 	m_camera_bras.SetConnectionStrategy(cs::VideoSource::ConnectionStrategy::kConnectionKeepOpen);
 	m_camera_crochet = frc::CameraServer::GetInstance()->StartAutomaticCapture("Derriere", 1);
 	m_camera_crochet.SetConnectionStrategy(cs::VideoSource::ConnectionStrategy::kConnectionKeepOpen);
 	m_server = frc::CameraServer::GetInstance()->GetServer();
+	frc::SmartDashboard::PutBoolean("Camera Bras",    &m_useCameraBras);
+	frc::SmartDashboard::PutBoolean("Camera Crochet", &m_useCameraCrochet);
 
 	// TODO Le Bras DOIT être en position élevée.
 	m_sysBras.resetPosition();
@@ -65,6 +68,38 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
+	m_useCameraBras    = frc::SmartDashboard::GetBoolean("Camera Bras",    m_useCameraBras);
+	m_useCameraCrochet = frc::SmartDashboard::GetBoolean("Camera Crochet", m_useCameraCrochet);
+	if (m_cam_server)
+	{
+		if (m_lastCameraBras != m_useCameraBras)
+		{
+			WPI_INFO(m_logger, __func__ << " Camera Bras " << m_useCameraBras);
+			if (m_useCameraBras)
+			{
+				m_cam_server->AddCamera(m_camera_bras);
+			}
+			else
+			{
+				m_cam_server->RemoveCamera(m_camera_bras.GetName());
+			}
+			m_lastCameraBras = m_useCameraBras;
+		}
+		if (m_lastCameraCrochet != m_useCameraCrochet)
+		{
+			WPI_INFO(m_logger, __func__ << " Camera Crochet " << m_useCameraCrochet);
+			if (m_useCameraCrochet)
+			{
+				m_cam_server->AddCamera(m_camera_crochet);
+			}
+			else
+			{
+				m_cam_server->RemoveCamera(m_camera_crochet.GetName());
+			}
+			m_lastCameraCrochet = m_useCameraCrochet;
+		}
+	}
+
 	eDirection direction = m_sysBaseMobile.getDirection();
 	if (m_last_direction != direction)
 	{

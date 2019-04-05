@@ -76,8 +76,13 @@ class Robot : public frc::TimedRobot
 	cmdGrpStation3 m_cmdGrpStation3;
 
 	cs::UsbCamera m_camera_bras;
+	bool m_useCameraBras {true};
+	bool m_lastCameraBras {true};
 	cs::UsbCamera m_camera_crochet;
+	bool m_useCameraCrochet {true};
+	bool m_lastCameraCrochet {true};
 	cs::VideoSink m_server;
+	frc::CameraServer * m_cam_server;
 
 	eDirection m_last_direction {eDirection::Bras};
 
