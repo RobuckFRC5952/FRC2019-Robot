@@ -50,7 +50,7 @@ OI::OI()
 	m_boutonDeployerRampe->WhileHeld(&m_DeployerRampe);
 	m_boutonRemonterRampe->WhileHeld(&m_RemonterRampe);
 
-	frc::SmartDashboard::PutData("DeplaceMoteur", new testDeplaceBaseMobile());
-	frc::SmartDashboard::PutData("TourneMoteur",  new testTourneBaseMobile());
-	frc::SmartDashboard::PutData("ResetEncoder",  new cmdResetEncoder());
+	// frc::SmartDashboard::PutData("DeplaceMoteur", new testDeplaceBaseMobile());
+	// frc::SmartDashboard::PutData("TourneMoteur",  new testTourneBaseMobile());
+	// frc::SmartDashboard::PutData("ResetEncoder",  new cmdResetEncoder());
 }
