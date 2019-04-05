@@ -10,6 +10,7 @@
 /// \file Robot.h
 /// \brief Le %Robot basé sur \b frc::TimedRobot.
 
+#include <cameraserver/CameraServer.h>
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
@@ -73,6 +74,12 @@ class Robot : public frc::TimedRobot
 	cmdGrpStation1 m_cmdGrpStation1;
 	cmdGrpStation2 m_cmdGrpStation2;
 	cmdGrpStation3 m_cmdGrpStation3;
+
+	cs::UsbCamera m_camera_bras;
+	cs::UsbCamera m_camera_crochet;
+	cs::VideoSink m_server;
+
+	eDirection m_last_direction {eDirection::Bras};
 
 	/// Logger de la classe \c Robot.
 	wpi::Logger m_logger;

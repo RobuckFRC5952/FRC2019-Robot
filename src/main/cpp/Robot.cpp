@@ -14,6 +14,8 @@
 #include <frc/commands/Scheduler.h>
 #include <frc/DriverStation.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include "frc/WPILib.h"
+#include <networktables/NetworkTableInstance.h>
 
 #include "Logger.h"
 
@@ -43,6 +45,12 @@ void Robot::RobotInit()
 	m_auto_mode.AddOption(       "Auto Modes",     &m_cmd_chooser);
 	frc::SmartDashboard::PutData("Modes Autonomes", &m_auto_mode);
 
+	m_camera_bras = frc::CameraServer::GetInstance()->StartAutomaticCapture("Devant",   0);
+	m_camera_bras.SetConnectionStrategy(cs::VideoSource::ConnectionStrategy::kConnectionKeepOpen);
+	m_camera_crochet = frc::CameraServer::GetInstance()->StartAutomaticCapture("Derriere", 1);
+	m_camera_crochet.SetConnectionStrategy(cs::VideoSource::ConnectionStrategy::kConnectionKeepOpen);
+	m_server = frc::CameraServer::GetInstance()->GetServer();
+
 	// TODO Le Bras DOIT être en position élevée.
 	m_sysBras.resetPosition();
 }
@@ -57,6 +65,21 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
+	eDirection direction = m_sysBaseMobile.getDirection();
+	if (m_last_direction != direction)
+	{
+		if (direction == eDirection::Bras)
+		{
+			m_server.SetSource(m_camera_bras);
+			WPI_INFO(m_logger, __func__ << " direction: Bras, camera " << m_camera_bras.GetName());
+		}
+		else
+		{
+			m_server.SetSource(m_camera_crochet);
+			WPI_INFO(m_logger, __func__ << " direction: Crochet, camera " << m_camera_crochet.GetName());
+		}
+		m_last_direction = direction;
+	}
 }
 
 /**
